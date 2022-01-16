@@ -29,17 +29,18 @@ Select_Disk(){
 }
 Format_Disk(){
 sgdisk --zap-all /dev/${DSKSLC}
-sgdisk --clear \
-         --new=1:0:+550MiB --typecode=1:ef00 \
-         --new=2:0:+8GiB   --typecode=2:8200 \
-         --new=3:0:0       --typecode=3:8300 \
-           /dev/${DSKSLC}
+parted "/dev/${DSKSLC}" -- mklabel gpt
+parted "/dev/${DSKSLC}" -- mkpart primary 512MiB -8GiB
+parted "/dev/${DSKSLC}" -- mkpart primary linux-swap -8GiB 100%
+wait $!
 
 #Partition the drive and create subvolumes
-mkfs.fat -F 32 -n boot "/dev/${DSKSLC}1"
-mkswap -L swap -f "/dev/${DSKSLC}2" 
-mkfs.ext4 -L nixos "/dev/${DSKSLC}3"
+
+mkfs.ext4 -L nixos "/dev/${DSKSLC}1"
+mkswap -L swap "/dev/${DSKSLC}2" 
+mkfs.fat -F 32 -n boot "/dev/${DSKSLC}3"
 wait $!
+
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
