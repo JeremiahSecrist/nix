@@ -44,4 +44,6 @@ mount /dev/disk/by-label/nixos /mnt
 
 ## init phase
 Select_Disk
+
+Format_Disk
 echo "fin!"
