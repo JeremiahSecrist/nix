@@ -79,7 +79,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jane = {
     isNormalUser = true;
-    initialPassword = "changeme!!"
+    initialPassword = "changeme!!";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
