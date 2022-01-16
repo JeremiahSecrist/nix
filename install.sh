@@ -29,6 +29,7 @@ Select_Disk(){
 }
 Format_Disk(){
 sgdisk --zap-all /dev/${DSKSLC}
+wait $!
 parted "/dev/${DSKSLC}" -- mklabel gpt
 parted "/dev/${DSKSLC}" -- mkpart primary 512MiB -8GiB
 parted "/dev/${DSKSLC}" -- mkpart primary linux-swap -8GiB 100%
@@ -46,6 +47,7 @@ sleep 2
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
+nixos-generate-config --root /mnt
 }
 
 ## init phase
