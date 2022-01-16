@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 Confirm(){
     read -r -p "Are you sure? [y/N] " response
 case "$response" in
