@@ -47,6 +47,6 @@ mount /dev/disk/by-label/boot /mnt/boot
 
 ## init phase
 Select_Disk
-
+Confirm
 Format_Disk
 echo "fin!"
