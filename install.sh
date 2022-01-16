@@ -1,9 +1,20 @@
 #!/usr/bin/sh
+Confirm(){
+    read -r -p "Are you sure? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+        return break
+        ;;
+    *)
+        exit 1
+        ;;
+esac
 
+}
 Sel-Disk(){
     lsblk -f
     drives = "${lsblk -d | tail -n+2 | cut -d" " -f1 | tr '\n' ' '}"
-    select i in $drives do echo "/dev/${i} selected"; done
+    select i in $drives do echo "/dev/${i} selected"; Confirm() ; done
 }
 
 sgdisk --zap-all /dev/sda
