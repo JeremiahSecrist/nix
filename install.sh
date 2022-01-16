@@ -39,6 +39,7 @@ sgdisk --clear \
 mkfs.fat -F 32 -n EFI "/dev/${DSKSLC}1"
 mkswap -L swap -f "/dev/${DSKSLC}2" 
 mkfs.ext4 -L nixos "/dev/${DSKSLC}3"
+wait $!
 mount /dev/disk/by-label/nixos /mnt
 }
 
