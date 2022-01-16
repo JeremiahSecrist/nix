@@ -1,4 +1,11 @@
 #!/usr/bin/sh
+
+Sel-Disk(){
+    lsblk -f
+    drives = "${lsblk -d | tail -n+2 | cut -d" " -f1 | tr '\n' ' '}"
+    select i in $drives do echo $i; done
+}
+
 sgdisk --zap-all /dev/sda
 
 sgdisk --clear \
