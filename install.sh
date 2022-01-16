@@ -36,11 +36,13 @@ sgdisk --clear \
            /dev/${DSKSLC}
 
 #Partition the drive and create subvolumes
-mkfs.fat -F 32 -n EFI "/dev/${DSKSLC}1"
+mkfs.fat -F 32 -n boot "/dev/${DSKSLC}1"
 mkswap -L swap -f "/dev/${DSKSLC}2" 
 mkfs.ext4 -L nixos "/dev/${DSKSLC}3"
 wait $!
 mount /dev/disk/by-label/nixos /mnt
+mkdir -p /mnt/boot
+mount /dev/disk/by-label/boot /mnt/boot
 }
 
 ## init phase
