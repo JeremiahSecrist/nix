@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
 {
-    virtualisation.docker.enable = true;
-    virtualisation.oci-containers.backend = "docker";
+    virtualisation.podman = {
+        enable = true;
+        dockerSocket.enable = true;
+        dockerCompat = true;
+    }
+    virtualisation.oci-containers.backend = "podman";
     virtualisation.oci-containers.containers."portainer" = {
      image = "portainer/portainer-ce:2.11.0";
      ports = ["0.0.0.0:9443:9443"];
