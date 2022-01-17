@@ -10,9 +10,10 @@
     };
     systemd.services.dockerstop = {
       wantedBy = [ "containerd.service" ]; 
-      before = [ "docker.service" ];
-      requires = ["containerd.service"];
-      description = "containerd-shim v2 workaround";
+      Before = [ "docker.service" ];
+      After = [ "containerd.service" ];
+      Requires = ["containerd.service"];
+      Description = "containerd-shim v2 workaround";
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = "yes";
