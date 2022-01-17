@@ -8,5 +8,15 @@
      ports = ["0.0.0.0:9443:9443"];
      volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
     };
-
+    systemd.services.dockerstop = {
+      wantedBy = [ "containerd.service" ]; 
+      before = [ "docker.service" ];
+      requires = ["containerd.service"];
+      description = "containerd-shim v2 workaround";
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+        ExecStop = ''/bin/sh -c '[ "$(systemctl is-system-running)" = "stopping" ] || ${pkg.docker}/docker kill $(${pkg.docker}/docker ps -q)''';
+      };
+   };
 }
