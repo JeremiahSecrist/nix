@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./var.nix
     ];
   boot.loader.systemd-boot.enable = true;
   # Use the GRUB 2 boot loader.
@@ -36,11 +37,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -76,7 +77,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.jane = {
+  users.users.sky = {
     isNormalUser = true;
     initialPassword = "changeme!!";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
