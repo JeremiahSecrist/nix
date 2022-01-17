@@ -77,7 +77,13 @@
     passwordAuthentication = false;
   };
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 9443 ];
+  networking.firewall.allowedTCPPorts = [ 
+    # ssh
+    22
+    # web ui
+    9443
+    2368
+    ];
   networking.firewall.allowedUDPPorts = [  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
