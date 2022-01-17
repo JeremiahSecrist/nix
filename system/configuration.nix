@@ -12,6 +12,7 @@
       ./var.nix
     ];
   boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 1;
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   nix.autoOptimiseStore = true;
   nix.gc ={
