@@ -12,16 +12,16 @@
      ports = ["0.0.0.0:9443:9443"];
      volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
     };
-    systemd.services.dockerstop = {
-      wantedBy = [ "containerd.service" ]; 
-      before = [ "docker.service" ];
-      after = [ "containerd.service" ];
-      requires = ["containerd.service"];
-      Description = "containerd-shim v2 workaround";
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = "yes";
-        ExecStop = "/bin/sh -c ''${pkgs.docker}/bin/docker kill $(${pkgs.docker}/bin/docker ps -q)''";
-      };
-   };
+#     systemd.services.dockerstop = {
+#       wantedBy = [ "containerd.service" ]; 
+#       before = [ "docker.service" ];
+#       after = [ "containerd.service" ];
+#       requires = ["containerd.service"];
+#       Description = "containerd-shim v2 workaround";
+#       serviceConfig = {
+#         Type = "oneshot";
+#         RemainAfterExit = "yes";
+#         ExecStop = "/bin/sh -c ''${pkgs.docker}/bin/docker kill $(${pkgs.docker}/bin/docker ps -q)''";
+#       };
+#    };
 }
