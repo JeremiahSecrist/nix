@@ -52,8 +52,17 @@ mount /dev/disk/by-label/boot /mnt/boot
 nixos-generate-config --root /mnt
 }
 
+Install_Nix(){
+    pushd ~/.dotfiles
+    sudo nixos-install -I nixos-config=./system/configuration.nix
+    popd
+}
+
 ## init phase
 Select_Disk
 Confirm
 Format_Disk
+lsblk
+Confirm
+Install_Nix
 echo "fin!"
