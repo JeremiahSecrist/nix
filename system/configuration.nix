@@ -12,12 +12,13 @@
       ./var.nix
     ];
   boot.loader.systemd-boot.enable = true;
+  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   nix.autoOptimiseStore = true;
   nix.gc ={
     automatic = true;
     dates = "03:15";
   };
-  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+
   
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
@@ -26,15 +27,14 @@
     '';
   };
 
-  networking.hostName = "nixcontainer"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Set your time zone.
   time.timeZone = "America/New_York";
   networking= {
+    hostName = "nixcontainer";
     useDHCP = false;
     interfaces.enp0s3.useDHCP = true;
   };
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
