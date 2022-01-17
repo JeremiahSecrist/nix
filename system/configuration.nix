@@ -83,6 +83,7 @@
     # web ui
     9443
     2368
+    49153
     ];
   networking.firewall.allowedUDPPorts = [  ];
   # Or disable the firewall altogether.
