@@ -7,6 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      ./docker.nix
       ./hardware-configuration.nix
       ./var.nix
     ];
@@ -44,7 +45,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPM5d9h1r7e4NBTUr5ZSO2dFTCZM3BNa5TKvgjqTJDOw"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKCYTCBJMl2N+6B+62+DYRK7DtgChb1vMeJ6jsVCOFTU"
     ];
-    extraGroups = [ "wheel" "docker" "podman" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
