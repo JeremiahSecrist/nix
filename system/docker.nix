@@ -5,7 +5,7 @@
         enable = true;
         dockerSocket.enable = true;
         dockerCompat = true;
-    }
+    };
     virtualisation.oci-containers.backend = "podman";
     virtualisation.oci-containers.containers."portainer" = {
      image = "portainer/portainer-ce:2.11.0";
