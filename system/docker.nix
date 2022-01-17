@@ -2,20 +2,16 @@
 
 {
 # init prereqs
-    # virtualisation.docker.enable = true;
-    virtualisation.podman= {
-        enable = true;
-        dockerSocket.enable = true;
-    }
+
+    virtualisation.docker.enable = true;
+    virtualisation.docker.enableOnBoot = true;
     virtualisation.oci-containers = {
-    backend = "podman";
+    backend = "docker";
     containers = {
       hass = {
-        image = "cr.portainer.io/portainer/portainer-ce:2.9.3";
+        image = "portainer/portainer-ce:2.9.3";
         autostart = true;
         extraOptions = ["--restart=always"];
-        user = "admin";
-        workdir = "/home/admin";
         ports = ["9443:9443"];
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
