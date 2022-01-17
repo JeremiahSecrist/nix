@@ -6,6 +6,7 @@
     #     dockerSocket.enable = true;
     #     dockerCompat = true;
     # };
+    virtualisation.docker.liveRestore = false;
     virtualisation.oci-containers.backend = "docker";
     virtualisation.oci-containers.containers."portainer" = {
      image = "portainer/portainer-ce:2.11.0";
