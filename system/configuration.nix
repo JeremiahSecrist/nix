@@ -13,8 +13,10 @@
     ];
   boot.loader.systemd-boot.enable = true;
   nix.autoOptimiseStore = true;
-  nix.gc.automatic = true;
-  nix.gc.dates = "03:15";
+  nix.gc ={
+    automatic = true;
+    dates = "03:15";
+  };
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   
   nix = {
@@ -29,9 +31,10 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-  networking.useDHCP = false;
-  networking.interfaces.enp0s3.useDHCP = true;
-
+  networking= {
+    useDHCP = false;
+    interfaces.enp0s3.useDHCP = true;
+  };
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
