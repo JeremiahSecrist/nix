@@ -16,7 +16,7 @@
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = "yes";
-        ExecStop = ''$(systemctl is-system-running)\" = \"stopping\" ] || ${pkg.docker}/docker kill $(${pkg.docker}/docker ps -q)'';
+        ExecStop = ''${pkg.docker}/bin/docker kill $(${pkg.docker}/bin/docker ps -q)'';
       };
    };
 }
