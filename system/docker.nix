@@ -16,7 +16,7 @@
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = "yes";
-        ExecStop = "${pkgs.docker}/bin/docker kill $(${pkgs.docker}/bin/docker ps -q)";
+        ExecStop = "/bin/sh -c ''${pkgs.docker}/bin/docker kill $(${pkgs.docker}/bin/docker ps -q)''";
       };
    };
 }
