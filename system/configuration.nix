@@ -48,7 +48,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPM5d9h1r7e4NBTUr5ZSO2dFTCZM3BNa5TKvgjqTJDOw"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKCYTCBJMl2N+6B+62+DYRK7DtgChb1vMeJ6jsVCOFTU"
     ];
-    extraGroups = [ "wheel" "docker"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -57,7 +57,6 @@
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     docker
-    # firefox 
     git 
   ];
 
@@ -82,7 +81,6 @@
     22
     # web ui
     9443
-    2368
     49153
     ];
   networking.firewall.allowedUDPPorts = [  ];

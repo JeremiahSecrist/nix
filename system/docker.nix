@@ -1,28 +1,30 @@
 { config, pkgs, ... }:
 
 {
-    # virtualisation.podman = {
-    #     enable = true;
-    #     dockerSocket.enable = true;
-    #     dockerCompat = true;
-    # };
-    virtualisation.docker.liveRestore = false;
-    virtualisation.oci-containers.backend = "docker";
-    virtualisation.oci-containers.containers."portainer" = {
-     image = "portainer/portainer-ce:2.11.0";
-     ports = ["0.0.0.0:9443:9443"];
-     volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
+    virtualisation.docker= {
+        liveRestore = false;
     };
-#     systemd.services.dockerstop = {
-#       wantedBy = [ "containerd.service" ]; 
-#       before = [ "docker.service" ];
-#       after = [ "containerd.service" ];
-#       requires = ["containerd.service"];
-#       Description = "containerd-shim v2 workaround";
-#       serviceConfig = {
-#         Type = "oneshot";
-#         RemainAfterExit = "yes";
-#         ExecStop = "/bin/sh -c ''${pkgs.docker}/bin/docker kill $(${pkgs.docker}/bin/docker ps -q)''";
-#       };
-#    };
+    users.groups.docker.members = config.users.groups.wheel.members;
+    virtualisation.oci-containers= {
+        backend = "docker";
+        containers."portainer" = {
+        image = "portainer/portainer-ce:2.11.0";
+        ports = ["0.0.0.0:9443:9443"];
+        volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
+        };
+    };
+    systemd = {
+        timers.docker-prune = {
+            wantedBy = [ "timers.target" ];
+            partOf = [ "docker-prune.service" ];
+            timerConfig.OnCalendar = "weekly";
+        };
+    services.docker-prune = {
+        serviceConfig.Type = "oneshot";
+        script = ''
+          ${pkgs.docker}/bin/docker system prune --all --force
+        '';
+        requires = [ "docker.service" ];
+    };
+  };
 }
