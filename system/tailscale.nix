@@ -5,6 +5,6 @@
     
     services.tailscale.enable = true;
     
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
 
 }
