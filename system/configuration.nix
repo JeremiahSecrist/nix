@@ -12,8 +12,11 @@
       ./tailscale.nix
       ./var.nix
     ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 1;
+  boot.loader = {
+    systemd-boot.enable = true;
+    timeout = 1;
+  };
+
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   nix.autoOptimiseStore = true;
   nix.gc ={
@@ -35,6 +38,16 @@
     hostName = "nixcontainer";
     useDHCP = false;
     interfaces.enp0s3.useDHCP = true;
+    firewall.allowedTCPPorts = [ 
+      # ssh
+      22
+      # web ui
+      9443
+      49153
+    ];
+    firewall.allowedUDPPorts = [
+
+    ];
   };
 
   # Select internationalisation properties.
@@ -81,14 +94,7 @@
     passwordAuthentication = false;
   };
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 
-    # ssh
-    22
-    # web ui
-    9443
-    49153
-    ];
-  networking.firewall.allowedUDPPorts = [  ];
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
