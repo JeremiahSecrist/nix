@@ -38,16 +38,18 @@
     hostName = "nixcontainer";
     useDHCP = false;
     interfaces.enp0s3.useDHCP = true;
-    firewall.allowedTCPPorts = [ 
+    firewall = {
+      allowedTCPPorts = [ 
       # ssh
       22
       # web ui
       9443
       49153
-    ];
-    firewall.allowedUDPPorts = [
+      ];
+      allowedUDPPorts = [
 
-    ];
+      ];
+    };
   };
 
   # Select internationalisation properties.
