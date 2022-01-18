@@ -7,8 +7,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./docker.nix
       ./hardware-configuration.nix
+      ./docker.nix
+      ./tailscale.nix
       ./var.nix
     ];
   boot.loader.systemd-boot.enable = true;
