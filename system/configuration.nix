@@ -8,8 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./docker.nix
-      ./tailscale.nix
+      # ./docker.nix
+      # ./tailscale.nix
       ./desktop.nix
     ];
   boot.loader = {
