@@ -4,7 +4,12 @@
     virtualisation.docker= {
         liveRestore = false;
     };
+    
     users.groups.docker.members = config.users.groups.wheel.members;
+    # web ui
+    networking.firewall.allowedTCPPorts = [ 9443 49153 ];
+    
+    
     virtualisation.oci-containers= {
         backend = "docker";
         containers."portainer" = {

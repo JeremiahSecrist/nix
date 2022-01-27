@@ -10,21 +10,24 @@
       ./hardware-configuration.nix
       ./docker.nix
       ./tailscale.nix
-      ./var.nix
+      ./desktop.nix
     ];
   boot.loader = {
+    #grub.device = "/dev/sda";
     systemd-boot.enable = true;
     timeout = 1;
   };
 
-  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-  nix.autoOptimiseStore = true;
-  nix.gc ={
-    automatic = true;
-    dates = "03:15";
+  # maintnence  
+  nix = {
+    autoOptimiseStore = true;
+    gc ={
+      automatic = true;
+      dates = "03:15";
+    };
   };
 
-  
+  # nix flakes
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
     extraOptions = ''
@@ -39,16 +42,8 @@
     useDHCP = false;
     interfaces.enp0s3.useDHCP = true;
     firewall = {
-      allowedTCPPorts = [ 
-      # ssh
-      22
-      # web ui
-      9443
-      49153
-      ];
-      allowedUDPPorts = [
-
-      ];
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPorts = [ ];
     };
   };
 
@@ -76,7 +71,6 @@
   environment.systemPackages = with pkgs; [
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    docker
     git 
   ];
 
