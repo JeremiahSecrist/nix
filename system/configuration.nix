@@ -7,9 +7,10 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      #./hardware-configuration.nix
       # ./docker.nix
       # ./tailscale.nix
+      ./libvirt-configuration.nix
       ./desktop.nix
     ];
   boot.loader = {
