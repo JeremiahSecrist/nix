@@ -24,6 +24,6 @@
     };
 
   swapDevices = [ ];
-
+  services.spice-vdagentd.enable = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
