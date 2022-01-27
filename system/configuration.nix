@@ -41,7 +41,7 @@
   networking= {
     hostName = "nixcontainer";
     useDHCP = false;
-    interfaces.enp0s3.useDHCP = true;
+    interfaces.enp0s1.useDHCP = true;
     firewall = {
       allowedTCPPorts = [ 22 ];
       allowedUDPPorts = [ ];
