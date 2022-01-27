@@ -14,6 +14,7 @@ services.xserver = {
 };
 
 # pipewire support
+hardware.pulseaudio.enable = false;
 security.rtkit.enable = true;
 services.pipewire = {
   enable = true;
