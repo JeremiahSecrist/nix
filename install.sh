@@ -1,5 +1,7 @@
 #!/bin/sh
 set -e
+source "${1}"
+
 Confirm(){
     read -r -p "Are you sure? [y/N] " response
 case "$response" in
@@ -12,36 +14,21 @@ case "$response" in
 esac
 
 }
-Select_Disk(){
-    lsblk -f
-    drives=$(lsblk -d | tail -n+2 | cut -d" " -f1 | tr '\n' ' ') 
-    drives="quit ${drives}"
-    echo "Please select a disk"
-    select i in $drives; do
-    if [ $i = "quit" ]; then
-        echo "ABORT!"
-        exit 1
-    else
-        echo "/dev/${i} selected"
-        DSKSLC="${i}"
-        break
-    fi
-    done
-}
+
 Format_Disk(){
-sgdisk --zap-all /dev/${DSKSLC}
+sgdisk --zap-all "${DISK}"
 wait $!
 sgdisk --clear \
          --new=1:0:+550MiB --typecode=1:ef00 \
-         --new=2:0:+8GiB   --typecode=2:8200 \
+         --new=2:0:+16GiB   --typecode=2:8200 \
          --new=3:0:0       --typecode=3:8300 \
-           "/dev/${DSKSLC}"
+           "${DISK}"
 wait $!
 sleep 2
 #Partition the drive and create subvolumes
-mkfs.fat -F 32 -n boot "/dev/${DSKSLC}1"
-mkswap -L swap "/dev/${DSKSLC}2" 
-mkfs.ext4 -L nixos "/dev/${DSKSLC}3"
+mkfs.fat -F 32 -n boot "${DISK}1"
+mkswap -L swap "${DISK}2" 
+mkfs.ext4 -L nixos "${DISK}3"
 
 
 wait $!
@@ -59,8 +46,6 @@ Install_Nix(){
 }
 
 ## init phase
-Select_Disk
-Confirm
 Format_Disk
 lsblk
 Confirm
