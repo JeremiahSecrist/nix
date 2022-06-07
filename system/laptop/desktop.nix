@@ -8,10 +8,7 @@ services.xserver = {
     libinput.enable = true;
     layout = "us";
     displayManager.lightdm.enable = true;
-    desktopManager = {
-			cinnamon.enable = true;
-		};
-    displayManager.defaultSession = "cinnamon";
+    desktopManager.cinnamon.enable = true;
 };
 
 # pipewire support

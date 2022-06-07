@@ -44,7 +44,8 @@ in
   networking= {
     hostName = "";
     useDHCP = false;
-    interfaces.enp1s0.useDHCP = true;
+    interfaces.enp0s25.useDHCP = true;
+    interfaces.wlp4s0.useDHCP = true;
     firewall = {
       allowedTCPPorts = [  ];
       allowedUDPPorts = [ ];
