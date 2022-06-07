@@ -14,7 +14,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./desktop.nix
-      ./homemanager.nix
+      # ./homemanager.nix
     ];
   boot.loader = {
     #grub.device = "/dev/sda";
@@ -60,7 +60,7 @@ in
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.admin = {
+  users.users.sky = {
     isNormalUser = true;
     initialPassword = "changeme!!";
     # openssh.authorizedKeys.keys = [
