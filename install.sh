@@ -40,7 +40,7 @@ nixos-generate-config --root /mnt
 }
 
 Install_Nix(){
-    pushd /home/nixos/.dotfiles
+    pushd /home/nixos/nix
     sudo nixos-install -I nixos-config=./system/${SYSTEM_NAME}/configuration.nix
     popd
 }
