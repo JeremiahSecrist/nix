@@ -42,7 +42,7 @@ in
   # Set your time zone.
   time.timeZone = "America/New_York";
   networking= {
-    hostName = "";
+    hostName = "skytop";
     useDHCP = false;
     interfaces.enp0s25.useDHCP = true;
     interfaces.wlp4s0.useDHCP = true;
