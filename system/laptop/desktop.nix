@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 {
-# enable gnome and wayland
-programs.xwayland.enable = true;
+# enable xerver and cinnamon
 hardware.opengl.enable = true ;
 services.xserver = {
     enable = true;

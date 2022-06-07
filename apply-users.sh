@@ -1,4 +1,4 @@
 #!/bin/sh
 pushd ~/.dotfiles
-home-manager switch -f ./users/sky/home.nix
+home-manager switch -f ./users/${USER}/home.nix
 popd
