@@ -14,6 +14,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./desktop.nix
+      ./homemanager.nix
     ];
   boot.loader = {
     #grub.device = "/dev/sda";
