@@ -18,13 +18,13 @@
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-53c89777-4614-4bc0-9dbd-ba2b3e2c946a".device = "/dev/disk/by-uuid/53c89777-4614-4bc0-9dbd-ba2b3e2c946a";
+#   boot.initrd.luks.devices."luks-53c89777-4614-4bc0-9dbd-ba2b3e2c946a".device = "/dev/disk/by-uuid/53c89777-4614-4bc0-9dbd-ba2b3e2c946a";
 
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
-  zramSwap.enable = true;
+
   swapDevices =
     [ { device = "/dev/disk/by-label/swap"; }
     ];

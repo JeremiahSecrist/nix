@@ -12,8 +12,8 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./gnome.nix
+      ./hardware.nix
+    #   ./gnome.nix
     ];
 
   # Bootloader.
@@ -21,14 +21,14 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # Setup keyfile
-  # boot.initrd.secrets = {
-    # "/crypto_keyfile.bin" = null;
-  # };
+#   # Setup keyfile
+#   boot.initrd.secrets = {
+#     "/crypto_keyfile.bin" = null;
+#   };
 
-  # # Enable swap on luks
-  # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
-  # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
+#   # Enable swap on luks
+#   boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
+#   boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
 
   networking = {
     hostName = "skytop"; # Define your hostname.
@@ -41,6 +41,9 @@ in
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
+
+  # Enable the GNOME Desktop Environment.
+  programs.xwayland.enable = true;
   
   # bluetooth
   hardware.bluetooth.enable = true;
@@ -59,8 +62,12 @@ in
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  # Packages to install
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
   environment.systemPackages = with pkgs; [
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
     nano
     git
     firefox-wayland
@@ -73,17 +80,35 @@ in
     ];
 
   xdg.portal = {
-    enable = true;
+   enable = true;
 #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
+  zramSwap.enable = true;
   virtualisation = {
     podman = {
       enable = true;
     };
   };
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
   programs = { 
    starship.enable = true;
   };
-   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+ system.stateVersion = "22.05"; # Did you read the comment?
+
 }
