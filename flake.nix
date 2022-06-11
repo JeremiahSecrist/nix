@@ -12,7 +12,7 @@
             };
             lib = nixpkgs.lib;
         in {
-            nixcsConfigurations = {
+            nixosConfigurations = {
                 skytop = lib.nixosSystem {
                     inherit system;
                     Modules = [
