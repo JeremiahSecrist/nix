@@ -15,7 +15,7 @@
             nixosConfigurations = {
                 skytop = lib.nixosSystem {
                     inherit system;
-                    Modules = [
+                    modules = [
                         ./system/laptop/configuration.nix
                     ];
                 };
