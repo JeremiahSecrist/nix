@@ -17,7 +17,7 @@
                     inherit system;
                     Modules = [
                         ./system/laptop/configuration.nix
-                    ]
+                    ];
                 };
             };
         };
