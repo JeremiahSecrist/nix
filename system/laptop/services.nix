@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
-let
-  unstable = import
-    (builtins.fetchTarball {
-        url = "https://github.com/nixos/nixpkgs/tarball/02ab2e2aa58df6231c319af3ce1af79f3e82e2d8";
-        sha256 = "1cmr9rwrs0aia8idzdrm3n5h7ajdkazjqlzkhy9l2qlb7vx7lw61";
-    } )
-    # reuse the current configuration
-    { config = config.nixpkgs.config; };
-in
+# let
+#   unstable = import
+#     (builtins.fetchTarball {
+#         url = "https://github.com/nixos/nixpkgs/tarball/02ab2e2aa58df6231c319af3ce1af79f3e82e2d8";
+#         sha256 = "1cmr9rwrs0aia8idzdrm3n5h7ajdkazjqlzkhy9l2qlb7vx7lw61";
+#     } )
+#     # reuse the current configuration
+#     { config = config.nixpkgs.config; };
+# in
 {
 services = {
     flatpak.enable = true; 
