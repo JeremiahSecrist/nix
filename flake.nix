@@ -18,7 +18,7 @@
                     Modules = [
                         ./system/laptop/configuration.nix
                     ]
-                }
+                };
             };
         };
     };
