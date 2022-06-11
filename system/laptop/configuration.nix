@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   unstable = import
-    (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/master)
+    (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/02ab2e2aa58df6231c319af3ce1af79f3e82e2d8)
     # reuse the current configuration
     { config = config.nixpkgs.config; };
 in
@@ -13,106 +13,77 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./desktop.nix
-      # ./homemanager.nix
+      ./gnome.nix
     ];
-  boot.loader = {
-    #grub.device = "/dev/sda";
-    systemd-boot.enable = true;
-    timeout = 1;
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Setup keyfile
+  # boot.initrd.secrets = {
+    # "/crypto_keyfile.bin" = null;
+  # };
+
+  # # Enable swap on luks
+  # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
+  # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
+
+  networking = {
+    hostName = "skytop"; # Define your hostname.
+    networkmanager.enable = true;
   };
-
-  nixpkgs.config.allowUnfree = true;
-  nix = {
-    # nix flakes
-    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    extraOptions = "experimental-features = nix-command flakes";
-    
-    #auto maintainence
-    autoOptimiseStore = true;
-    gc ={
-      automatic = true;
-      dates = "03:15";
-    };
-  };
-
-
+  # NM DNS
+  
   # Set your time zone.
   time.timeZone = "America/New_York";
-  networking= {
-    hostName = "skytop";
-    useDHCP = false;
-    interfaces.enp0s25.useDHCP = true;
-    interfaces.wlp4s0.useDHCP = true;
-    firewall = {
-      allowedTCPPorts = [  ];
-      allowedUDPPorts = [ ];
-    };
-  };
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
-
+  i18n.defaultLocale = "en_US.utf8";
+  
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
     isNormalUser = true;
-    initialPassword = "changeme!!";
-    # openssh.authorizedKeys.keys = [
-    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPM5d9h1r7e4NBTUr5ZSO2dFTCZM3BNa5TKvgjqTJDOw"
-    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKCYTCBJMl2N+6B+62+DYRK7DtgChb1vMeJ6jsVCOFTU"
-    # ];
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    description = "sky";
+    extraGroups = [ "networkmanager" "wheel" ];
   };
-
   
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  # Packages to install
   environment.systemPackages = with pkgs; [
-    microcodeIntel
-    lm_sensors
-    nano 
-    wget
-    git 
-    #desktop
-    firefox
+    nano
+    git
+    firefox-wayland
+    gnome3.gnome-tweaks
     unstable.noisetorch
-  ];
+    spotify
+    cryptomator
+    distrobox
+    vscode
+    ];
 
-  # Enable flatpak
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
+  xdg.portal = {
     enable = true;
-    enableSSHSupport = true;
+#   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh ={
-  #   enable = true;
-  #   passwordAuthentication = false;
-  # };
-  # Open ports in the firewall.
-
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  virtualisation = {
+    podman = {
+      enable = true;
+    };
+  };
+  programs = { 
+   starship.enable = true;
+  };
+   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }
-

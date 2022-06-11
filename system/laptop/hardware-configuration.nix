@@ -4,24 +4,38 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "ahci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
+  boot.kernelParams = [ "nouveau.modeset=0" ];
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
+  boot.initrd.luks.devices."luks-53c89777-4614-4bc0-9dbd-ba2b3e2c946a".device = "/dev/disk/by-uuid/53c89777-4614-4bc0-9dbd-ba2b3e2c946a";
+
+  fileSystems."/boot/efi" =
     { device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
+  zramSwap.enable = true;
+  swapDevices =
+    [ { device = "/dev/disk/by-label/swap"; }
+    ];
 
-  swapDevices = [ { device = "/dev/disk/by-label/swap"; }];
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s25.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
