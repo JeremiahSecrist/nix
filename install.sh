@@ -14,35 +14,37 @@ case "$response" in
 esac
 
 }
-
+Await() {
+    wait $!
+    sleep 2
+}
 Format_Disk(){
 sgdisk --zap-all "${DISK}"
-wait $!
+
+Await
+
 sgdisk --clear \
          --new=1:0:+550MiB --typecode=1:ef00 \
          --new=2:0:+16GiB   --typecode=2:8200 \
          --new=3:0:0       --typecode=3:8300 \
            "${DISK}"
-wait $!
-sleep 2
+
 #Partition the drive and create subvolumes
 mkfs.fat -F 32 -n boot "${DISK}1"
 mkswap -L swap "${DISK}2" 
 mkfs.ext4 -L nixos "${DISK}3"
 
+Await
 
-wait $!
-sleep 2
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
+swapon /dev/disk/by-label/swap
 nixos-generate-config --root /mnt
 }
 
-Install_Nix(){
-    pushd /home/nixos/nix
-    sudo nixos-install -I nixos-config=./system/${SYSTEM_NAME}/configuration.nix
-    popd
+Install_Nix() {
+    nix-install --flake https://github.com/arouzing/nix#${SYSTEM_NAME} --root /mnt
 }
 
 ## init phase
