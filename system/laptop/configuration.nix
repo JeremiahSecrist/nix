@@ -21,14 +21,14 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-#   # Setup keyfile
-#   boot.initrd.secrets = {
-#     "/crypto_keyfile.bin" = null;
-#   };
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
 
-#   # Enable swap on luks
-#   boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
-#   boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
+  boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
 
   networking = {
     hostName = "skytop"; # Define your hostname.
