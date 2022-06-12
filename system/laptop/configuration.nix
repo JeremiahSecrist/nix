@@ -24,7 +24,20 @@
   # Enable swap on luks
   # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
   # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
-
+  nix = {
+    # nix flakes
+    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    
+    #auto maintainence
+    autoOptimiseStore = true;
+    gc ={
+      automatic = true;
+      dates = "03:15";
+    };
+  };
   networking = {
     hostName = "skytop"; # Define your hostname.
     networkmanager.enable = true;
