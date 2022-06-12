@@ -88,7 +88,7 @@
     spotify
     cryptomator
     distrobox
-    vscode
+    vscode-fhs
     ];
 
   xdg.portal = {
