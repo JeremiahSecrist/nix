@@ -25,6 +25,7 @@ services = {
         libinput.enable = true;
         displayManager = {
             gdm.enable = true;
+            sessionPackages = [ pkgs.gnome.gnome-session.sessions ];
             defaultSession = "gnome";
         };
         desktopManager = {
