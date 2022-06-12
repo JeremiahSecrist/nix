@@ -12,7 +12,7 @@ services = {
             gnome.enable = true;
         };
     };
-    dbus.packages = [ pkgs.dconf ]; 
+    # dbus.packages = [ pkgs.dconf ]; 
     udev.packages = [ pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon ];
 };
 
@@ -39,7 +39,7 @@ environment.gnome.excludePackages = (with pkgs; [
 ]);
 xdg.portal = {
   enable = true;
-  gtkUsePortal = true;
+  # gtkUsePortal = true;
   # Add the GTK portal which seems to be always needed for GTK applications
   # extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
 };
