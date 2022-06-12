@@ -102,7 +102,7 @@
     enable = true;
     gtkUsePortal = true;
     # Add the GTK portal which seems to be always needed for GTK applications
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
   };
   zramSwap.enable = true;
   virtualisation = {
