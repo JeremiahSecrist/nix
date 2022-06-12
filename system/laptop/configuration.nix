@@ -78,8 +78,8 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget #
     remake
-    dconf
     protonvpn-gui
+    python39Packages.protonvpn-nm-lib
     ecryptfs
     ecryptfs-helper
     nano
