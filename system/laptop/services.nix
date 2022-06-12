@@ -39,5 +39,6 @@ services = {
         pulse.enable = true;
         wireplumber.enable = true;
     };
+    yubikey-agent.enable = true;
 };
 }
