@@ -23,15 +23,6 @@ services = {
         layout = "us";
         xkbVariant = "";
         libinput.enable = true;
-        displayManager = {
-            gdm.enable = true;
-            sessionPackages = [ pkgs.gnome.gnome-session.sessions ];
-            defaultSession = "gnome";
-        };
-        desktopManager = {
-          gnome.enable = true;
-            # plasma5.enable = true;
-        };
     };
     pipewire = {
         enable = true;
@@ -42,7 +33,5 @@ services = {
     };
     yubikey-agent.enable = true;
     pcscd.enable = true; # for yubikey
-    dbus.packages = [ pkgs.dconf ]; 
-    udev.packages = [ pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon ];
 };
 }

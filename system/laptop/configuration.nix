@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware.nix
       ./services.nix
-    #   ./gnome.nix
+      ./gnome.nix
     ];
 
   # Bootloader.
@@ -42,11 +42,8 @@
     hostName = "skytop"; # Define your hostname.
     networkmanager.enable = true;
   };
-  # NM DNS
-  
   # Set your time zone.
   time.timeZone = "America/New_York";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
@@ -81,7 +78,7 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget #
     remake
-    protonvpn-cli
+    # protonvpn-cli
     python39Packages.dbus-python
     ecryptfs
     ecryptfs-helper
@@ -97,12 +94,7 @@
     discord
     ];
   services.gnome.gnome-keyring.enable = true;
-  xdg.portal = {
-    enable = true;
-    gtkUsePortal = true;
-    # Add the GTK portal which seems to be always needed for GTK applications
-    # extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
-  };
+
   zramSwap.enable = true;
   virtualisation = {
     podman = {
