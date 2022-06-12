@@ -94,7 +94,7 @@
 
   xdg.portal = {
    enable = true;
-   extraPortals = [ pkgs.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk ];
+   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   zramSwap.enable = true;
   virtualisation = {
