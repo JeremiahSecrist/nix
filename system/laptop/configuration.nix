@@ -79,7 +79,6 @@
   #  wget #
     remake
     protonvpn-cli
-    python39Packages.protonvpn-nm-lib
     ecryptfs
     ecryptfs-helper
     nano
