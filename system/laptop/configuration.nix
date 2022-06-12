@@ -90,6 +90,7 @@
     cryptomator
     distrobox
     vscode-fhs
+    yubioath-desktop
     ];
   services.gnome.gnome-keyring.enable = true;
   xdg.portal = {
