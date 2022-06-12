@@ -19,6 +19,7 @@ services = {
 environment.gnome.excludePackages = (with pkgs; [
   gnome-photos
   gnome-tour
+  xterm
 ]) ++ (with pkgs.gnome; [
   cheese # webcam tool
   gnome-music
