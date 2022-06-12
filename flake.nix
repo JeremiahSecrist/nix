@@ -20,7 +20,7 @@
                     inherit system;
                     modules = [
                         ./system/laptop/configuration.nix
-                        homa-manager.nixosModules.home-manager {
+                        home-manager.nixosModules.home-manager {
                             home-manager.useGlobalPkgs = true;
                             home-manager.useUserPackages = true;
                             home-manager.users.sky = {
