@@ -26,7 +26,7 @@
                             home-manager.users.sky = {
                                 import = [ ./hm/sky/home.nix];
                             };
-                        };
+                        }
                     ];
                 };
             };
