@@ -54,7 +54,7 @@
   programs = {
     xwayland.enable = true;
     gnupg.agent.enable = true;
-  }
+  };
   
   # bluetooth
   hardware.bluetooth.enable = true;
