@@ -95,6 +95,7 @@
     distrobox
     vscode-fhs
     yubioath-desktop
+    discord
     ];
   services.gnome.gnome-keyring.enable = true;
   xdg.portal = {
