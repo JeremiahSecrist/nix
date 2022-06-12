@@ -88,13 +88,12 @@
     nano
     git
     gnupg
-    firefox-wayland
-    gnome3.gnome-tweaks
-    spotify
-    cryptomator
     distrobox
-    vscode-fhs
+    cryptomator
+    firefox-wayland
     yubioath-desktop
+    vscode-fhs
+    spotify
     discord
     ];
   services.gnome.gnome-keyring.enable = true;
