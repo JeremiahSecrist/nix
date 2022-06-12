@@ -13,11 +13,11 @@ services = {
     flatpak.enable = true; 
     auto-cpufreq.enable = true;
     printing.enable = true;
-    resolved.fallbackDns = [
-        "1.1.1.1"
-        "1.0.0.1"
-        "2606:4700:4700::1111,2606:4700:4700::1001"
-    ];
+#    resolved.fallbackDns = [
+#        "1.1.1.1"
+#        "1.0.0.1"
+#        "2606:4700:4700::1111,2606:4700:4700::1001"
+#    ];
     xserver = {
         enable = true;
         layout = "us";
