@@ -41,8 +41,8 @@ services = {
     };
     yubikey-agent.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
-    pcscd.enable = true;
-    dbus.packages = [pkgs.gnome3.dconf];
+    pcscd.enable = true; # for yubikey
+    dbus.packages = [ pkgs.gnome3.dconf ]; 
     udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 };
 }
