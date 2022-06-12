@@ -24,7 +24,7 @@
                             home-manager.useGlobalPkgs = true;
                             home-manager.useUserPackages = true;
                             home-manager.users.sky = {
-                                import = [ ./hm/sky/home.nix];
+                                imports = [ ./hm/sky/home.nix ];
                             };
                         }
                     ];
