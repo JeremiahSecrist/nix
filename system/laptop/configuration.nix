@@ -51,7 +51,10 @@
   i18n.defaultLocale = "en_US.utf8";
 
   # Enable the GNOME Desktop Environment.
-  programs.xwayland.enable = true;
+  programs = {
+    xwayland.enable = true;
+    gnupg.agent.enable = true;
+  }
   
   # bluetooth
   hardware.bluetooth.enable = true;
@@ -84,7 +87,7 @@
     ecryptfs-helper
     nano
     git
-    gpg
+    gnupg
     firefox-wayland
     gnome3.gnome-tweaks
     spotify
@@ -104,6 +107,7 @@
       enable = true;
     };
   };
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
