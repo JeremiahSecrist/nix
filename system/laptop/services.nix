@@ -40,5 +40,7 @@ services = {
         wireplumber.enable = true;
     };
     yubikey-agent.enable = true;
+    udev.packages = [pkgs.yubikey-personalization];
+    pcscd.enable = true;
 };
 }
