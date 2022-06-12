@@ -84,6 +84,7 @@
     ecryptfs-helper
     nano
     git
+    gpg
     firefox-wayland
     gnome3.gnome-tweaks
     spotify
