@@ -79,6 +79,7 @@
   #  wget #
     remake
     protonvpn-cli
+    python39Packages.dbus-python
     ecryptfs
     ecryptfs-helper
     nano
