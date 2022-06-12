@@ -40,9 +40,8 @@ services = {
         wireplumber.enable = true;
     };
     yubikey-agent.enable = true;
-    udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true; # for yubikey
     dbus.packages = [ pkgs.gnome3.dconf ]; 
-    udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
+    udev.packages = [pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon ];
 };
 }
