@@ -24,12 +24,12 @@ services = {
         xkbVariant = "";
         libinput.enable = true;
         displayManager = {
-            sddm.enable = true;
-            defaultSession = "plasmawayland";
+            gdm.enable = true;
+            defaultSession = "gnomewayland";
         };
         desktopManager = {
-#           gnome.enable = true;
-            plasma5.enable = true;
+          gnome.enable = true;
+            # plasma5.enable = true;
         };
     };
     pipewire = {
@@ -42,5 +42,7 @@ services = {
     yubikey-agent.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
+    dbus.packages = [pkgs.gnome3.dconf];
+    udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 };
 }
