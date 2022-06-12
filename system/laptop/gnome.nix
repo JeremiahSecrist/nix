@@ -8,7 +8,8 @@ services = {
             defaultSession = "gnome";
         };
         desktopManager = {
-          gnome.enable = true;
+            xterm.enable = false;
+            gnome.enable = true;
         };
     };
     dbus.packages = [ pkgs.dconf ]; 
