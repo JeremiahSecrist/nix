@@ -25,7 +25,7 @@ services = {
         libinput.enable = true;
         displayManager = {
             gdm.enable = true;
-            defaultSession = "gnomewayland";
+            defaultSession = "gnome";
         };
         desktopManager = {
           gnome.enable = true;
