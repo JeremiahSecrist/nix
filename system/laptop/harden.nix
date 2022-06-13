@@ -13,7 +13,7 @@ with lib;
 
   # environment.memoryAllocator.provider = mkDefault "graphene-hardened";
   # environment.variables.SCUDO_OPTIONS = mkDefault "ZeroContents=1";
-  systemd.coredump.enable = false;
+  # systemd.coredump.enable = false;
   
   security.lockKernelModules = mkDefault true;
 
@@ -28,8 +28,8 @@ with lib;
 
   security.virtualisation.flushL1DataCache = mkDefault "always";
 
-  security.apparmor.enable = mkDefault true;
-  security.apparmor.killUnconfinedConfinables = mkDefault true;
+  # security.apparmor.enable = mkDefault true;
+  # security.apparmor.killUnconfinedConfinables = mkDefault true;
 
   boot.kernelParams = [
     # Slab/slub sanity checks, redzoning, and poisoning
