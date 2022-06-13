@@ -14,10 +14,12 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  # Disable core dumps.
-  systemd.coredump.enable = false;
+  boot.plymouth.enable = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+ 
 
   nix = {
     # nix flakes
@@ -25,7 +27,6 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    
     #auto maintainence
     autoOptimiseStore = true;
     gc ={
@@ -34,6 +35,7 @@
       options = "--delete-older-than 7d";
     };
   };
+  
   networking = {
     hostName = "skytop"; # Define your hostname.
     networkmanager.enable = true;
@@ -60,6 +62,9 @@
   # bluetooth
   hardware.bluetooth.enable = true;
   
+  # Disable wait for network
+  systemd.network.wait-online.timeout = 0;
+  boot.loader.timeout = 1;
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
