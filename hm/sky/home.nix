@@ -10,6 +10,7 @@
         stateVersion = "22.05";
     };
     programs = {
+        himalaya.enable = true;
         home-manager.enable = true;
         git = {
             enable = true;
