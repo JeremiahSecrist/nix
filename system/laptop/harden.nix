@@ -7,6 +7,8 @@ with lib;
     maintainers = [ maintainers.joachifm maintainers.emily ];
   };
 
+  systemd.coredump.enable = mkDefault false;
+
   boot.kernelPackages = mkDefault pkgs.linuxPackages_hardened;
 
   nix.settings.allowed-users = mkDefault [ "@users" ];
