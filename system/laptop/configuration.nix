@@ -82,6 +82,7 @@
     python39Packages.dbus-python
     ecryptfs
     ecryptfs-helper
+    dconf2nix
     nano
     git
     gnupg
