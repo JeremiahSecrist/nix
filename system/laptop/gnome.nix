@@ -2,7 +2,7 @@
 {
 services = {
     xserver = {
-        enable = false;
+        enable = true;
         displayManager = {
             gdm.enable = true;
             defaultSession = "gnome";
@@ -19,7 +19,6 @@ services = {
 environment.gnome.excludePackages = (with pkgs; [
   gnome-photos
   gnome-tour
-  # xterm
 ]) ++ (with pkgs.gnome; [
   cheese # webcam tool
   gnome-music
@@ -36,6 +35,7 @@ environment.gnome.excludePackages = (with pkgs; [
   atomix # puzzle game
   
 ]);
+programs.xwayland.enable = true;
 xdg.portal = {
   enable = true;
   # gtkUsePortal = true;
