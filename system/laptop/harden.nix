@@ -7,7 +7,7 @@ with lib;
     maintainers = [ maintainers.joachifm maintainers.emily ];
   };
 
-  systemd.coredump.enable = mkDefault false;
+  # systemd.coredump.enable = mkDefault falset;
 
   boot.kernelPackages = mkDefault pkgs.linuxPackages_hardened;
 

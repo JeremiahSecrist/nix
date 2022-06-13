@@ -46,13 +46,13 @@
   # Enable the GNOME Desktop Environment.
   programs = {
     gnupg.agent.enable = true;
-    firejail.enable = true;
-    firejail.wrappedBinaries = {
-      firefox = {
-        executable = "${lib.getBin pkgs.firefox-wayland}/bin/firefox";
-        profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
-      };
-    };
+    # firejail.enable = true;
+    # firejail.wrappedBinaries = {
+    #   firefox = {
+    #     executable = "${lib.getBin pkgs.firefox-wayland}/bin/firefox";
+    #     profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
+    #   };
+    # };
   };
   # nixpkgs.config.packageOverrides = pkgs: with pkgs; {
   #   firefox = stdenv.lib.overrideDerivation firefox (_: {
@@ -94,7 +94,7 @@
     gnupg
     distrobox
     cryptomator
-    #firefox-wayland
+    firefox-wayland
     yubioath-desktop
     vscode-fhs
     spotify

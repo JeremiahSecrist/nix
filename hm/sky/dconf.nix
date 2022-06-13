@@ -49,6 +49,10 @@ with lib.hm.gvariant;
       application-id = "code.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/firefox" = {
+      application-id = "firefox.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/gnome-power-panel" = {
       application-id = "gnome-power-panel.desktop";
     };
@@ -61,8 +65,21 @@ with lib.hm.gvariant;
       application-id = "org.gnome.Software.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-mozilla-firefox" = {
+      application-id = "org.mozilla.firefox.desktop";
+    };
+
     "org/gnome/desktop/session" = {
       idle-delay = mkUint32 300;
+    };
+
+    "org/gnome/eog/ui" = {
+      sidebar = false;
+    };
+
+    "org/gnome/eog/view" = {
+      background-color = "rgb(0,0,0)";
+      use-background-color = true;
     };
 
     "org/gnome/evolution-data-server" = {
@@ -71,9 +88,11 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/gnome-system-monitor" = {
+      maximized = false;
       network-total-in-bits = false;
       show-dependencies = false;
       show-whose-processes = "user";
+      window-state = mkTuple [ 700 500 ];
     };
 
     "org/gnome/gnome-system-monitor/disktreenew" = {
@@ -105,8 +124,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      app-picker-layout = "[{'org.gnome.Calendar.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.Maps.desktop': <{'position': <4>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <5>}>, 'org.gnome.Extensions.desktop': <{'position': <6>}>, 'org.mozilla.firefox.desktop': <{'position': <7>}>, 'org.gnome.Calculator.desktop': <{'position': <8>}>, 'cups.desktop': <{'position': <9>}>, 'simple-scan.desktop': <{'position': <10>}>, 'org.gnome.Settings.desktop': <{'position': <11>}>, 'gnome-system-monitor.desktop': <{'position': <12>}>, 'nixos-manual.desktop': <{'position': <13>}>, 'org.gnome.Software.desktop': <{'position': <14>}>, 'Utilities': <{'position': <15>}>, 'spotify.desktop': <{'position': <16>}>, 'yelp.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
-      favorite-apps = [ "org.mozilla.firefox.desktop" "code.desktop" "discord.desktop" "org.gnome.Console.desktop" "org.gnome.Nautilus.desktop" ];
+      app-picker-layout = "[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'org.gnome.Calculator.desktop': <{'position': <4>}>, 'simple-scan.desktop': <{'position': <5>}>, 'org.gnome.Settings.desktop': <{'position': <6>}>, 'gnome-system-monitor.desktop': <{'position': <7>}>, 'Utilities': <{'position': <8>}>, 'yelp.desktop': <{'position': <9>}>, 'org.gnome.Calendar.desktop': <{'position': <10>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <11>}>, 'org.gnome.Extensions.desktop': <{'position': <12>}>, 'firefox.desktop': <{'position': <13>}>, 'cups.desktop': <{'position': <14>}>, 'nixos-manual.desktop': <{'position': <15>}>, 'org.gnome.Software.desktop': <{'position': <16>}>, 'spotify.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
+      favorite-apps = [ "firefox.desktop" "code.desktop" "discord.desktop" "org.gnome.Console.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "42.2";
     };
 
@@ -115,7 +134,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/software" = {
-      check-timestamp = mkInt64 1655076356;
+      check-timestamp = mkInt64 1655156943;
       first-run = false;
     };
 
