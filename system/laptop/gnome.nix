@@ -13,6 +13,7 @@ services = {
         };
     };
     udev.packages = [ pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon ];
+    packagekit.enable = true;
 };
 
 # exclude the following packages from the default installation
@@ -37,7 +38,6 @@ environment.gnome.excludePackages = (with pkgs; [
 ]);
 programs = {
   xwayland.enable = true;
-  packagekit.enable = true;
 };
 xdg.portal = {
   enable = true;
