@@ -13,7 +13,8 @@ with lib;
 
   # environment.memoryAllocator.provider = mkDefault "graphene-hardened";
   # environment.variables.SCUDO_OPTIONS = mkDefault "ZeroContents=1";
-
+  systemd.coredump.enable = false;
+  
   security.lockKernelModules = mkDefault true;
 
   security.protectKernelImage = mkDefault true;
