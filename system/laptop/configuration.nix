@@ -78,6 +78,7 @@
     python39Packages.dbus-python
     ecryptfs
     ecryptfs-helper
+    clamav
     dconf2nix
     nano
     git
