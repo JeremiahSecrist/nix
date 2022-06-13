@@ -11,7 +11,6 @@
     };
     programs = {
         dconf.enable = true;
-        home-manager.enable = true;
         git = {
             enable = true;
             userName  = "arouzing";
