@@ -33,5 +33,10 @@ services = {
     };
     yubikey-agent.enable = true;
     pcscd.enable = true; # for yubikey
-};
+    # antivirus enabled with clamav
+    
+    clamav = {
+        daemon.enable = true;
+        updater.enable = true;
+    };
 }

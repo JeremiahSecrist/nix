@@ -7,6 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      <nixpkgs/nixos/modules/profiles/hardened.nix>
       ./hardware.nix
       ./services.nix
       ./gnome.nix
@@ -15,15 +16,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Disable core dumps.
+  systemd.coredump.enable = false;
 
-  # Setup keyfile
-  # boot.initrd.secrets = {
-  #   "/crypto_keyfile.bin" = null;
-  # };
-
-  # Enable swap on luks
-  # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".device = "/dev/disk/by-uuid/628e73c4-0740-4e30-8dce-7aa4c0dfc409";
-  # boot.initrd.luks.devices."luks-628e73c4-0740-4e30-8dce-7aa4c0dfc409".keyFile = "/crypto_keyfile.bin";
   nix = {
     # nix flakes
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
@@ -46,10 +41,15 @@
   time.timeZone = "America/New_York";
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
-
   # Enable the GNOME Desktop Environment.
   programs = {
     gnupg.agent.enable = true;
+    firejail.enable = true;
+    firejail.wrappedBinaries = {
+      firefox = {
+          executable = "${pkgs.lib.getBin pkgs.firefox}/bin/firefox";
+          profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
+      };
   };
   
   # bluetooth
@@ -114,11 +114,12 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
+  networking.firewall = { 
+    enable = true;
+    allowedTCPPorts = [];
+    allowedUDPPorts = [];
+  };
+  
  system.stateVersion = "22.05"; # Did you read the comment?
 
 }
