@@ -43,14 +43,12 @@
     hostName = "skytop"; # Define your hostname.
     networkmanager.enable = true;
   };
-  # Set your time zone.
   time.timeZone = "America/New_York";
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
   # Enable the GNOME Desktop Environment.
   programs = {
-    xwayland.enable = true;
     gnupg.agent.enable = true;
   };
   
@@ -73,11 +71,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget #
     gnumake
     # protonvpn-cli
     python39Packages.dbus-python
