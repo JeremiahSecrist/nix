@@ -2,7 +2,7 @@
 {
 services = {
     xserver = {
-        enable = true;
+        enable = false;
         displayManager = {
             gdm.enable = true;
             defaultSession = "gnome";
@@ -12,7 +12,6 @@ services = {
             gnome.enable = true;
         };
     };
-    # dbus.packages = [ pkgs.dconf ]; 
     udev.packages = [ pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon ];
 };
 
