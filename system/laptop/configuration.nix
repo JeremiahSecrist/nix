@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      <nixpkgs/nixos/modules/profiles/hardened.nix>
+      ./harden.nix
       ./hardware.nix
       ./services.nix
       ./gnome.nix
