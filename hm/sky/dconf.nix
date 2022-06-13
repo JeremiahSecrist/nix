@@ -119,6 +119,11 @@ with lib.hm.gvariant;
       maximized = true;
     };
 
+    "org/gnome/nm-applet/eap/dc09bf41-0922-4e42-b923-f16f2b676dae" = {
+      ignore-ca-cert = false;
+      ignore-phase2-ca-cert = false;
+    };
+
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "suspend";
     };
@@ -155,7 +160,7 @@ with lib.hm.gvariant;
     "org/gtk/settings/file-chooser" = {
       date-format = "regular";
       location-mode = "path-bar";
-      show-hidden = true;
+      show-hidden = false;
       show-size-column = true;
       show-type-column = true;
       sidebar-width = 157;
