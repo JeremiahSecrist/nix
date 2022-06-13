@@ -78,7 +78,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget #
-    remake
+    gnumake
     # protonvpn-cli
     python39Packages.dbus-python
     ecryptfs
