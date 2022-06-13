@@ -35,7 +35,10 @@ environment.gnome.excludePackages = (with pkgs; [
   atomix # puzzle game
   
 ]);
-programs.xwayland.enable = true;
+programs = {
+  xwayland.enable = true;
+  packagekit.enable = true;
+};
 xdg.portal = {
   enable = true;
   # gtkUsePortal = true;
