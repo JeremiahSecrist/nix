@@ -5,8 +5,13 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
+    "org/gnome/Console" = {
+      font-scale = 1.1;
+    };
+
     "org/gnome/control-center" = {
       last-panel = "wifi";
+      window-state = mkTuple [ 980 640 ];
     };
 
     "org/gnome/desktop/app-folders" = {
@@ -36,6 +41,26 @@ with lib.hm.gvariant;
       enable-hot-corners = false;
     };
 
+    "org/gnome/desktop/notifications" = {
+      application-children = [ "org-gnome-console" "gnome-power-panel" "org-gnome-software" "code" ];
+    };
+
+    "org/gnome/desktop/notifications/application/code" = {
+      application-id = "code.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/gnome-power-panel" = {
+      application-id = "gnome-power-panel.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-console" = {
+      application-id = "org.gnome.Console.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-software" = {
+      application-id = "org.gnome.Software.desktop";
+    };
+
     "org/gnome/desktop/session" = {
       idle-delay = mkUint32 300;
     };
@@ -43,6 +68,17 @@ with lib.hm.gvariant;
     "org/gnome/evolution-data-server" = {
       migrated = true;
       network-monitor-gio-name = "";
+    };
+
+    "org/gnome/gnome-system-monitor" = {
+      network-total-in-bits = false;
+      show-dependencies = false;
+      show-whose-processes = "user";
+    };
+
+    "org/gnome/gnome-system-monitor/disktreenew" = {
+      col-6-visible = true;
+      col-6-width = 0;
     };
 
     "org/gnome/mutter" = {
@@ -53,13 +89,24 @@ with lib.hm.gvariant;
       workspaces-only-on-primary = true;
     };
 
+    "org/gnome/nautilus/preferences" = {
+      default-folder-viewer = "icon-view";
+      search-filter-time-type = "last_modified";
+      search-view = "list-view";
+    };
+
+    "org/gnome/nautilus/window-state" = {
+      initial-size = mkTuple [ 890 550 ];
+      maximized = true;
+    };
+
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "suspend";
     };
 
     "org/gnome/shell" = {
-      app-picker-layout = "[{'org.gnome.Geary.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.Maps.desktop': <{'position': <4>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <5>}>, 'org.gnome.Photos.desktop': <{'position': <6>}>, 'org.gnome.Totem.desktop': <{'position': <7>}>, 'org.gnome.Calculator.desktop': <{'position': <8>}>, 'simple-scan.desktop': <{'position': <9>}>, 'org.gnome.Settings.desktop': <{'position': <10>}>, 'gnome-system-monitor.desktop': <{'position': <11>}>, 'org.gnome.Extensions.desktop': <{'position': <12>}>, 'Utilities': <{'position': <13>}>, 'cups.desktop': <{'position': <14>}>, 'yelp.desktop': <{'position': <15>}>, 'nixos-manual.desktop': <{'position': <16>}>, 'org.gnome.Cheese.desktop': <{'position': <17>}>, 'org.gnome.Software.desktop': <{'position': <18>}>, 'spotify.desktop': <{'position': <19>}>, 'org.gnome.TextEditor.desktop': <{'position': <20>}>, 'org.gnome.Tour.desktop': <{'position': <21>}>}, {'xterm.desktop': <{'position': <0>}>, 'com.yubico.yubioath.desktop': <{'position': <1>}>, 'org.gnome.Epiphany.desktop': <{'position': <2>}>, 'org.gnome.Calendar.desktop': <{'position': <3>}>, 'org.gnome.Music.desktop': <{'position': <4>}>, 'code.desktop': <{'position': <5>}>}]";
-      favorite-apps = [ "firefox.desktop" "code.desktop" "discord.desktop" "org.gnome.Console.desktop" "org.gnome.Nautilus.desktop" ];
+      app-picker-layout = "[{'org.gnome.Calendar.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.Maps.desktop': <{'position': <4>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <5>}>, 'org.gnome.Extensions.desktop': <{'position': <6>}>, 'org.mozilla.firefox.desktop': <{'position': <7>}>, 'org.gnome.Calculator.desktop': <{'position': <8>}>, 'cups.desktop': <{'position': <9>}>, 'simple-scan.desktop': <{'position': <10>}>, 'org.gnome.Settings.desktop': <{'position': <11>}>, 'gnome-system-monitor.desktop': <{'position': <12>}>, 'nixos-manual.desktop': <{'position': <13>}>, 'org.gnome.Software.desktop': <{'position': <14>}>, 'Utilities': <{'position': <15>}>, 'spotify.desktop': <{'position': <16>}>, 'yelp.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
+      favorite-apps = [ "org.mozilla.firefox.desktop" "code.desktop" "discord.desktop" "org.gnome.Console.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "42.2";
     };
 
@@ -70,6 +117,35 @@ with lib.hm.gvariant;
     "org/gnome/software" = {
       check-timestamp = mkInt64 1655076356;
       first-run = false;
+    };
+
+    "org/gtk/gtk4/settings/file-chooser" = {
+      date-format = "regular";
+      location-mode = "path-bar";
+      show-hidden = false;
+      show-size-column = true;
+      show-type-column = true;
+      sidebar-width = 169;
+      sort-column = "name";
+      sort-directories-first = false;
+      sort-order = "ascending";
+      type-format = "category";
+      window-size = mkTuple [ 888 374 ];
+    };
+
+    "org/gtk/settings/file-chooser" = {
+      date-format = "regular";
+      location-mode = "path-bar";
+      show-hidden = true;
+      show-size-column = true;
+      show-type-column = true;
+      sidebar-width = 157;
+      sort-column = "name";
+      sort-directories-first = false;
+      sort-order = "ascending";
+      type-format = "category";
+      window-position = mkTuple [ 26 23 ];
+      window-size = mkTuple [ 1231 902 ];
     };
 
   };
