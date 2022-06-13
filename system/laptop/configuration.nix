@@ -47,7 +47,7 @@
     firejail.enable = true;
     firejail.wrappedBinaries = {
       firefox = {
-          executable = "${pkgs.lib.getBin pkgs.firefox}/bin/firefox";
+          executable = "${pkgs.lib.getBin pkgs.firefox-wayland}/bin/firefox";
           profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
       };
     };
@@ -96,6 +96,7 @@
 
   zramSwap.enable = true;
   virtualisation = {
+    docker.liveRestore = false;
     podman = {
       enable = true;
     };
