@@ -93,6 +93,7 @@
     vscode-fhs
     spotify
     discord
+    btop
     ];
   services.gnome.gnome-keyring.enable = true;
 
