@@ -52,7 +52,11 @@
       };
     };
   };
-  
+  # nixpkgs.config.packageOverrides = pkgs: with pkgs; {
+  #   firefox = stdenv.lib.overrideDerivation firefox (_: {
+  #     desktopItem = makeDesktopItem {...};
+  #   });
+  # };
   # bluetooth
   hardware.bluetooth.enable = true;
   
