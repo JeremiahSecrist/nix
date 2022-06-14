@@ -75,7 +75,7 @@
     isNormalUser = true;
     initialPassword = "password";
     description = "sky";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
   
   # Allow unfree packages
@@ -106,9 +106,10 @@
   zramSwap.enable = true;
   virtualisation = {
     docker.liveRestore = false;
-    podman = {
-      dockerCompat = true;
-      dockerSocket.enable = true;
+    docker = {
+      # dockerCompat = true;
+      # dockerSocket.enable = true;
+      
       enable = true;
     };
   };
