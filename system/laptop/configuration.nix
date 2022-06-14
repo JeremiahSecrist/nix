@@ -106,9 +106,9 @@
   zramSwap.enable = true;
   virtualisation = {
     docker.liveRestore = false;
-    dockerSocket.enable = true;
-    dockerCompat = true;
     podman = {
+      dockerCompat = true;
+      dockerSocket.enable = true;
       enable = true;
     };
   };
