@@ -15,11 +15,11 @@
         gnome3.evince # pdf reader
 
         # desktop look & feel
-        gnome3.gnome-tweak-tool
+        gnome.gnome-tweaks # desktop settings
 
         # extensions
         gnomeExtensions.appindicator
-        gnomeExtensions.dash-to-dock
+        gnomeExtensions.material-shell
     ];
 
 
