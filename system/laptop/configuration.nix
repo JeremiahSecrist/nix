@@ -63,7 +63,6 @@
         gdm.u2fAuth = true;
         slock.u2fAuth = true;
       };
-      enableEcryptfs = true;
     };
   };
   # nixpkgs.config.packageOverrides = pkgs: with pkgs; {
