@@ -5,6 +5,7 @@ inputs:
     harden = import ./harden inputs;
     sound = import ./sound inputs;
     yubikey = import ./yubikey inputs;
-    gnomeDesktop = import ./gnome-desktop inputs;
+    u2fLogin = import ./u2fLogin inputs;
+    gnomeDesktop = import ./gnomeDesktop inputs;
 
 }

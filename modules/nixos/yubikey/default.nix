@@ -4,4 +4,11 @@ _: { config, pkgs, ... }:
         pcscd.enable = true;
         yubikey-agent.enable = true;
     };
+    programs = {
+    ssh.startAgent = false;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
 }
