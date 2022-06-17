@@ -7,6 +7,8 @@ boot:
 	@sudo nixos-rebuild --flake ./#$(SYSTEM_NAME) boot
 test:
 	@sudo nixos-rebuild --flake ./#$(SYSTEM_NAME) test
+build:
+	@sudo nixos-rebuild --flake ./#$(SYSTEM_NAME) build
 dconf-dump:
 	@dconf dump / > hm/$(MY_USER)/dconf.settings
 dconf2nix: dconf-dump
