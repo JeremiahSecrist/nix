@@ -5,6 +5,15 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
+    "apps/seahorse/listing" = {
+      keyrings-selected = [ "secret-service:///org/freedesktop/secrets/collection/login" ];
+    };
+
+    "apps/seahorse/windows/key-manager" = {
+      height = 476;
+      width = 600;
+    };
+
     "com/github/akiraux/akira" = {
       left-paned = 377;
       pos-x = 0;
@@ -41,10 +50,10 @@ with lib.hm.gvariant;
       window-size = mkTuple [ 768 600 ];
     };
 
-    # "org/gnome/control-center" = {
-    #   last-panel = "keyboard";
-    #   window-state = mkTuple [ 980 640 ];
-    # };
+    "org/gnome/control-center" = {
+      last-panel = "keyboard";
+      window-state = mkTuple [ 980 640 ];
+    };
 
     "org/gnome/desktop/app-folders" = {
       folder-children = [ "Utilities" "YaST" ];
@@ -189,7 +198,7 @@ with lib.hm.gvariant;
 
     "org/gnome/shell" = {
       app-picker-layout = "[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'org.gnome.Calculator.desktop': <{'position': <4>}>, 'simple-scan.desktop': <{'position': <5>}>, 'org.gnome.Settings.desktop': <{'position': <6>}>, 'gnome-system-monitor.desktop': <{'position': <7>}>, 'Utilities': <{'position': <8>}>, 'yelp.desktop': <{'position': <9>}>, 'org.gnome.Calendar.desktop': <{'position': <10>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <11>}>, 'org.gnome.Extensions.desktop': <{'position': <12>}>, 'firefox.desktop': <{'position': <13>}>, 'cups.desktop': <{'position': <14>}>, 'nixos-manual.desktop': <{'position': <15>}>, 'org.gnome.Software.desktop': <{'position': <16>}>, 'spotify.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
-      disable-user-extensions = false;
+      disable-user-extensions = true;
       disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" ];
       enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" "material-shell@papyelgringo" "auto-move-windows@gnome-shell-extensions.gcampax.github.com" "drive-menu@gnome-shell-extensions.gcampax.github.com" ];
       favorite-apps = [ "firefox.desktop" "code.desktop" "discord.desktop" "org.gnome.Console.desktop" "org.gnome.Nautilus.desktop" ];
@@ -200,19 +209,19 @@ with lib.hm.gvariant;
       application-list = [ "discord.desktop:1" "firefox.desktop:3" "code.desktop:2" "org.gnome.Console.desktop:2" ];
     };
 
-    # "org/gnome/shell/keybindings" = {
-    #   switch-to-application-1 = [ "" ];
-    #   switch-to-application-2 = [ "" ];
-    #   switch-to-application-3 = [ "" ];
-    #   switch-to-application-4 = [ "" ];
-    #   switch-to-application-5 = [ "" ];
-    #   switch-to-application-6 = [ "" ];
-    #   switch-to-application-7 = [ "" ];
-    #   switch-to-application-8 = [ "" ];
-    #   switch-to-application-9 = [ "" ];
-    #   toggle-application-view = [ "" ];
-    #   toggle-overview = [ "" ];
-    # };
+    "org/gnome/shell/keybindings" = {
+      switch-to-application-1 = [ "" ];
+      switch-to-application-2 = [ "" ];
+      switch-to-application-3 = [ "" ];
+      switch-to-application-4 = [ "" ];
+      switch-to-application-5 = [ "" ];
+      switch-to-application-6 = [ "" ];
+      switch-to-application-7 = [ "" ];
+      switch-to-application-8 = [ "" ];
+      switch-to-application-9 = [ "" ];
+      toggle-application-view = [ "" ];
+      toggle-overview = [ "" ];
+    };
 
     "org/gnome/shell/world-clocks" = {
       locations = "@av []";
