@@ -94,23 +94,11 @@
 
   environment.systemPackages = with pkgs; [
     gnumake
-    # protonvpn-cli
+    nano
+    git
     python39Packages.dbus-python
     ecryptfs
     ecryptfs-helper
-    clamav
-    dconf2nix
-    nano
-    git
-    gnupg
-    distrobox
-    cryptomator
-    firefox-wayland
-    yubioath-desktop
-    vscode-fhs
-    spotify
-    discord
-    btop
     ];
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gnome-keyring.u2fAuth = true;

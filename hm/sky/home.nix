@@ -8,18 +8,28 @@
         username = "sky";
         homeDirectory = "/home/sky";
         stateVersion = "22.05";
-
         packages = with pkgs; [
-        # gnome3 apps
-        gnome3.eog    # image viewer
-        gnome3.evince # pdf reader
-
         # desktop look & feel
         gnome.gnome-tweaks # desktop settings
-
         # extensions
         gnomeExtensions.appindicator
-        #unstable.gnomeExtensions.material-shell
+        # CLI
+        btop
+        dconf2nix
+        nano
+        git
+        # protonvpn-cli
+
+        # Desktop
+        distrobox
+        cryptomator
+        firefox-wayland
+        yubioath-desktop
+        vscode-fhs
+        spotify
+        discord
+        gnupg
+
     ];
 
 
