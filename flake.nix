@@ -6,7 +6,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
-    outputs = { self, nixpkgs, home-manager, ... }:
+    outputs = { self, nixpkgs, home-manager, ... }@inputs:
         let
             system = "x86_64-linux";
             pkgs = import nixpkgs {
@@ -15,6 +15,8 @@
             };
             lib = nixpkgs.lib;
         in {
+            nixosModules = import ./modules/nixos inputs;
+            # homeModules  = import ./modules/hm inputs;
             nixosConfigurations = {
                 skytop = lib.nixosSystem {
                     inherit system;
@@ -27,7 +29,9 @@
                                 imports = [ ./hm/sky/home.nix ];
                             };
                         }
-                    ];
+                    ]++ (with self.nixosModules; [
+                        gnomeDesktop
+                    ]);
                 };
             };
         };
