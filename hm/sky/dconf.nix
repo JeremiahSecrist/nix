@@ -41,10 +41,10 @@ with lib.hm.gvariant;
       window-size = mkTuple [ 768 600 ];
     };
 
-    "org/gnome/control-center" = {
-      last-panel = "wifi";
-      window-state = mkTuple [ 980 640 ];
-    };
+    # "org/gnome/control-center" = {
+    #   last-panel = "keyboard";
+    #   window-state = mkTuple [ 980 640 ];
+    # };
 
     "org/gnome/desktop/app-folders" = {
       folder-children = [ "Utilities" "YaST" ];
@@ -76,11 +76,15 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-console" "gnome-power-panel" "org-gnome-software" "code" ];
+      application-children = [ "org-gnome-console" "gnome-power-panel" "org-gnome-software" "code" "firefox" ];
     };
 
     "org/gnome/desktop/notifications/application/code" = {
       application-id = "code.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/discord" = {
+      application-id = "discord.desktop";
     };
 
     "org/gnome/desktop/notifications/application/firefox" = {
@@ -111,9 +115,9 @@ with lib.hm.gvariant;
       idle-delay = mkUint32 300;
     };
 
-    # "org/gnome/desktop/wm/keybindings" = {
-    #   maximize = [ "" ];
-    # };
+    "org/gnome/desktop/wm/keybindings" = {
+      maximize = [ "<Super>Up" ];
+    };
 
     "org/gnome/desktop/wm/preferences" = {
       workspace-names = [ "1" "2" ];
@@ -154,14 +158,14 @@ with lib.hm.gvariant;
       workspaces-only-on-primary = true;
     };
 
-    # "org/gnome/mutter/keybindings" = {
-    #   toggle-tiled-left = [ "" ];
-    #   toggle-tiled-right = [ "" ];
-    # };
+    "org/gnome/mutter/keybindings" = {
+      toggle-tiled-left = [ "<Super>Left" ];
+      toggle-tiled-right = [ "<Super>Right" ];
+    };
 
-    # "org/gnome/mutter/wayland/keybindings" = {
-    #   restore-shortcuts = [ "" ];
-    # };
+    "org/gnome/mutter/wayland/keybindings" = {
+      restore-shortcuts = [ "" ];
+    };
 
     "org/gnome/nautilus/preferences" = {
       default-folder-viewer = "icon-view";
