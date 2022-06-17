@@ -30,6 +30,10 @@
                             };
                         }
                     ]++ (with self.nixosModules; [
+                        common
+                        sound
+                        yubikey
+                        u2fLogin
                         gnomeDesktop
                     ]);
                 };
