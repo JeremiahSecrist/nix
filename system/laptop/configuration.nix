@@ -55,14 +55,15 @@
     pam = {
       u2f = {
         enable = true;
-        control = "required";
-        cuet = true;
+        control = "sufficient";
+        cue = true;
       };
       services = {
         login.u2fAuth = true;
         gdm.u2fAuth = true;
         slock.u2fAuth = true;
       };
+      enableEcryptfs = true;
     };
   };
   # nixpkgs.config.packageOverrides = pkgs: with pkgs; {
@@ -113,7 +114,7 @@
     btop
     ];
   services.gnome.gnome-keyring.enable = true;
-
+  security.pam.services.gnome-keyring.u2fAuth = true;
   zramSwap.enable = true;
   virtualisation = {
     docker.liveRestore = false;
