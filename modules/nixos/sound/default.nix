@@ -13,6 +13,6 @@ _: { config, pkgs, lib, ... }:
         pulse.enable = true;
         wireplumber.enable = true;
     };
-    }
+    };
 
 }
