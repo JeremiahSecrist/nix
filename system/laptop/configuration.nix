@@ -7,10 +7,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-#      ./harden.nix
       ./hardware.nix
       ./services.nix
-      ./gnome.nix
     ];
 
   # Bootloader.
