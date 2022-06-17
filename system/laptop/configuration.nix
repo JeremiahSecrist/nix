@@ -45,14 +45,25 @@
   i18n.defaultLocale = "en_US.utf8";
   # Enable the GNOME Desktop Environment.
   programs = {
-    gnupg.agent.enable = true;
-    # firejail.enable = true;
-    # firejail.wrappedBinaries = {
-    #   firefox = {
-    #     executable = "${lib.getBin pkgs.firefox-wayland}/bin/firefox";
-    #     profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
-    #   };
-    # };
+    ssh.startAgent = false;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
+  security = {
+    pam = {
+      u2f = {
+        enable = true;
+        control = "required";
+        cuet = true;
+      };
+      services = {
+        login.u2fAuth = true;
+        gdm.u2fAuth = true;
+        slock.u2fAuth = true;
+      };
+    };
   };
   # nixpkgs.config.packageOverrides = pkgs: with pkgs; {
   #   firefox = stdenv.lib.overrideDerivation firefox (_: {
