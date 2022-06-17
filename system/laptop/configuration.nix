@@ -40,7 +40,6 @@
     };
   };
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.gnome-keyring.u2fAuth = true;
   programs = { 
    starship.enable = true;
   };
