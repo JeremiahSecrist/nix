@@ -8,31 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware.nix
-      ./services.nix
     ];
-
-  # Bootloader.
-  boot.plymouth.enable = true;
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
- 
-
-  nix = {
-    # nix flakes
-    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    #auto maintainence
-    autoOptimiseStore = true;
-    gc ={
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
   
   networking = {
     hostName = "skytop"; # Define your hostname.
@@ -41,43 +17,12 @@
   time.timeZone = "America/New_York";
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
-  # Enable the GNOME Desktop Environment.
-  programs = {
-    ssh.startAgent = false;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
-  security = {
-    pam = {
-      u2f = {
-        enable = true;
-        control = "sufficient";
-        cue = true;
-      };
-      services = {
-        login.u2fAuth = true;
-        gdm.u2fAuth = true;
-        slock.u2fAuth = true;
-      };
-    };
-  };
-  # nixpkgs.config.packageOverrides = pkgs: with pkgs; {
-  #   firefox = stdenv.lib.overrideDerivation firefox (_: {
-  #     desktopItem = makeDesktopItem {...};
-  #   });
-  # };
+  
   # bluetooth
   hardware.bluetooth.enable = true;
   
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;
-  boot.loader.timeout = 1;
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
@@ -86,44 +31,19 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
-  
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    gnumake
-    nano
-    git
-    python39Packages.dbus-python
-    ecryptfs
-    ecryptfs-helper
-    ];
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.gnome-keyring.u2fAuth = true;
-  zramSwap.enable = true;
-  virtualisation = {
-    docker.liveRestore = false;
-    docker = {
-      # dockerCompat = true;
-      # dockerSocket.enable = true;
-      
-      enable = true;
+  services = {
+    flatpak.enable = true; 
+    auto-cpufreq.enable = true;
+    xserver = {
+        enable = true;
+        libinput.enable = true;
     };
   };
-  
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.gnome-keyring.u2fAuth = true;
   programs = { 
    starship.enable = true;
   };
-  security.pam.enableEcryptfs = true;
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   networking.firewall = { 
