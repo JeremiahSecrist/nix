@@ -19,7 +19,7 @@
 
         # extensions
         gnomeExtensions.appindicator
-        gnomeExtensions.material-shell
+        #unstable.gnomeExtensions.material-shell
     ];
 
 
