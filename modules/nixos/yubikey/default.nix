@@ -6,6 +6,7 @@ _: { config, pkgs, ... }:
     };
     programs = {
     ssh.startAgent = false;
+    gnupg.agent.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
