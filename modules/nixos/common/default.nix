@@ -26,13 +26,7 @@ _: { config, pkgs, lib, ... }:
         };
     };
 
-    # Bootloader.
-    boot.plymouth.enable = true;
-    boot.loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-        timeout = 1;
-    };
+
 
     # enable zram
     zramSwap.enable = true;
