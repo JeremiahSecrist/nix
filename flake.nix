@@ -35,6 +35,7 @@
                         yubikey
                         u2fLogin
                         gnomeDesktop
+                        encryptedBoot
                     ]);
                 };
             };
