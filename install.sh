@@ -50,27 +50,30 @@ Encrypted_Format_Disk(){
 
     # Create Partitions
     sgdisk --clear \
-         --new=1:0:+550MiB  --typecode=1:ef00
-         --new=2:0:0        --typecode=2:8300
-    cryptsetup luksFormat   ${DISK}2
+         --new=1:0:+550MiB  --typecode=1:ef00 \
+         --new=2:0:0        --typecode=2:8300 \
+    "${DISK}"
+    cryptsetup luksFormat  --label luks  ${DISK}2
     cryptsetup luksOpen     ${DISK}2 enc-pv
+    pvcreate /dev/mapper/enc-pv
+    vgcreate vg /dev/mapper/enc-pv
     lvcreate -L 16G -n swap vg
     lvcreate -l '100%FREE' -n nixos vg
 
     # Format Partitions
     mkfs.fat    -F 32 -n boot ${DISK}1
-    mkfs.ext4   -L nixos /dev/vg/root
+    mkfs.ext4   -L nixos /dev/vg/nixos
     mkswap      -L swap /dev/vg/swap
 
     # Mount Partitions
-    mount   /dev/disk/by-label/nixos /mnt
+    mount   /dev/vg/nixos /mnt
     mkdir   -p /mnt/boot
     mount   /dev/disk/by-label/boot /mnt/boot
-    swapon  /dev/disk/by-label/swap
+    swapon  /dev/vg/swap
     
 }
 Install_Nix() {
-    nix-install --flake https://github.com/arouzing/nix#${SYSTEM_NAME} --root /mnt
+    nixos-install --flake https://github.com/arouzing/nix#${SYSTEM_NAME} --root /mnt
 }
 
 ## init phase
