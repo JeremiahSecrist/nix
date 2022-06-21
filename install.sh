@@ -54,7 +54,7 @@ Encrypted_Format_Disk(){
          --new=2:0:0        --typecode=2:8300
     cryptsetup luksFormat   ${DISK}2
     cryptsetup luksOpen     ${DISK}2 enc-pv
-    lvcreate -L 8G -n swap vg
+    lvcreate -L 16G -n swap vg
     lvcreate -l '100%FREE' -n nixos vg
 
     # Format Partitions
