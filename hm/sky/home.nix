@@ -18,7 +18,6 @@
         dconf2nix
         nano
         git
-        comma
         # protonvpn-cli
 
         # Desktop
