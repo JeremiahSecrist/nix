@@ -15,3 +15,5 @@ dconf2nix: dconf-dump
 	@dconf2nix -i hm/$(MY_USER)/dconf.settings -o hm/$(MY_USER)/dconf.nix
 clean:
 	@sudo nix-collect-garbage -d
+update: 
+	@nix flake update
