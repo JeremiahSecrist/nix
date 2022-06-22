@@ -2,3 +2,6 @@ dconf.settings
 installed.env
 result
 .vscode/settings.json
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log
