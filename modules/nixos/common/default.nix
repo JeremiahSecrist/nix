@@ -12,18 +12,21 @@ _: { config, pkgs, lib, ... }:
     ];
 
     nix = {
-    # nix flakes
-    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    #auto maintainence
-    autoOptimiseStore = true;
+        # nix flakes
+        package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
+        extraOptions = ''
+          experimental-features = nix-command flakes
+        '';
+        #auto maintainence
+        autoOptimiseStore = true;
         gc ={
             automatic = true;
             dates = "weekly";
             options = "--delete-older-than 7d";
         };
+        # prevent tampering
+        readOnlyStore = true;
+
     };
 
 
