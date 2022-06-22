@@ -9,6 +9,8 @@ _: { config, pkgs, lib, ... }:
         gnumake
         nano
         git
+        git-secret
+
     ];
 
     nix = {
