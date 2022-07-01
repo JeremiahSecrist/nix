@@ -19,6 +19,7 @@
             # homeModules  = import ./modules/hm inputs;
             nixosConfigurations = {
                 skytop = import ./system/laptop (inputs // { inherit lib system; });
+                cache_server = import ./system/cache_server (inputs // { inherit lib system; });
             };
         };
 }
