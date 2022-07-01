@@ -38,7 +38,7 @@ _: { config, pkgs, lib, ... }:
     # enable zram
     zramSwap.enable = true;
     # clock speed management
-    auto-cpufreq.enable = true;
+    services.auto-cpufreq.enable = true;
     # enable docker
     virtualisation = {
     docker.liveRestore = false;
