@@ -11,6 +11,7 @@ lib.nixosSystem {
     # u2fLogin
     # gnomeDesktop
     boot
+    docker
     # harden
   ]);
 }
