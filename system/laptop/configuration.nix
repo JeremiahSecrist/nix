@@ -27,6 +27,7 @@
   users.users.sky = {
     isNormalUser = true;
     initialPassword = "password";
+    shell = pkgs.zsh;
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
