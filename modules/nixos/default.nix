@@ -1,13 +1,14 @@
 inputs:
 
 {
-    common          =   import ./common         inputs;
-    boot            =   import ./boot           inputs;
-    encryptedBoot   =   import ./encryptedBoot  inputs;
-    harden          =   import ./harden         inputs;
-    sound           =   import ./sound          inputs;
-    yubikey         =   import ./yubikey        inputs;
-    u2fLogin        =   import ./u2fLogin       inputs;
-    gnomeDesktop    =   import ./gnomeDesktop   inputs;
-
+    common          =   import ./common.nix         inputs;
+    boot            =   import ./boot.nix           inputs;
+    encryptedBoot   =   import ./encryptedBoot.nix  inputs;
+    harden          =   import ./harden.nix         inputs;
+    sound           =   import ./sound.nix          inputs;
+    yubikey         =   import ./yubikey.nix        inputs;
+    u2fLogin        =   import ./u2fLogin.nix       inputs;
+    gnomeDesktop    =   import ./gnomeDesktop.nix   inputs;
+    docker          =   import ./docker.nix         inputs;
+    openssh          =   import ./openssh.nix         inputs;
 }
