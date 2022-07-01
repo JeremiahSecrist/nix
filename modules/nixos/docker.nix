@@ -4,5 +4,5 @@ _: { config, pkgs, lib, ... }:
         enable = true;
         liveRestore = true;
         autoPrune.enable = true;
-    }
+    };
 }
