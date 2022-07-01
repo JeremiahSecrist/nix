@@ -40,7 +40,6 @@ mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
 swapon /dev/disk/by-label/swap
-nixos-generate-config --root /mnt
 }
 
 Encrypted_Format_Disk(){
@@ -73,12 +72,16 @@ Encrypted_Format_Disk(){
     
 }
 Install_Nix() {
-    nixos-install --flake https://github.com/arouzing/nix#${SYSTEM_NAME} --root /mnt
+    nixos-install --flake https://github.com/arouzing/nix\#${SYSTEM_NAME} --root /mnt
 }
 
 ## init phase
-Encrypted_Format_Disk
 lsblk
+echo "I am going to format all data on ${DISK}"
 Confirm
+
+[ ENCRYPTED = true ] && Encrypted_Format_Disk
+[ ENCRYPTED = false ] && Format_Disk
+
 Install_Nix
 echo "fin!"
