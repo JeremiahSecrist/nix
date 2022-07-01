@@ -6,12 +6,9 @@ lib.nixosSystem {
     ./configuration.nix
   ] ++ (with self.nixosModules; [
     common
-    # sound
-    # yubikey
-    # u2fLogin
-    # gnomeDesktop
     boot
     docker
+    openssh
     # harden
   ]);
 }
