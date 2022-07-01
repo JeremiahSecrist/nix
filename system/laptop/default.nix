@@ -19,6 +19,7 @@ lib.nixosSystem {
     u2fLogin
     gnomeDesktop
     encryptedBoot
+    docker
     # harden
   ]);
 }
