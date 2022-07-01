@@ -1,4 +1,4 @@
-{ system, home-manager, lib, self, ... }:
+{ system, lib, self, ... }:
 
 lib.nixosSystem {
   inherit system;
