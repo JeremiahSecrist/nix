@@ -18,46 +18,7 @@
             nixosModules = import ./modules/nixos inputs;
             # homeModules  = import ./modules/hm inputs;
             nixosConfigurations = {
-                skytop = lib.nixosSystem {
-                    inherit system;
-                    modules = [
-                        ./system/laptop/configuration.nix
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.users.sky = {
-                                imports = [ ./hm/sky/home.nix ];
-                            };
-                        }
-                    ]++ (with self.nixosModules; [
-                        common
-                        sound
-                        yubikey
-                        u2fLogin
-                        gnomeDesktop
-                        encryptedBoot
-                    ]);
-                };
-                skydesk = lib.nixosSystem {
-                    inherit system;
-                    modules = [
-                        ./system/desktop/configuration.nix
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.users.sky = {
-                                imports = [ ./hm/sky/home.nix ];
-                            };
-                        }
-                    ]++ (with self.nixosModules; [
-                        common
-                        sound
-                        yubikey
-                        u2fLogin
-                        gnomeDesktop
-                        encryptedBoot
-                    ]);
-                };
+                skytop = import ./system/laptop (inputs // { inherit lib system; });
             };
         };
 }

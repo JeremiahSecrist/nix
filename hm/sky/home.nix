@@ -46,6 +46,7 @@
             userName  = "arouzing";
             userEmail = "593336a4-f160-432d-981d-34f51d9ad98d@anonaddy.me";
         };
-        
+        starship.enable = true;
+        zsh.enable = true;        
     };
 }

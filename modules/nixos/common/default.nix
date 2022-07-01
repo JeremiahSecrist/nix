@@ -31,11 +31,14 @@ _: { config, pkgs, lib, ... }:
 
     };
 
+    # Select internationalisation properties.
+    i18n.defaultLocale = "en_US.utf8";
 
-
+    # Performance
     # enable zram
     zramSwap.enable = true;
-
+    # clock speed management
+    auto-cpufreq.enable = true;
     # enable docker
     virtualisation = {
     docker.liveRestore = false;

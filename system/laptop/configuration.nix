@@ -15,8 +15,7 @@
     networkmanager.enable = true;
   };
   time.timeZone = "America/New_York";
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
+ 
   
   # bluetooth
   hardware.bluetooth.enable = true;
@@ -33,15 +32,7 @@
   };
   services = {
     flatpak.enable = true; 
-    auto-cpufreq.enable = true;
-    xserver = {
-        enable = true;
-        libinput.enable = true;
-    };
-  };
-  services.gnome.gnome-keyring.enable = true;
-  programs = { 
-   starship.enable = true;
+    xserver.libinput.enable = true;
   };
 
   # Open ports in the firewall.
