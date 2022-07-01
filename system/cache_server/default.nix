@@ -6,7 +6,7 @@ lib.nixosSystem {
     ./configuration.nix
   ] ++ (with self.nixosModules; [
     common
-    boot
+    EncryptedBoot
     docker
     openssh
     # harden
