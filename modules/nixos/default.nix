@@ -10,5 +10,5 @@ inputs:
     u2fLogin        =   import ./u2fLogin.nix       inputs;
     gnomeDesktop    =   import ./gnomeDesktop.nix   inputs;
     docker          =   import ./docker.nix         inputs;
-    openssh          =   import ./openssh.nix         inputs;
+    openssh         =   import ./openssh.nix        inputs;
 }
