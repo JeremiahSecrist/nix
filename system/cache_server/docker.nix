@@ -12,7 +12,7 @@
             };
             lancache_monolith = {
                 image = "lancachenet/monolithic:latest";
-                ports = ["0.0.0.0:80:80","0.0.0.0:443:443"];
+                ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
                 volumes = [ "lancache_data/data:/data" "lancache_data/logs:/logs" ];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
