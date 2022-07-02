@@ -13,13 +13,12 @@
             lancache_monolith = {
                 image = "lancachenet/monolithic:latest";
                 ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
-                volumes = [ "lancache_data/data:/data" "lancache_data/logs:/logs" ];
+                volumes = [ "lancache_data:/data" ];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
                     LANCACHE_IP         =   "10.0.1.92";
                     DNS_BIND_IP         =   "10.0.1.92";
                     UPSTREAM_DNS        =   "8.8.8.8";
-                    CACHE_ROOT          =   "/lancache";
                     CACHE_DISK_SIZE     =   "100000m";
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/New_York";
@@ -33,7 +32,6 @@
                     LANCACHE_IP         =   "10.0.1.92";
                     DNS_BIND_IP         =   "10.0.1.92";
                     UPSTREAM_DNS        =   "8.8.8.8";
-                    CACHE_ROOT          =   "/lancache";
                     CACHE_DISK_SIZE     =   "100000m";
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/New_York";
