@@ -2,8 +2,8 @@
 
 {
     networking.firewall.allowedTCPPorts = [ 22 53 80 443 9443  ];
-    virtualisation.oci-containers = {
-        backend = "docker";
+    # virtualisation.oci-containers = {
+        # backend = "docker";
         containers = {
             portainer = {
                 image = "portainer/portainer-ce:2.11.0";
@@ -11,6 +11,7 @@
                 volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
             };
             lancache_monolith = {
+                autoStart = true;
                 image = "lancachenet/monolithic:latest";
                 ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
                 volumes = [ "lancache_data:/data" ];
@@ -25,6 +26,7 @@
                 };
             };
             lancache_dns = {
+                autoStart = true;
                 image = "lancachenet/lancache-dns:latest";
                 ports = ["0.0.0.0:53:53"];
                 environment = {
@@ -37,6 +39,18 @@
                     TZ                  =   "America/New_York";
                 };
             };
+            pihole = {
+                autoStart = true;
+                image = "pihole/pihole:latest";
+                volumes = [ 
+                    "pihole_data/etc-pihole:/etc/pihole"
+                    "pihole_data/etc-dnsmasq.d:/etc/dnsmasq.d"
+                    ];
+                ports = ["0.0.0.0:8080:80"];
+                environment = {
+                    TZ                  =   "America/New_York";
+                };
+            };
         };
-    };
+    # };
 }
