@@ -56,7 +56,7 @@
         token = "$INFLUX_TOKEN";
         organization = "arouzing";
         bucket = "arouzingBucket";
-      }
+      };
       };
       environmentFiles = [
         "/etc/telegraf.env"
