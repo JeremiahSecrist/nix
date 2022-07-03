@@ -37,33 +37,39 @@
   # enable telegraf to log myself!
   services.telegraf = {
     enable = true;
+
+
+
     extraConfig = {
-      # Configuration for telegraf agent
-      agent = {
-        interval = "10s";
-        round_interval = true;
-        metric_batch_size = 1000;
-        metric_buffer_limit = 10000;
-        collection_jitter = "0s";
-        flush_interval = "10s";
-        flush_jitter = "0s";
-        precision = "";
-        hostname = "";
-        omit_hostname = false;
+      inputs = {
+        statsd = {
+          delete_timings = true;
+          service_address = ":8125";
+        };
       };
       outputs = {
         influxdb_v2 = {
           urls = ["http://10.0.1.92:8086"];
+
+          ## Token for authentication.
           token = "$INFLUX_TOKEN";
+
+          ## Organization is the name of the organization you wish to write to; must exist.
           organization = "arouzing";
+
+          ## Destination bucket to write into.
           bucket = "arouzingBucket";
         };
       };
     };
-      environmentFiles = [
-        "/etc/telegraf.env"
-      ];
-    };
+
+
+
+
+    environmentFiles = [
+      "/etc/telegraf.env"
+    ];
+  };
 
   # Open ports in the firewall.
   networking.firewall = { 
