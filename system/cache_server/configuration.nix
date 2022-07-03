@@ -46,6 +46,12 @@
           delete_timings = true;
           service_address = ":8125";
         };
+        docker = {
+          endpoint = "unix:///var/run/docker.sock";
+          timeout = "5s";
+          perdevice = true;
+          tag_env = ["JAVA_HOME" "HEAP_SIZE"];
+        };
       };
       outputs = {
         influxdb_v2 = {
