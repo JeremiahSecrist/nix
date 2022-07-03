@@ -52,7 +52,7 @@
       };
       outputs = {
         influxdb_v2 = {
-          urls = ["http://10.0.1.92:8086"];
+          urls = ["http://127.0.0.1:8086"];
 
           ## Token for authentication.
           token = "$INFLUX_TOKEN";
