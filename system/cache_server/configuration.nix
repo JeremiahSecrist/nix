@@ -34,6 +34,30 @@
   # enable influxdb
   services.influxdb2.enable = true;
 
+  # enable telegraf to log myself!
+  services.telegraf = {
+    enable = true;
+    extraConfig = {
+      inputs = {
+        statsd = {
+          delete_timings = true;
+          service_address = ":8125";
+        };
+      };
+      outputs = {
+        influxdb = {
+          database = "telegraf";
+          urls = [
+            "http://localhost:8086/api/v2/telegrafs/099d51d0a3960000"
+          ];
+        };
+      };
+    };
+    enviormentFiles = [
+      "/etc/telegraf.env"
+    ];
+  };
+
   # Open ports in the firewall.
   networking.firewall = { 
     enable = true;
