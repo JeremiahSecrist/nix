@@ -54,7 +54,7 @@
       };
     };
     enviormentFiles = [
-      "/etc/telegraf.env"
+      "./telegraf.env"
     ];
   };
 
