@@ -1,9 +1,19 @@
 { config, pkgs, lib, ... }:
 
 {
-    networking.firewall.allowedTCPPorts = [ 22 53 80 443 9443  ];
-    # virtualisation.oci-containers = {
-        # backend = "docker";
+    networking.firewall.allowedTCPPorts = [ 53 80 443 9443  ];
+
+    system.activationScripts.mkVPN = let
+        docker = config.virtualisation.oci-containers.backend;
+        dockerBin = "${pkgs.${docker}}/bin/${docker}";
+        networkName = "backend";
+
+      in ''
+        ${dockerBin} network inspect ${networkName} >/dev/null 2>&1 || ${dockerBin} network create ${networkName} --subnet 172.20.0.0/16
+      '';
+
+    virtualisation.oci-containers = {
+        backend = "docker";
         containers = {
             portainer = {
                 image = "portainer/portainer-ce:2.11.0";
@@ -11,7 +21,6 @@
                 volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
             };
             lancache_monolith = {
-                autoStart = true;
                 image = "lancachenet/monolithic:latest";
                 ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
                 volumes = [ "lancache_data:/data" ];
@@ -26,7 +35,6 @@
                 };
             };
             lancache_dns = {
-                autoStart = true;
                 image = "lancachenet/lancache-dns:latest";
                 ports = ["0.0.0.0:53:53"];
                 environment = {
@@ -40,7 +48,6 @@
                 };
             };
             pihole = {
-                autoStart = true;
                 image = "pihole/pihole:latest";
                 volumes = [ 
                     "pihole_data/etc-pihole:/etc/pihole"
@@ -52,5 +59,5 @@
                 };
             };
         };
-    # };
+    };
 }

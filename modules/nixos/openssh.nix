@@ -1,6 +1,7 @@
 _: { config, pkgs, lib, ... }: 
 {
     services.openssh = {
+        openFirewall = true;
         enable = true;
         passwordAuthentication = false;
         permitRootLogin = "no";
