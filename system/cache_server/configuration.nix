@@ -65,18 +65,16 @@
         };
       };
     };
-    # must add telegraf to docker group
-    users.users.telegraf = {
-      extraGroups = [ "docker" ];
-    };
-
-
-
+  ####
 
     environmentFiles = [
       "/etc/telegraf.env"
     ];
   };
+    # must add telegraf to docker group
+    users.users.telegraf = {
+      extraGroups = [ "docker" ];
+    };
 
   # Open ports in the firewall.
   networking.firewall = { 
