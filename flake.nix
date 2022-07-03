@@ -14,6 +14,10 @@
                 inherit system;
                 config.allowUnfree = true;
             };
+            pkgs-unstable = import nixpkgs-unstable {
+                inherit system;
+                config.allowUnfree = true;
+            };
             lib = nixpkgs.lib;
         in {
             nixosModules = import ./modules/nixos inputs;
