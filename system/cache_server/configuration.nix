@@ -46,7 +46,6 @@
         docker = {
           endpoint = "unix:///var/run/docker.sock";
           timeout = "5s";
-          perdevice = true;
           tag_env = ["JAVA_HOME" "HEAP_SIZE"];
         };
         diskio = {
