@@ -53,8 +53,8 @@
         };
       };
     };
-    enviormentFiles = [
-      "./telegraf.env"
+    environmentFiles = [
+      "/etc/telegraf.env"
     ];
   };
 
