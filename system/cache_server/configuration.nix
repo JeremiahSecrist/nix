@@ -51,13 +51,15 @@
         hostname = "";
         omit_hostname = false;
       };
-      outputs.influxdb_v2 = {
-        urls = ["http://10.0.1.92:8086"];
-        token = "$INFLUX_TOKEN";
-        organization = "arouzing";
-        bucket = "arouzingBucket";
+      outputs = {
+        influxdb_v2 = {
+          urls = ["http://10.0.1.92:8086"];
+          token = "$INFLUX_TOKEN";
+          organization = "arouzing";
+          bucket = "arouzingBucket";
+        };
       };
-      };
+    };
       environmentFiles = [
         "/etc/telegraf.env"
       ];
