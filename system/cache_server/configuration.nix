@@ -68,7 +68,7 @@
     # must add telegraf to docker group
     users.users.telegraf = {
       extraGroups = [ "docker" ];
-    }
+    };
 
 
 
