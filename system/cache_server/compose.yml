@@ -1,0 +1,17 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    ports:
+      - "8080:80/tcp"
+    environment:
+      TZ: 'America/New_York'
+      # WEBPASSWORD: 'set a secure password here or it will be random'
+    volumes:
+      - 'pihole_data/etc-pihole:/etc/pihole'
+      - 'pihole_data/etc-dnsmasq.d:/etc/dnsmasq.d'    
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN # Recommended but not required (DHCP needs NET_ADMIN)      
+    restart: unless-stopped
