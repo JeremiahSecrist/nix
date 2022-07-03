@@ -7,7 +7,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+    outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:
         let
             system = "x86_64-linux";
             overlay = final: prev: { unstable = unstable.legacyPackages.${prev.system}; };
