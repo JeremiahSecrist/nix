@@ -39,10 +39,10 @@
     enable = true;
     extraConfig = {
       inputs = {
-        statsd = {
-          delete_timings = true;
-          service_address = ":8125";
-        };
+        # statsd = {
+        #   delete_timings = true;
+        #   service_address = ":8125";
+        # };
         docker = {
           endpoint = "unix:///var/run/docker.sock";
           timeout = "5s";
