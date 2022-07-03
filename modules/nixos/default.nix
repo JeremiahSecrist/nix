@@ -3,6 +3,7 @@ inputs:
 {
     common          =   import ./common.nix         inputs;
     boot            =   import ./boot.nix           inputs;
+    virtualBoot     =   import ./virtualBoot.nix    inputs;
     encryptedBoot   =   import ./encryptedBoot.nix  inputs;
     harden          =   import ./harden.nix         inputs;
     sound           =   import ./sound.nix          inputs;
