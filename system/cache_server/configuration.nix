@@ -37,9 +37,6 @@
   # enable telegraf to log myself!
   services.telegraf = {
     enable = true;
-
-
-
     extraConfig = {
       inputs = {
         statsd = {
@@ -68,6 +65,10 @@
         };
       };
     };
+    # must add telegraf to docker group
+    users.users.telegraf = {
+      extraGroups = [ "docker" ];
+    }
 
 
 
