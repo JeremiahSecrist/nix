@@ -3,14 +3,14 @@
 {
     networking.firewall.allowedTCPPorts = [ 53 80 443 9443  ];
 
-    system.activationScripts.mkVPN = let
-        docker = config.virtualisation.oci-containers.backend;
-        dockerBin = "${pkgs.${docker}}/bin/${docker}";
-        networkName = "backend";
+    # system.activationScripts.mkVPN = let
+    #     docker = config.virtualisation.oci-containers.backend;
+    #     dockerBin = "${pkgs.${docker}}/bin/${docker}";
+    #     networkName = "backend";
 
-      in ''
-        ${dockerBin} network inspect ${networkName} >/dev/null 2>&1 || ${dockerBin} network create ${networkName} --subnet 172.20.0.0/16
-      '';
+    #   in ''
+    #     ${dockerBin} network inspect ${networkName} >/dev/null 2>&1 || ${dockerBin} network create ${networkName} --subnet 172.20.0.0/16
+    #   '';
 
     virtualisation.oci-containers = {
         backend = "docker";
