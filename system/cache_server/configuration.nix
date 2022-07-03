@@ -31,6 +31,9 @@
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
 
+  # enable influxdb
+  services.influxdb2.enable = true
+
   # Open ports in the firewall.
   networking.firewall = { 
     enable = true;
