@@ -38,25 +38,30 @@
   services.telegraf = {
     enable = true;
     extraConfig = {
-      inputs = {
-        statsd = {
-          delete_timings = true;
-          service_address = ":8125";
-        };
+      # Configuration for telegraf agent
+      agent = {
+        interval = "10s";
+        round_interval = true;
+        metric_batch_size = 1000;
+        metric_buffer_limit = 10000;
+        collection_jitter = "0s";
+        flush_interval = "10s";
+        flush_jitter = "0s";
+        precision = "";
+        hostname = "";
+        omit_hostname = false;
       };
-      outputs = {
-        influxdb = {
-          database = "telegraf";
-          urls = [
-            "http://localhost:8086/api/v2/telegrafs/099d51d0a3960000"
-          ];
-        };
+      outputs.influxdb_v2 = {
+        urls = ["http://10.0.1.92:8086"];
+        token = "$INFLUX_TOKEN";
+        organization = "arouzing";
+        bucket = "arouzingBucket";
+      }
       };
+      environmentFiles = [
+        "/etc/telegraf.env"
+      ];
     };
-    environmentFiles = [
-      "/etc/telegraf.env"
-    ];
-  };
 
   # Open ports in the firewall.
   networking.firewall = { 
