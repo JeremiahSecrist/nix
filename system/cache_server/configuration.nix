@@ -28,8 +28,8 @@
     description = "admin";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
-    # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
   # enable influxdb
   services.influxdb2.enable = true;
@@ -49,6 +49,14 @@
           perdevice = true;
           tag_env = ["JAVA_HOME" "HEAP_SIZE"];
         };
+        diskio = {
+          devices = ["sda"];
+        };
+        # minecraft = {
+        #   server = "";
+        #   port = "25575";
+        #   password = "$MINECRAFT_PASSWORD"
+        # }
       };
       outputs = {
         influxdb_v2 = {
