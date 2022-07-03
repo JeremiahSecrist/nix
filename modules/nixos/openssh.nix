@@ -1,8 +1,10 @@
 _: { config, pkgs, lib, ... }: 
 {
     services.openssh = {
-        openFirewall = true;
         enable = true;
+        openFirewall = true;
+        startWhenNeeded = true;
+        kexAlgorithms = [ "curve25519-sha256@libssh.org" ];
         passwordAuthentication = false;
         permitRootLogin = "no";
     };
