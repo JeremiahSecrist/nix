@@ -19,6 +19,9 @@
                 image = "portainer/portainer-ce:2.11.0";
                 ports = ["0.0.0.0:9443:9443"];
                 volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
+                extraOptions = [
+                    "--label=docker.group=all"
+                ];
             };
             lancache_monolith = {
                 image = "lancachenet/monolithic:latest";
@@ -33,6 +36,9 @@
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/New_York";
                 };
+                extraOptions = [
+                    "--label=docker.group=all"
+                ];
             };
             lancache_dns = {
                 image = "lancachenet/lancache-dns:latest";
@@ -46,18 +52,21 @@
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/New_York";
                 };
+                extraOptions = [
+                    "--label=docker.group=all"
+                ];
             };
-            pihole = {
-                image = "pihole/pihole:latest";
-                volumes = [ 
-                    "pihole_data/etc-pihole:/etc/pihole"
-                    "pihole_data/etc-dnsmasq.d:/etc/dnsmasq.d"
-                    ];
-                ports = ["0.0.0.0:8080:80"];
-                environment = {
-                    TZ                  =   "America/New_York";
-                };
-            };
+            # pihole = {
+            #     image = "pihole/pihole:latest";
+            #     volumes = [ 
+            #         "pihole_data/etc-pihole:/etc/pihole"
+            #         "pihole_data/etc-dnsmasq.d:/etc/dnsmasq.d"
+            #         ];
+            #     ports = ["0.0.0.0:8080:80"];
+            #     environment = {
+            #         TZ                  =   "America/New_York";
+            #     };
+            # };
         };
     };
 }
