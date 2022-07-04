@@ -34,15 +34,15 @@
   # enable influxdb
   services.influxdb2.enable = true;
 
+  # enable grafana
+  services.grafana = {
+    enable = true;
+  };
   # enable telegraf to log myself!
   services.telegraf = {
     enable = true;
     extraConfig = {
       inputs = {
-        # statsd = {
-        #   delete_timings = true;
-        #   service_address = ":8125";
-        # };
         docker = {
           endpoint = "unix:///var/run/docker.sock";
           timeout = "5s";
