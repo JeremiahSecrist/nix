@@ -56,7 +56,7 @@
           enable_file_download = true;
         };
         disk = {
-          ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
+          ignore_fs = ["tmpfs" "devtmpfs" "devfs" "iso9660" "overlay" "aufs" "squashfs"];
         };
         diskio = { };
         mem = {};
