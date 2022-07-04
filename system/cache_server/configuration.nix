@@ -52,7 +52,7 @@
           gather_services = false;
           container_name_include = [];
           container_name_exclude = [];
-          timeout = "5s"
+          timeout = "5s";
           docker_label_include = [];
           docker_label_exclude = [];
           perdevice = true;
