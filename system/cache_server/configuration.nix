@@ -37,6 +37,10 @@
   # enable grafana
   services.grafana = {
     enable = true;
+    port     = "3000";
+    domain   = "localhost";
+    protocol = "http";
+    dataDir  = "/var/lib/grafana";
   };
   # enable telegraf to log myself!
   services.telegraf = {
