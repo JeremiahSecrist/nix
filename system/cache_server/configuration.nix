@@ -38,7 +38,7 @@
   services.grafana = {
     enable = true;
     port     = 3000;
-    domain   = "localhost";
+    domain   = "0.0.0.0";
     protocol = "http";
     dataDir  = "/var/lib/grafana";
   };
