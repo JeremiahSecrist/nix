@@ -37,8 +37,9 @@
   # enable grafana
   services.grafana = {
     enable = true;
-    port     = 3000;
-    domain   = "0.0.0.0";
+    # port     = 3000;
+    # domain   = "0.0.0.0";
+    addr = "0.0.0.0";
     protocol = "http";
     dataDir  = "/var/lib/grafana";
   };
@@ -93,7 +94,7 @@
   # Open ports in the firewall.
   networking.firewall = { 
     enable = true;
-    allowedTCPPorts = [8086];
+    allowedTCPPorts = [8086 3000];
     allowedUDPPorts = [];
   };
 
