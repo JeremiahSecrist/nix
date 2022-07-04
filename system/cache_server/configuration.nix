@@ -38,7 +38,6 @@
   services.grafana = {
     enable = true;
     # port     = 3000;
-    # domain   = "0.0.0.0";
     addr = "0.0.0.0";
     protocol = "http";
     dataDir  = "/var/lib/grafana";
@@ -53,12 +52,25 @@
           timeout = "5s";
           tag_env = ["JAVA_HOME" "HEAP_SIZE"];
         };
-        diskio = {
-          devices = ["sda"];
-        };
         internet_speed = {
           enable_file_download = true;
         };
+        disk = {
+          ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
+        };
+        diskio = { };
+        mem = {};
+        cpu = {
+          ## Whether to report per-cpu stats or not
+          percpu = true;
+          ## Whether to report total system cpu stats or not
+          totalcpu = true;
+          ## If true, collect raw CPU time metrics
+          collect_cpu_time = false;
+          ## If true, compute and report the sum of all non-idle CPU states
+          report_active = false;
+        };
+
         # minecraft = {
         #   server = "";
         #   port = "25575";
