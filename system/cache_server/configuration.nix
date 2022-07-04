@@ -51,6 +51,9 @@
         diskio = {
           devices = ["sda"];
         };
+        internet_speed = {
+          enable_file_download = true;
+        };
         # minecraft = {
         #   server = "";
         #   port = "25575";
