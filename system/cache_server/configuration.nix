@@ -49,8 +49,14 @@
       inputs = {
         docker = {
           endpoint = "unix:///var/run/docker.sock";
-          timeout = "5s";
-          tag_env = ["JAVA_HOME" "HEAP_SIZE"];
+          gather_services = false;
+          container_name_include = [];
+          container_name_exclude = [];
+          timeout = "5s"
+          docker_label_include = [];
+          docker_label_exclude = [];
+          perdevice = true;
+          total = false;
         };
         internet_speed = {
           enable_file_download = true;
