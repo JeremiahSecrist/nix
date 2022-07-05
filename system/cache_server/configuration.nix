@@ -6,7 +6,19 @@
       ./hardware.nix
       ./docker.nix
     ];
-  
+  #### temp for testing
+  boot.kernelPackages = mkDefault pkgs.linuxPackages_hardened;
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = mkDefault true;
+  nix.settings.allowed-users = mkDefault [ "@users" ];
+  security.lockKernelModules = mkDefault true;
+  security.protectKernelImage = mkDefault true;
+  security.allowSimultaneousMultithreading = mkDefault false;
+  security.forcePageTableIsolation = mkDefault true;
+  # This is required by podman to run containers in rootless mode.
+  security.unprivilegedUsernsClone = mkDefault config.virtualisation.containers.enable;
+  security.virtualisation.flushL1DataCache = mkDefault "always";
+
+  ###
   networking = {
     hostName = "cacheserver"; # Define your hostname.
     networkmanager.enable = true;
