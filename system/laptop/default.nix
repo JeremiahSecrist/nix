@@ -1,12 +1,4 @@
-{ self, system, home-manager, nixpkgs, ... }:
-
-let
-pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = true;
-};
-lib = nixpkgs.lib;
-in 
+{ self, lib, system, home-manager,  ... }:
 lib.nixosSystem {
   inherit system;
   modules = [

@@ -1,11 +1,4 @@
-{ self, system, nixpkgs-small,  ... }:
-let
-pkgs = import nixpkgs-small {
-    inherit system;
-    config.allowUnfree = true;
-};
-lib = nixpkgs-small.lib;
-in 
+{ self, lib, system, ... }:
 lib.nixosSystem {
   inherit system;
   modules = [
