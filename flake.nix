@@ -14,7 +14,7 @@
         in {
             nixosModules = import ./modules/nixos inputs;
             nixosConfigurations = {
-                skytop = import ./system/laptop             (inputs // { inherit system; inherit (nixpkgs)lib });
+                skytop      = import ./system/laptop             (inputs // { inherit system; inherit (nixpkgs)lib });
                 cacheServer = import ./system/cacheServer   (inputs // { inherit system; inherit (nixpkgs-small)lib });
             };
         };
