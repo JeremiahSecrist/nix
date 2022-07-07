@@ -4,7 +4,7 @@ lib.nixosSystem {
   modules = [
     ./configuration.nix
   ] ++ (with self.nixosModules; [
-    common
+    # common
     boot
     docker
     openssh
