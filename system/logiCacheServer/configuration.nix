@@ -4,19 +4,20 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware.nix
-      ./docker.nix
+      # ./docker.nix
     ];
   
   networking = {
     hostName = "cacheserver"; # Define your hostname.
-    defaultGateway = "192.168.1.254";
-    nameservers = [ "1.1.1.1" ];
-    interfaces.eth0.ipv4.addresses = [ {
-      address = "192.168.1.2";
-      prefixLength = 24;
-    }   
-  ];
-    # networkmanager.enable = true;
+  #   defaultGateway = "192.168.1.254";
+  #   nameservers = [ "1.1.1.1" ];
+  #   enableIPv6 = false;
+  #   interfaces.eth0.ipv4.addresses = [ {
+  #     address = "192.168.1.2";
+  #     prefixLength = 24;
+  #   }   
+  # ];
+    networkmanager.enable = true;
   };
   time.timeZone = "America/Huston";
   
