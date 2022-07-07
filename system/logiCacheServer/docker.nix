@@ -26,8 +26,8 @@
                 volumes = [ "lancache_data:/data" ];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
-                    LANCACHE_IP         =   "192.168.1.123";
-                    DNS_BIND_IP         =   "192.168.1.123";
+                    LANCACHE_IP         =   "192.168.1.2";
+                    DNS_BIND_IP         =   "192.168.1.2";
                     UPSTREAM_DNS        =   "1.1.1.1";
                     CACHE_DISK_SIZE     =   "600000m";
                     CACHE_MAX_AGE       =   "3650d";
@@ -39,8 +39,8 @@
                 ports = ["0.0.0.0:53:53"];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
-                    LANCACHE_IP         =   "192.168.1.123";
-                    DNS_BIND_IP         =   "192.168.1.123";
+                    LANCACHE_IP         =   "192.168.1.2";
+                    DNS_BIND_IP         =   "192.168.1.2";
                     UPSTREAM_DNS        =   "1.1.1.1";
                     CACHE_DISK_SIZE     =   "600000m";
                     CACHE_MAX_AGE       =   "3650d";
