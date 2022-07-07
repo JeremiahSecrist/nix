@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-source ./laptop.env
+source ${1}
 
 Confirm(){
     read -r -p "Are you sure? [y/N] " response
