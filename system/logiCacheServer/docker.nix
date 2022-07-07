@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-    networking.firewall.allowedTCPPorts = [ 53 80 443 9443  ];
+    # networking.firewall.allowedTCPPorts = [ 53 80 443 9443  ];
 
     # system.activationScripts.mkVPN = let
     #     docker = config.virtualisation.oci-containers.backend;

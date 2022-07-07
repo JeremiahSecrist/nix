@@ -82,9 +82,9 @@
   services.qemuGuest.enable = true;
   # Open ports in the firewall.
   networking.firewall = { 
-    enable = true;
-    allowedTCPPorts = [];
-    allowedUDPPorts = [];
+    enable = false;
+    # allowedTCPPorts = [];
+    # allowedUDPPorts = [];
   };
 
  system.stateVersion = "22.05"; # Did you read the comment?
