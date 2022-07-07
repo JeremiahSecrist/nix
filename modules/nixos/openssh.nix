@@ -7,9 +7,9 @@ _: { config, pkgs, lib, ... }:
         kexAlgorithms = [ "curve25519-sha256@libssh.org" ];
         passwordAuthentication = false;
         permitRootLogin = "no";
-        extraConfig = ''
-            AllowTcpForwarding
-        '';
+        # extraConfig = ''
+        #     AllowTcpForwarding
+        # '';
     };
     security.pam = {
         enableSSHAgentAuth = true;
