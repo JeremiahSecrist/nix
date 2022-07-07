@@ -22,7 +22,7 @@
                     LANCACHE_IP         =   "192.168.1.2";
                     DNS_BIND_IP         =   "192.168.1.2";
                     UPSTREAM_DNS        =   "1.1.1.1";
-                    CACHE_DISK_SIZE     =   "600000m";
+                    CACHE_DISK_SIZE     =   "700000m";
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/Huston";
                 };
@@ -38,7 +38,7 @@
                     LANCACHE_IP         =   "192.168.1.2";
                     DNS_BIND_IP         =   "192.168.1.2";
                     UPSTREAM_DNS        =   "1.1.1.1";
-                    CACHE_DISK_SIZE     =   "600000m";
+                    CACHE_DISK_SIZE     =   "700000m";
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/Huston";
                 };
