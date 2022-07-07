@@ -36,7 +36,7 @@
             };
             lancache_dns = {
                 image = "lancachenet/lancache-dns:latest";
-                ports = ["0.0.0.0:53:53"];
+                # ports = ["0.0.0.0:53:53"];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
                     LANCACHE_IP         =   "192.168.1.2";
@@ -46,6 +46,9 @@
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/Huston";
                 };
+                extraOptions = [
+                    "--network=host"
+                ];
             };
         };
     };
