@@ -28,7 +28,7 @@
                     USE_GENERIC_CACHE   =   "true";
                     LANCACHE_IP         =   "192.168.1.2";
                     DNS_BIND_IP         =   "192.168.1.2";
-                    UPSTREAM_DNS        =   "1.1.1.1";
+                    UPSTREAM_DNS        =   "8.8.8.8";
                     CACHE_DISK_SIZE     =   "600000m";
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/Huston";
@@ -41,7 +41,7 @@
                     USE_GENERIC_CACHE   =   "true";
                     LANCACHE_IP         =   "192.168.1.2";
                     DNS_BIND_IP         =   "192.168.1.2";
-                    UPSTREAM_DNS        =   "1.1.1.1";
+                    UPSTREAM_DNS        =   "8.8.8.8";
                     CACHE_DISK_SIZE     =   "600000m";
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/Huston";
