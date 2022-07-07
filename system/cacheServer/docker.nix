@@ -3,22 +3,13 @@
 {
     networking.firewall.allowedTCPPorts = [ 53 80 443 9443  ];
 
-    # system.activationScripts.mkVPN = let
-    #     docker = config.virtualisation.oci-containers.backend;
-    #     dockerBin = "${pkgs.${docker}}/bin/${docker}";
-    #     networkName = "backend";
-
-    #   in ''
-    #     ${dockerBin} network inspect ${networkName} >/dev/null 2>&1 || ${dockerBin} network create ${networkName} --subnet 172.20.0.0/16
-    #   '';
-
     virtualisation.oci-containers = {
         backend = "docker";
         containers = {
             portainer = {
                 image = "portainer/portainer-ce:2.14.0";
                 ports = ["0.0.0.0:9443:9443"];
-                volumes = [ "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
+                volumes = [ "portainer_data:/data" "portainer_data:/data" "/var/run/docker.sock:/var/run/docker.sock" ];
                 extraOptions = [
                     "--label=docker.group=all"
                 ];
@@ -26,7 +17,11 @@
             lancache_monolith = {
                 image = "lancachenet/monolithic:latest";
                 ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
-                volumes = [ "lancache_data:/data" ];
+                volumes = [ 
+                    "lancache_data:/data"
+                    "lancache_data/cache:/data/cache"
+                    "lancache_data/logs:/data/logs"
+                    ];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
                     LANCACHE_IP         =   "10.0.1.92";
