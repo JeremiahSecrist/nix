@@ -4,7 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware.nix
-      # ./docker.nix
+      ./docker.nix
     ];
   
   networking = {
