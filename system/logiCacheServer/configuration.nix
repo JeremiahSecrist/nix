@@ -16,9 +16,9 @@
       prefixLength = 24;
     }   
   ];
-    networkmanager.enable = true;
+    # networkmanager.enable = true;
   };
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/Huston";
   
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;

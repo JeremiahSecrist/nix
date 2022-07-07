@@ -31,7 +31,7 @@
                     UPSTREAM_DNS        =   "1.1.1.1";
                     CACHE_DISK_SIZE     =   "600000m";
                     CACHE_MAX_AGE       =   "3650d";
-                    TZ                  =   "America/Denver";
+                    TZ                  =   "America/Huston";
                 };
             };
             lancache_dns = {
@@ -44,7 +44,7 @@
                     UPSTREAM_DNS        =   "1.1.1.1";
                     CACHE_DISK_SIZE     =   "600000m";
                     CACHE_MAX_AGE       =   "3650d";
-                    TZ                  =   "America/Denver";
+                    TZ                  =   "America/Huston";
                 };
             };
         };
