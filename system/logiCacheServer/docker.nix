@@ -22,7 +22,7 @@
             };
             lancache_monolith = {
                 image = "lancachenet/monolithic:latest";
-                ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
+                # ports = ["0.0.0.0:80:80" "0.0.0.0:443:443"];
                 volumes = [ "lancache_data:/data" ];
                 environment = {
                     USE_GENERIC_CACHE   =   "true";
@@ -33,6 +33,9 @@
                     CACHE_MAX_AGE       =   "3650d";
                     TZ                  =   "America/Huston";
                 };
+                extraOptions = [
+                    "--network=host"
+                ];
             };
             lancache_dns = {
                 image = "lancachenet/lancache-dns:latest";
