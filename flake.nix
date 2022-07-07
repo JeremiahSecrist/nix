@@ -16,6 +16,7 @@
             nixosConfigurations = {
                 skytop      = import ./system/laptop             (inputs // { inherit system; inherit (nixpkgs)lib; });
                 cacheServer = import ./system/cacheServer   (inputs // { inherit system; inherit (nixpkgs-small)lib; });
+                logiCacheServer = import ./system/logiCacheServer   (inputs // { inherit system; inherit (nixpkgs-small)lib; });
             };
         };
 }
