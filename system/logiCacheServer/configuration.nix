@@ -49,13 +49,13 @@
 
 ###################3
 
-  services.resolved.extraConfig = ''
-  DNSStubListener=no
-  '';
+  # services.resolved.extraConfig = ''
+  # DNSStubListener=no
+  # '';
   
   networking = {
     hostName = "cacheserver"; # Define your hostname.
-  #   defaultGateway = "192.168.1.254";
+    defaultGateway = "192.168.1.254";
     nameservers = [ "1.1.1.1" ];
     enableIPv6 = false;
     interfaces.enp6s18.ipv4.addresses = [ {
