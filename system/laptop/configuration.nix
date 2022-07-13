@@ -16,7 +16,8 @@
   };
   time.timeZone = "America/New_York";
  
-  
+  # ssd optimization:
+  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   # bluetooth
   hardware.bluetooth.enable = true;
   
