@@ -44,6 +44,7 @@
   boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" =   false;
   ###
   networking = {
+    firewall.checkReversePath = "loose";
     hostName = "cacheserver"; # Define your hostname.
     networkmanager.enable = true;
   };
