@@ -47,6 +47,10 @@
     hostName = "cacheserver"; # Define your hostname.
     networkmanager.enable = true;
   };
+  
+  environment.systemPackages = [ pkgs.tailscale ];
+  services.tailscale.enable = true;
+
   time.timeZone = "America/New_York";
   
   # Disable wait for network
