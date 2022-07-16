@@ -17,7 +17,7 @@
         nano
         git
         git-secret
-
+        tailscale 
     ];
 
     nix = {
@@ -49,12 +49,9 @@
 
 ###################3
 
-  # services.resolved.extraConfig = ''
-  # DNSStubListener=no
-  # '';
-  
+  services.tailscale.enable = true; # adds tailscale
   networking = {
-    hostName = "cacheserver"; # Define your hostname.
+    hostName = "logicacheserver"; # Define your hostname.
     defaultGateway = "192.168.1.254";
     nameservers = [ "1.1.1.1" ];
     enableIPv6 = false;
