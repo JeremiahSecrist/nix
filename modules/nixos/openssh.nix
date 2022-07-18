@@ -6,6 +6,7 @@ _: { config, pkgs, lib, ... }:
         startWhenNeeded = true;
         kexAlgorithms = [ "curve25519-sha256@libssh.org" ];
         passwordAuthentication = false;
+        kbdInteractiveAuthentication = false;
         permitRootLogin = "no";
         # extraConfig = ''
         #     AllowTcpForwarding
