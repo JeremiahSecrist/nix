@@ -6,6 +6,16 @@
       ./hardware.nix
       ./docker.nix
     ];
+      # lollypops.deployment = {
+      #   user = "admin";
+      #   sshOpts = "-A";
+      #   config-dir = "/home/admin/deployment";
+      # };
+    # base packages
+    environment.systemPackages = with pkgs; [
+      htop
+    ];
+
   #### temp for testing
   boot.kernelPackages =   pkgs.linuxPackages_hardened;
   boot.kernel.sysctl."kernel.unprivileged_userns_clone" =   true;
