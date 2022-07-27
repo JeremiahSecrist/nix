@@ -72,7 +72,7 @@ Encrypted_Format_Disk(){
     
 }
 Install_Nix() {
-    nixos-install --flake https://github.com/arouzing/nix\#${SYSTEM_NAME} --root /mnt
+    nixos-install --flake "./#${SYSTEM_NAME}" --root /mnt
 }
 
 ## init phase
