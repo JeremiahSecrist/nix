@@ -20,6 +20,5 @@ lib.nixosSystem {
     encryptedBoot
     docker
     virtual
-    # harden
   ]);
 }
