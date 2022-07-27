@@ -24,11 +24,11 @@
     { device = "/dev/disk/by-label/games";
       fsType = "ext4";
     };
-  # mount home folder
-  fileSystems."/home" =
-    { device = "/dev/disk/by-label/home";
-      fsType = "ext4";
-    };
+  # # mount home folder
+  # fileSystems."/home" =
+  #   { device = "/dev/disk/by-label/home";
+  #     fsType = "ext4";
+  #   };
   # bluetooth
   hardware.bluetooth.enable = true;
   
