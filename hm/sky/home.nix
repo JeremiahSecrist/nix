@@ -52,8 +52,11 @@
         };
         starship.enable = true;
         zsh = {
-            enable = true;
-            enableAutosuggestions = true;
+            enable                      = true;
+            enableAutosuggestions       = true;
+            enableCompletion            = true;
+            enableSyntaxHighlighting    = true;
+            autocd                      = true;
         };    
     };
 }
