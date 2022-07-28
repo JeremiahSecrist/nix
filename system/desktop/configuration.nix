@@ -35,6 +35,8 @@
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;
 
+  programs.noisetorch.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
     isNormalUser = true;
