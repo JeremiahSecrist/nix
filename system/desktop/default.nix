@@ -17,7 +17,7 @@ lib.nixosSystem {
     yubikey
     u2fLogin
     gnomeDesktop
-    encryptedBoot
+    boot
     docker
     virtual
   ]);
