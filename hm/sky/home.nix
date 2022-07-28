@@ -30,6 +30,9 @@
         discord
         gnupg
 
+        # development
+        terraform
+
     ];
     };
     
