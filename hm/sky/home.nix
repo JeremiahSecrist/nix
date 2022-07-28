@@ -39,22 +39,32 @@
     };
 
     };
-    programs = {
-        home-manager.enable = true;
-        git = {
-            enable = true;
-            userName  = "arouzing";
-            userEmail = "owner@arouzing.xyz";
-            signing = {
-                key = "71F252936D785219";
-                signByDefault = true;
+    programs                    = {
+        home-manager.enable     = true;
+        git                     = {
+            enable              = true;
+            userName            = "arouzing";
+            userEmail           = "owner@arouzing.xyz";
+            signing             = {
+                key             = "71F252936D785219";
+                signByDefault   = true;
             };
         };
         starship.enable = true;
+        
         zsh = {
             enable                      = true;
-            enableAutosuggestions       = true;
+            history     = {
+                save    = 10000000;
+            };
+            envExtra                    = ''
+            
+            '';
             enableCompletion            = true;
+            completionInit              = ''
+            autoload -U compinit &&zstyle ':completion:*' menu select &&zmodload zsh/complist &&compinit &&_comp_options+=(globdots)	
+            '';
+            enableAutosuggestions       = true;
             enableSyntaxHighlighting    = true;
             autocd                      = true;
         };    
