@@ -44,11 +44,17 @@
     shell = pkgs.zsh;
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    useDefaultShell = false;
   };
+  users.users.admin = {
+    isNormalUser = true;
+    initialPassword = "password";
+    shell = pkgs.zsh;
+    description = "admin";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+  };
+  
   # fixes gnome login issues
-  environment.pathsToLink = [ "/share/zsh" ];
-  environment.shells = [ pkgs.zsh ];
+  programs.zsh.enable = true;
 
   services = {
     flatpak.enable = true; 
