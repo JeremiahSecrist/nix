@@ -8,7 +8,7 @@ lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.sky = {
-        imports = [ ../../hm/sky/home.nix ];
+        imports = [ ../../hm/sky/home.nix ../../hm/sky/desktopU2f.nix];
       };
     }
   ] ++ (with self.nixosModules; [
