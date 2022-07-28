@@ -45,13 +45,6 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
-  users.users.admin = {
-    isNormalUser = true;
-    initialPassword = "password";
-    shell = pkgs.zsh;
-    description = "admin";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-  };
   
   # fixes gnome login issues
   programs.zsh.enable = true;
