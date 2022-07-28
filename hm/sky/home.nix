@@ -60,7 +60,7 @@
                 echo -ne "\033]0; $(basename "$PWD") \007"
             }
             starship_precmd_user_func="set_win_title"
-
+            precmd_functions+=(set_win_title)
             '';
             enableCompletion            = true;
             completionInit              = ''
