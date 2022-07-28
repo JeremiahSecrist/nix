@@ -32,6 +32,10 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
+
+  # fixes gnome login issues
+  programs.zsh.enable = true;
+  
   services = {
     flatpak.enable = true; 
     xserver.libinput.enable = true;
