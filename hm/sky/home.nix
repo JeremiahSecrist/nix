@@ -61,6 +61,8 @@
             }
             starship_precmd_user_func="set_win_title"
             precmd_functions+=(set_win_title)
+
+            bindkey "^[[3~" delete-char
             '';
             enableCompletion            = true;
             completionInit              = ''
