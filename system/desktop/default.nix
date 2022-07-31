@@ -8,7 +8,11 @@ lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.sky = {
-        imports = [ ../../hm/sky/home.nix ../../hm/sky/desktopU2f.nix];
+        imports = [ 
+          ../../hm/sky/home.nix  
+          ../../hm/sky/desktopU2f.nix
+          ../../hm/sky/noisetorch.nix
+          ];
       };
     }
   ] ++ (with self.nixosModules; [
@@ -20,5 +24,6 @@ lib.nixosSystem {
     boot
     docker
     virtual
+    tailscale
   ]);
 }
