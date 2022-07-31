@@ -2,7 +2,7 @@ _: { config, pkgs, lib, ... }:
 
 {
      # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = lib.mkDefault true;
 
     # base packages
     environment.systemPackages = with pkgs; [
@@ -20,7 +20,7 @@ _: { config, pkgs, lib, ... }:
           experimental-features = nix-command flakes
         '';
         #auto maintainence
-        autoOptimiseStore = true;
+        autoOptimiseStore = lib.mkDefault true;
         gc ={
             automatic = true;
             dates = "weekly";
@@ -32,12 +32,12 @@ _: { config, pkgs, lib, ... }:
     };
 
     # Select internationalisation properties.
-    i18n.defaultLocale = "en_US.utf8";
+    i18n.defaultLocale = lib.mkDefault "en_US.utf8";
 
     # Performance
     # enable zram
-    zramSwap.enable = true;
+    zramSwap.enable = lib.mkDefault true;
     # clock speed management
-    services.auto-cpufreq.enable = true;
+    services.auto-cpufreq.enable = lib.mkDefault true;
 
 }
