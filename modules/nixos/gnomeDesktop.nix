@@ -1,4 +1,4 @@
-_: { config, pkgs, ... }:
+_: { config, pkgs, lib, ... }:
 {
 services = {
   gnome.gnome-keyring.enable = true;
@@ -8,15 +8,15 @@ services = {
         xkbVariant = "";
         displayManager = {
             gdm.enable = true;
-            defaultSession = "gnome";
+            gdm.wayland = false;
+            # defaultSession = lib.mkDefault "gnome";
         };
         desktopManager = {
-            xterm.enable = false;
-            gnome.enable = true;
+            xterm.enable = lib.mkDefault false;
+            gnome.enable = lib.mkDefault true;
         };
     };
     udev.packages = [ pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon ];
-    packagekit.enable = true;
 };
 
 # exclude the following packages from the default installation
@@ -39,10 +39,10 @@ environment.gnome.excludePackages = (with pkgs; [
   atomix # puzzle game
   
 ]);
-programs = {
-  xwayland.enable = true;
-};
+# programs = {
+#   xwayland.enable = lib.mkDefault true;
+# };
 xdg.portal = {
-  enable = true;
+  enable = lib.mkDefault true;
 };
 }
