@@ -3,6 +3,7 @@
 {
     imports = [
         ./desktopU2f.nix
+        ./noisetorch.nix
         ./display.nix
     ];
 }

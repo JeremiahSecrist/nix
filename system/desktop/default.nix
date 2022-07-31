@@ -10,8 +10,7 @@ lib.nixosSystem {
       home-manager.users.sky = {
         imports = [ 
           ../../hm/sky/home.nix  
-          ../../hm/sky/desktopU2f.nix
-          ../../hm/sky/noisetorch.nix
+          ../../hm/sky/desktop
           ];
       };
     }
