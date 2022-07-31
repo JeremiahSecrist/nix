@@ -9,6 +9,8 @@
     [ # Include the results of the hardware scan.
       ./hardware.nix
     ];
+
+  
   
   networking = {
     hostName = "desksky"; # Define your hostname.
@@ -29,11 +31,17 @@
   #   { device = "/dev/disk/by-label/home";
   #     fsType = "ext4";
   #   };
+  # default to xorg on desktop
+  # services.xserver.displayManager.defaultSession = "gnome-xorg";
+
   # bluetooth
   hardware.bluetooth.enable = true;
   
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;
+
+  # wooting keyboard
+  hardware.wooting.enable = true;
 
   programs.noisetorch.enable = true;
 
@@ -57,6 +65,9 @@
     "steam"
     "steam-original"
     "steam-runtime"
+  ];
+  environment.systemPackages = with pkgs; [
+    tailscale
   ];
   programs.steam = {
     enable = true;
