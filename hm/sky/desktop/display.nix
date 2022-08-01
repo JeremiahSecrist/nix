@@ -14,31 +14,19 @@
                             enable                      =   true;
                             crtc                        =   0;
                             mode                        =   "1920x1080";
-                            pos                         =   "0x0";
+                            position                    =   "0x0";
                             primary                     =   true;
-                            rate                        =   "74.99";
-                            x-prop-max_bpc              =   8;
-                            x-prop-non_desktop          =   0;
-                            x-prop-scaling_mode         =   "None";
-                            x-prop-tearfree             =   "auto";
-                            x-prop-underscan            =   "off";
-                            x-prop-underscan_hborder    =   0;
-                            x-prop-underscan_vborder    =   0;
+                            rate                        =   "75.00";
+
 
                         };
                         DisplayPort-2 = {
                             enable                      =   true;
                             crtc                        =   1;
                             mode                        =   "1920x1080";
-                            pos                         =   "1920x0";
-                            rate                        =   "74.97";
-                            x-prop-max_bpc              =   8;
-                            x-prop-non_desktop          =   0;
-                            x-prop-scaling_mode         =   "None";
-                            x-prop-tearfree             =   "auto";
-                            x-prop-underscan            =   "off";
-                            x-prop-underscan_hborder    =   0;
-                            x-prop-underscan_vborder    =   0;
+                            position                    =   "1920x0";
+                            rate                        =   "75.00";
+
                         };
                     };
                 };
