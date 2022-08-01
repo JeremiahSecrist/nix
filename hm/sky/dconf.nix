@@ -200,7 +200,9 @@ with lib.hm.gvariant;
       power-button-action = "suspend";
       sleep-inactive-ac-timeout = 3600;
     };
-
+    "org/gnome/desktop/lockdown"= {
+      disable-lock-screen = false;
+    };
     "org/gnome/shell" = {
       app-picker-layout = "[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'org.gnome.Calculator.desktop': <{'position': <4>}>, 'simple-scan.desktop': <{'position': <5>}>, 'org.gnome.Settings.desktop': <{'position': <6>}>, 'gnome-system-monitor.desktop': <{'position': <7>}>, 'Utilities': <{'position': <8>}>, 'yelp.desktop': <{'position': <9>}>, 'org.gnome.Calendar.desktop': <{'position': <10>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <11>}>, 'org.gnome.Extensions.desktop': <{'position': <12>}>, 'firefox.desktop': <{'position': <13>}>, 'cups.desktop': <{'position': <14>}>, 'nixos-manual.desktop': <{'position': <15>}>, 'org.gnome.Software.desktop': <{'position': <16>}>, 'spotify.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
       command-history = [ "pkill Discord" ];
@@ -213,20 +215,6 @@ with lib.hm.gvariant;
 
     "org/gnome/shell/extensions/auto-move-windows" = {
       application-list = [ "discord.desktop:1" "firefox.desktop:3" "code.desktop:2" "org.gnome.Console.desktop:2" ];
-    };
-
-    "org/gnome/shell/keybindings" = {
-      switch-to-application-1 = [ "" ];
-      switch-to-application-2 = [ "" ];
-      switch-to-application-3 = [ "" ];
-      switch-to-application-4 = [ "" ];
-      switch-to-application-5 = [ "" ];
-      switch-to-application-6 = [ "" ];
-      switch-to-application-7 = [ "" ];
-      switch-to-application-8 = [ "" ];
-      switch-to-application-9 = [ "" ];
-      toggle-application-view = [ "" ];
-      toggle-overview = [ "" ];
     };
 
     "org/gnome/shell/world-clocks" = {
