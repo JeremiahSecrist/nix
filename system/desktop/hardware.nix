@@ -45,7 +45,7 @@
   hardware.bluetooth.enable = true;
 
   # wooting keyboard
-  hardware.wooting.enable = true;
+  # hardware.wooting.enable = true;
 
   # networking
   # Disable wait for network
