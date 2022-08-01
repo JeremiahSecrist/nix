@@ -29,7 +29,7 @@
         spotify
         discord
         gnupg
-
+        virt-manager
         # development
         terraform
 
