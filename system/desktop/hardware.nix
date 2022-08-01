@@ -5,13 +5,13 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod;
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-  boot.kernelParams = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower zfs xpadneo dpdk ];
+  boot.kernelParams = [ "mitigations=off"];
   
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
