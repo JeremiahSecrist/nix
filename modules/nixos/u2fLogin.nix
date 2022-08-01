@@ -5,7 +5,7 @@ security = {
     pam = {
       u2f = {
         enable = true;
-        control = "sufficient";
+        control = "required";
         cue = true;
       };
     };
