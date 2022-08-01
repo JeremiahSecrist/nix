@@ -12,17 +12,36 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower zfs xpadneo dpdk ];
   boot.kernelParams = [ "mitigations=off"];
-  
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s25.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
-
-#   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-#   powerManagerment.cpuFreqGovernor = lib.mkDefault "ondemand";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  
+  #File systems
+  
+  # ssd optimization:
+  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
+  
+  # mount games drive
+  fileSystems."/home/sky/Games" =
+  { device = "/dev/disk/by-label/games";
+    fsType = "ext4";
+  };
+  
+  # devices
+  # bluetooth
+  hardware.bluetooth.enable = true;
+
+  # wooting keyboard
+  hardware.wooting.enable = true;
+  
+  # networking
+   # Disable wait for network
+  systemd.network.wait-online.timeout = 0;
+  
+  time.timeZone = "America/New_York";
+  
+  networking.useDHCP = lib.mkDefault true;
+  
+  networking = {
+    hostName = "desksky"; # Define your hostname.
+    networkmanager.enable = true;
+  };
 }

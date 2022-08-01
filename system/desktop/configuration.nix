@@ -10,40 +10,6 @@
       ./hardware.nix
     ];
 
-  
-  
-  networking = {
-    hostName = "desksky"; # Define your hostname.
-    networkmanager.enable = true;
-  };
-  time.timeZone = "America/New_York";
- 
-  # ssd optimization:
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
-
-  # mount games drive
-  fileSystems."/home/sky/Games" =
-    { device = "/dev/disk/by-label/games";
-      fsType = "ext4";
-    };
-  # # mount home folder
-  # fileSystems."/home" =
-  #   { device = "/dev/disk/by-label/home";
-  #     fsType = "ext4";
-  #   };
-  # default to xorg on desktop
-  # services.xserver.displayManager.defaultSession = "gnome-xorg";
-
-  # bluetooth
-  hardware.bluetooth.enable = true;
-  
-  # Disable wait for network
-  systemd.network.wait-online.timeout = 0;
-
-  # wooting keyboard
-  hardware.wooting.enable = true;
-
-  programs.noisetorch.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
@@ -56,6 +22,7 @@
   
   # fixes gnome login issues
   programs.zsh.enable = true;
+  programs.noisetorch.enable = true;
 
   services = {
     flatpak.enable = true; 
