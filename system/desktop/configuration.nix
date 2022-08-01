@@ -7,8 +7,19 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware.nix
+    (import "${
+        fetchTarball {
+          url =
+            "https://github.com/davidtwco/nixpkgs/archive/wootility-4.4.5.tar.gz";
+          sha256 = "0bpy2a31qklzab09sq09dzplzv9wbp1kj838b998npjh8vsjkimx";
+        }
+      }/nixos/modules/hardware/wooting.nix")
   ];
-
+  disabledModules = [ "hardware/wooting.nix" ];
+  hardware.wooting = {
+    enable = true;
+    xinput.enable = true;
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
     isNormalUser = true;
