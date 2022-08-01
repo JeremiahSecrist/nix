@@ -18,9 +18,15 @@
       dconf2nix
       nano
       git
+      tldr
+      sshfs
+      nixfmt
+      cmatrix
+      noisetorch
       # protonvpn-cli
 
       # Desktop
+      rustdesk
       distrobox
       cryptomator
       firefox-wayland
