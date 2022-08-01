@@ -5,22 +5,21 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware.nix
-    ];
-  
+  imports = [ # Include the results of the hardware scan.
+    ./hardware.nix
+  ];
+
   networking = {
     hostName = "skytop"; # Define your hostname.
     networkmanager.enable = true;
   };
   time.timeZone = "America/New_York";
- 
+
   # ssd optimization:
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   # bluetooth
   hardware.bluetooth.enable = true;
-  
+
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;
 
@@ -35,19 +34,19 @@
 
   # fixes gnome login issues
   programs.zsh.enable = true;
-  
+
   services = {
-    flatpak.enable = true; 
+    flatpak.enable = true;
     xserver.libinput.enable = true;
   };
 
   # Open ports in the firewall.
-  networking.firewall = { 
+  networking.firewall = {
     enable = true;
-    allowedTCPPorts = [];
-    allowedUDPPorts = [];
+    allowedTCPPorts = [ ];
+    allowedUDPPorts = [ ];
   };
 
- system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 
 }

@@ -5,11 +5,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware.nix
-    ];
-
+  imports = [ # Include the results of the hardware scan.
+    ./hardware.nix
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
@@ -17,38 +15,37 @@
     initialPassword = "password";
     shell = pkgs.zsh;
     description = "sky";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
   };
-  
+
   # fixes gnome login issues
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
 
-  services = {
-    flatpak.enable = true; 
-  };
+  services = { flatpak.enable = true; };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-original"
-    "steam-runtime"
-  ];
-  environment.systemPackages = with pkgs; [
-    tailscale
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-runtime"
+    ];
+  environment.systemPackages = with pkgs; [ tailscale ];
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # Open ports in the firewall.
-  networking.firewall = { 
+  networking.firewall = {
     enable = true;
-    allowedTCPPorts = [];
-    allowedUDPPorts = [];
+    allowedTCPPorts = [ ];
+    allowedUDPPorts = [ ];
   };
 
- system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 
 }

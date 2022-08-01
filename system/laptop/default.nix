@@ -1,4 +1,4 @@
-{ self, lib, system, home-manager,  ... }:
+{ self, lib, system, home-manager, ... }:
 lib.nixosSystem {
   inherit system;
   modules = [
@@ -8,10 +8,7 @@ lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.sky = {
-        imports = [ 
-        ../../hm/sky/home.nix 
-        ../../hm/sky/laptop
-        ];
+        imports = [ ../../hm/sky/home.nix ../../hm/sky/laptop ];
       };
     }
   ] ++ (with self.nixosModules; [

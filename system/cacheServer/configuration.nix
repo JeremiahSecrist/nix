@@ -1,33 +1,29 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware.nix
-      ./docker.nix
-    ];
-      # lollypops.deployment = {
-      #   user = "admin";
-      #   sshOpts = "-A";
-      #   config-dir = "/home/admin/deployment";
-      # };
-    # base packages
-    environment.systemPackages = with pkgs; [
-      htop
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware.nix
+    ./docker.nix
+  ];
+  # lollypops.deployment = {
+  #   user = "admin";
+  #   sshOpts = "-A";
+  #   config-dir = "/home/admin/deployment";
+  # };
+  # base packages
+  environment.systemPackages = with pkgs; [ htop tailscale ];
 
   #### temp for testing
-  boot.kernelPackages =   pkgs.linuxPackages_hardened;
-  boot.kernel.sysctl."kernel.unprivileged_userns_clone" =   true;
-  nix.settings.allowed-users =   [ "@users" ];
-  security.lockKernelModules =   true;
-  security.protectKernelImage =   true;
-  security.allowSimultaneousMultithreading =   false;
-  security.forcePageTableIsolation =   true;
+  boot.kernelPackages = pkgs.linuxPackages_hardened;
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = true;
+  nix.settings.allowed-users = [ "@users" ];
+  security.lockKernelModules = true;
+  security.protectKernelImage = true;
+  security.allowSimultaneousMultithreading = false;
+  security.forcePageTableIsolation = true;
   # This is required by podman to run containers in rootless mode.
-  security.unprivilegedUsernsClone =   config.virtualisation.containers.enable;
-  security.virtualisation.flushL1DataCache =   "always";
-
+  security.unprivilegedUsernsClone = config.virtualisation.containers.enable;
+  security.virtualisation.flushL1DataCache = "always";
 
   # Enable strict reverse path filtering (that is, do not attempt to route
   # packets that "obviously" do not belong to the iface's network; dropped
@@ -38,20 +34,20 @@
   # boot.kernel.sysctl."net.ipv4.conf.default.rp_filter" =   "1";
 
   # Ignore broadcast ICMP (mitigate SMURF)
-  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" =   true;
+  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" = true;
 
   # Ignore incoming ICMP redirects (note: default is needed to ensure that the
   # setting is applied to interfaces added after the sysctls are set)
-  boot.kernel.sysctl."net.ipv4.conf.all.accept_redirects" =   false;
-  boot.kernel.sysctl."net.ipv4.conf.all.secure_redirects" =   false;
-  boot.kernel.sysctl."net.ipv4.conf.default.accept_redirects" =   false;
-  boot.kernel.sysctl."net.ipv4.conf.default.secure_redirects" =   false;
-  boot.kernel.sysctl."net.ipv6.conf.all.accept_redirects" =   false;
-  boot.kernel.sysctl."net.ipv6.conf.default.accept_redirects" =   false;
+  boot.kernel.sysctl."net.ipv4.conf.all.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.all.secure_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.secure_redirects" = false;
+  boot.kernel.sysctl."net.ipv6.conf.all.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv6.conf.default.accept_redirects" = false;
 
   # Ignore outgoing ICMP redirects (this is ipv4 only)
-  boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" =   false;
-  boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" =   false;
+  boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" = false;
   ###
   networking = {
     firewall.checkReversePath = "loose";
@@ -59,11 +55,10 @@
     networkmanager.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.tailscale ];
   services.tailscale.enable = true;
 
   time.timeZone = "America/New_York";
-  
+
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;
 
@@ -91,7 +86,7 @@
     # port     = 3000;
     addr = "0.0.0.0";
     protocol = "http";
-    dataDir  = "/var/lib/grafana";
+    dataDir = "/var/lib/grafana";
   };
   # enable telegraf to log myself!
   services.telegraf = {
@@ -101,22 +96,28 @@
         docker = {
           endpoint = "unix:///var/run/docker.sock";
           gather_services = false;
-          container_name_include = [];
-          container_name_exclude = [];
+          container_name_include = [ ];
+          container_name_exclude = [ ];
           timeout = "5s";
-          docker_label_include = [];
-          docker_label_exclude = [];
+          docker_label_include = [ ];
+          docker_label_exclude = [ ];
           perdevice = true;
           total = false;
         };
-        internet_speed = {
-          enable_file_download = true;
-        };
+        internet_speed = { enable_file_download = true; };
         disk = {
-          ignore_fs = ["tmpfs" "devtmpfs" "devfs" "iso9660" "overlay" "aufs" "squashfs"];
+          ignore_fs = [
+            "tmpfs"
+            "devtmpfs"
+            "devfs"
+            "iso9660"
+            "overlay"
+            "aufs"
+            "squashfs"
+          ];
         };
         diskio = { };
-        mem = {};
+        mem = { };
         cpu = {
           ## Whether to report per-cpu stats or not
           percpu = true;
@@ -136,7 +137,7 @@
       };
       outputs = {
         influxdb_v2 = {
-          urls = ["http://127.0.0.1:8086"];
+          urls = [ "http://127.0.0.1:8086" ];
 
           ## Token for authentication.
           token = "$INFLUX_TOKEN";
@@ -149,24 +150,20 @@
         };
       };
     };
-  ####
+    ####
 
-    environmentFiles = [
-      "/etc/telegraf.env"
-    ];
+    environmentFiles = [ "/etc/telegraf.env" ];
   };
-    # must add telegraf to docker group
-    users.users.telegraf = {
-      extraGroups = [ "docker" ];
-    };
+  # must add telegraf to docker group
+  users.users.telegraf = { extraGroups = [ "docker" ]; };
 
   # Open ports in the firewall.
-  networking.firewall = { 
+  networking.firewall = {
     enable = true;
-    allowedTCPPorts = [8086 3000];
-    allowedUDPPorts = [];
+    allowedTCPPorts = [ 8086 3000 ];
+    allowedUDPPorts = [ ];
   };
 
- system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 
 }

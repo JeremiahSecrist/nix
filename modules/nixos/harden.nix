@@ -1,11 +1,10 @@
-_: { config, lib, pkgs, ... }:
+_:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 {
-  meta = {
-    maintainers = [ maintainers.joachifm maintainers.emily ];
-  };
+  meta = { maintainers = [ maintainers.joachifm maintainers.emily ]; };
 
   # systemd.coredump.enable = mkDefault falset;
 
@@ -16,7 +15,7 @@ with lib;
   # environment.memoryAllocator.provider = mkDefault "graphene-hardened";
   # environment.variables.SCUDO_OPTIONS = mkDefault "ZeroContents=1";
   # systemd.coredump.enable = false;
-  
+
   security.lockKernelModules = mkDefault true;
 
   security.protectKernelImage = mkDefault true;
@@ -26,7 +25,8 @@ with lib;
   security.forcePageTableIsolation = mkDefault true;
 
   # This is required by podman to run containers in rootless mode.
-  security.unprivilegedUsernsClone = mkDefault config.virtualisation.containers.enable;
+  security.unprivilegedUsernsClone =
+    mkDefault config.virtualisation.containers.enable;
 
   security.virtualisation.flushL1DataCache = mkDefault "always";
 

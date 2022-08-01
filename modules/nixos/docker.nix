@@ -1,8 +1,8 @@
-_: { config, pkgs, lib, ... }:
-{
-    virtualisation.docker = {
-        enable = true;
-        liveRestore = false;
-        autoPrune.enable = true;
-    };
+_:
+{ config, pkgs, lib, ... }: {
+  virtualisation.docker = {
+    enable = true;
+    liveRestore = false;
+    autoPrune.enable = true;
+  };
 }

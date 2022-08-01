@@ -1,53 +1,50 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware.nix
-      ./docker.nix
-    ];
-  
-############# common
-     # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
+  imports = [ # Include the results of the hardware scan.
+    ./hardware.nix
+    ./docker.nix
+  ];
 
-    # base packages
-    environment.systemPackages = with pkgs; [
-        gnumake
-        nano
-        git
-        git-secret
-        tailscale 
-    ];
+  ############# common
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-    nix = {
-        # nix flakes
-        package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-        extraOptions = ''
-          experimental-features = nix-command flakes
-        '';
-        #auto maintainence
-        autoOptimiseStore = true;
-        gc ={
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than 7d";
-        };
-        # prevent tampering
-        readOnlyStore = true;
+  # base packages
+  environment.systemPackages = with pkgs; [
+    gnumake
+    nano
+    git
+    git-secret
+    tailscale
+  ];
 
+  nix = {
+    # nix flakes
+    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    #auto maintainence
+    autoOptimiseStore = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
+    # prevent tampering
+    readOnlyStore = true;
 
-    # Select internationalisation properties.
-    i18n.defaultLocale = "en_US.utf8";
+  };
 
-    # Performance
-    # enable zram
-    zramSwap.enable = true;
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.utf8";
 
+  # Performance
+  # enable zram
+  zramSwap.enable = true;
 
-
-###################3
+  ###################3
 
   services.tailscale.enable = true; # adds tailscale
   networking = {
@@ -55,15 +52,14 @@
     defaultGateway = "192.168.1.254";
     nameservers = [ "1.1.1.1" ];
     enableIPv6 = false;
-    interfaces.enp6s18.ipv4.addresses = [ {
+    interfaces.enp6s18.ipv4.addresses = [{
       address = "192.168.1.2";
       prefixLength = 24;
-    }   
-  ];
+    }];
     networkmanager.enable = true;
   };
   time.timeZone = "America/Huston";
-  
+
   # Disable wait for network
   systemd.network.wait-online.timeout = 0;
 
@@ -81,12 +77,12 @@
   };
   services.qemuGuest.enable = true;
   # Open ports in the firewall.
-  networking.firewall = { 
+  networking.firewall = {
     enable = false;
     # allowedTCPPorts = [];
     # allowedUDPPorts = [];
   };
 
- system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 
 }

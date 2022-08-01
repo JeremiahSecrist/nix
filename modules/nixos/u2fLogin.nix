@@ -1,7 +1,7 @@
-_: { config, pkgs, lib, ... }: 
-{
-services.pcscd.enable = true;
-security = {
+_:
+{ config, pkgs, lib, ... }: {
+  services.pcscd.enable = true;
+  security = {
     pam = {
       u2f = {
         enable = true;

@@ -1,7 +1,1 @@
-{ config, pkgs, stdenv, lib, ... }:
-
-{
-    imports = [
-        ./desktopU2f.nix
-    ];
-}
+{ config, pkgs, stdenv, lib, ... }: { imports = [ ./desktopU2f.nix ]; }
