@@ -52,6 +52,31 @@
   };
   programs = {
     home-manager.enable = true;
+    gpg = {
+      mutableTrust = true;
+      mutableKeys = true;
+      publicKeys = [{ 
+        me = {
+          trust = 5;
+          source = ./publickeys.gpg;
+        };
+       }];
+    };
+    ssh = {
+      enable = true;
+      compression = true;
+      forwardAgent = true;
+      matchBlocks = {
+        "*" = {
+          hostname = "*";
+          extraOptions = {
+          "IdentityAgent" = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+        };
+        };
+      };
+      extraConfig = ''
+      '';
+    };
     direnv = {
       enableZshIntegration = true;
       enable = true;
@@ -65,6 +90,7 @@
         signByDefault = true;
       };
     };
+
     starship.enable = true;
 
     zsh = {
@@ -78,9 +104,8 @@
         precmd_functions+=(set_win_title)
 
         gpg-connect-agent /bye
-        export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
-        alias nrs="pushd ~/nix && make switch && popd"
+        alias nrs="pushd ~/nix && make switch ;; popd"
 
         bindkey "^[[3~" delete-char
       '';
