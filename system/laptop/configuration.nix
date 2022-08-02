@@ -31,7 +31,9 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
-
+  environment.systemPackages = with pkgs; [ tailscale ];
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
   # fixes gnome login issues
   programs.zsh.enable = true;
 
