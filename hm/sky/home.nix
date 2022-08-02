@@ -80,6 +80,8 @@
         gpg-connect-agent /bye
         export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
+        alias nrs="pushd ~/nix && make switch && popd"
+
         bindkey "^[[3~" delete-char
       '';
       enableCompletion = true;
