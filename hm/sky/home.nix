@@ -66,17 +66,24 @@
       enable = true;
       compression = true;
       forwardAgent = true;
-      matchBlocks = {
-        "*" = {
-          hostname = "*";
-          extraOptions = {
+      extraOptionOverrides = {
           "IdentityAgent" = "/run/user/1000/gnupg/S.gpg-agent.ssh";
         };
+      matchBlocks = {
+        "github.com" = {
+          hostname  = "github.com";
+          user      = "git";
+          forwardAgent = false;
+        };
+        "10.27.27.226" = {
+          user = "admin";
+          extraOptions = {
+            "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent.extra /run/user/1000/gnupg/S.gpg-agent.extra";
+            "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent";
+          };
+        }
         };
       };
-      extraConfig = ''
-      '';
-    };
     direnv = {
       enableZshIntegration = true;
       enable = true;
@@ -105,7 +112,7 @@
 
         gpg-connect-agent /bye
 
-        alias nrs="pushd ~/nix && make switch ;; popd"
+        alias nrs="pushd ~/nix && make switch ; popd"
 
         bindkey "^[[3~" delete-char
       '';
