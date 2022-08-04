@@ -55,35 +55,45 @@
     gpg = {
       mutableTrust = true;
       mutableKeys = true;
-      publicKeys = [{ 
+      publicKeys = [{
         me = {
           trust = 5;
           source = ./publickeys.gpg;
         };
-       }];
+      }];
     };
     ssh = {
       enable = true;
       compression = true;
       forwardAgent = true;
       extraOptionOverrides = {
-          "IdentityAgent" = "/run/user/1000/gnupg/S.gpg-agent.ssh";
-        };
+        "IdentityAgent" = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+      };
       matchBlocks = {
         "github.com" = {
-          hostname  = "github.com";
-          user      = "git";
+          hostname = "github.com";
+          user = "git";
           forwardAgent = false;
         };
         "10.27.27.226" = {
           user = "admin";
-          extraOptions = {
-            "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent.extra /run/user/1000/gnupg/S.gpg-agent.extra";
-            "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent";
-          };
-        }
+          remoteForwards = [
+            {
+              host.address = "/run/user/1000/gnupg/S.gpg-agent";
+              bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+            }
+            {
+              host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+              bind.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+            }
+          ];
+          # extraOptions = {
+          # "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent.extra /run/user/1000/gnupg/S.gpg-agent.extra";
+          # "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent";
+          # };
         };
       };
+    };
     direnv = {
       enableZshIntegration = true;
       enable = true;
