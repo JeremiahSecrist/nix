@@ -1,7 +1,8 @@
 { pkgs, lib, ... }: {
-  packages = with pkgs; [
+  home.packages = with pkgs;
+    [
 
-    looking-glass-client
-  
-  ];
+      looking-glass-client
+
+    ];
 }
