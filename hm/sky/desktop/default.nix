@@ -1,5 +1,5 @@
 { config, pkgs, stdenv, lib, ... }:
 
 {
-  imports = [ ./desktopU2f.nix ./noisetorch.nix ./display.nix ];
+  imports = [ ./packages.nix ./desktopU2f.nix ./noisetorch.nix ./display.nix ];
 }
