@@ -115,7 +115,7 @@
             echo -ne "\033]0; $(basename "$PWD") \007"
         }
         bindkey "^[[3~" delete-char
-        gpg-connect-agent reloadagent /bye
+        gpg-connect-agent reloadagent /bye > /dev/null
       '';
       envExtra = ''
         starship_precmd_user_func="set_win_title"
