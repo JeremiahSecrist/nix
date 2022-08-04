@@ -43,6 +43,7 @@
   };
   services.gpg-agent = {
     enable = true;
+    pinentryFlavor = "gnome3";
     enableSshSupport = true;
     enableExtraSocket = true;
     defaultCacheTtl = 34560000;
@@ -114,7 +115,7 @@
             echo -ne "\033]0; $(basename "$PWD") \007"
         }
         bindkey "^[[3~" delete-char
-        gpg-connect-agent /bye
+        gpg-connect-agent reloadagent /bye
       '';
       envExtra = ''
         starship_precmd_user_func="set_win_title"
@@ -123,6 +124,7 @@
       shellAliases = {
         nrs = "pushd ~/nix && make switch ; popd";
         reagent = "gpg-connect-agent reloadagent /bye";
+        fucking = "sudo";
       };
       enableCompletion = true;
       completionInit = ''
