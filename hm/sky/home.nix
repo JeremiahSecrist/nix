@@ -87,10 +87,6 @@
               bind.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
             }
           ];
-          # extraOptions = {
-          # "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent.extra /run/user/1000/gnupg/S.gpg-agent.extra";
-          # "RemoteForward" = "/run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent";
-          # };
         };
       };
     };
@@ -117,15 +113,17 @@
         function set_win_title(){
             echo -ne "\033]0; $(basename "$PWD") \007"
         }
+        bindkey "^[[3~" delete-char
+        gpg-connect-agent /bye
+      '';
+      envExtra = ''
         starship_precmd_user_func="set_win_title"
         precmd_functions+=(set_win_title)
-
-        gpg-connect-agent /bye
-
-        alias nrs="pushd ~/nix && make switch ; popd"
-
-        bindkey "^[[3~" delete-char
       '';
+      shellAliases = {
+        nrs = "pushd ~/nix && make switch ; popd";
+        reagent = "gpg-connect-agent reloadagent /bye";
+      };
       enableCompletion = true;
       completionInit = ''
         autoload -U compinit && zstyle ':completion:*' menu select && zmodload zsh/complist && compinit && _comp_options+=(globdots)	
