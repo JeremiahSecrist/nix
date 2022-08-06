@@ -1,5 +1,5 @@
 { config, pkgs, stdenv, lib, ... }:
-let myuid = "1000";
+let g = { myuid = "1000"; };
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -43,7 +43,7 @@ in {
       compression = true;
       forwardAgent = true;
       extraOptionOverrides = {
-        "IdentityAgent" = "/run/user/${myuid}/gnupg/S.gpg-agent.ssh";
+        "IdentityAgent" = "/run/user/${g.myuid}/gnupg/S.gpg-agent.ssh";
       };
       matchBlocks = {
         "github.com" = {
@@ -55,12 +55,12 @@ in {
           user = "admin";
           remoteForwards = [
             {
-              host.address = "/run/user/${myuid}/gnupg/S.gpg-agent";
-              bind.address = "/run/user/${myuid}/gnupg/S.gpg-agent";
+              host.address = "/run/user/${g.myuid}/gnupg/S.gpg-agent";
+              bind.address = "/run/user/${g.myuid}/gnupg/S.gpg-agent";
             }
             {
-              host.address = "/run/user/${myuid}/gnupg/S.gpg-agent.extra";
-              bind.address = "/run/user/${myuid}/gnupg/S.gpg-agent.extra";
+              host.address = "/run/user/${g.myuid}/gnupg/S.gpg-agent.extra";
+              bind.address = "/run/user/${g.myuid}/gnupg/S.gpg-agent.extra";
             }
           ];
         };
