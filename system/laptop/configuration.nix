@@ -25,6 +25,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
+    uid = 1000;
     isNormalUser = true;
     initialPassword = "password";
     shell = pkgs.zsh;
