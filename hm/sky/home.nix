@@ -1,55 +1,26 @@
 { config, pkgs, stdenv, lib, ... }:
-
-{
+let myuid = "1000";
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  imports = [ ./dconf.nix ];
+  imports = [ ./dconf.nix ./packages.nix ];
   home = {
     username = "sky";
     homeDirectory = "/home/sky";
     stateVersion = "22.05";
-    packages = with pkgs; [
-      # desktop look & feel
-      gnome.gnome-tweaks # desktop settings
-      # extensions
-      gnomeExtensions.appindicator
-      # CLI
-      btop
-      dconf2nix
-      nano
-      git
-      tldr
-      sshfs
-      nixfmt
-      cmatrix
-      noisetorch
-      # protonvpn-cli
-
-      # Desktop
-      rustdesk
-      distrobox
-      cryptomator
-      firefox-wayland
-      yubioath-desktop
-      vscode-fhs
-      spotify
-      discord
-      gnupg
-      virt-manager
-      # development
-      terraform
-
-    ];
   };
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = "gnome3";
     enableSshSupport = true;
     enableExtraSocket = true;
+    enableZshIntegration = true;
+    sshKeys = [ "8D53CA91572B3252096210F0A5D58142765E3114" ];
+    pinentryFlavor = "gnome3";
     defaultCacheTtl = 34560000;
     defaultCacheTtlSsh = 34560000;
     maxCacheTtl = 34560000;
     maxCacheTtlSsh = 34560000;
+    extraConfig = "\n";
   };
   programs = {
     home-manager.enable = true;
@@ -68,7 +39,7 @@
       compression = true;
       forwardAgent = true;
       extraOptionOverrides = {
-        "IdentityAgent" = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+        "IdentityAgent" = "/run/user/${myuid}/gnupg/S.gpg-agent.ssh";
       };
       matchBlocks = {
         "github.com" = {
@@ -80,12 +51,12 @@
           user = "admin";
           remoteForwards = [
             {
-              host.address = "/run/user/1000/gnupg/S.gpg-agent";
-              bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+              host.address = "/run/user/${myuid}/gnupg/S.gpg-agent";
+              bind.address = "/run/user/${myuid}/gnupg/S.gpg-agent";
             }
             {
-              host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-              bind.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+              host.address = "/run/user/${myuid}/gnupg/S.gpg-agent.extra";
+              bind.address = "/run/user/${myuid}/gnupg/S.gpg-agent.extra";
             }
           ];
         };
