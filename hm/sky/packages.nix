@@ -9,6 +9,7 @@
     dconf2nix
     nano
     git
+    gnupg
     tldr
     sshfs
     nixfmt
@@ -24,7 +25,6 @@
     yubioath-desktop
     spotify
     discord
-    gnupg
     virt-manager
     # development
     terraform
