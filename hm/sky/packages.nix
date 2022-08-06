@@ -22,7 +22,6 @@
     cryptomator
     firefox-wayland
     yubioath-desktop
-    vscode-fhs
     spotify
     discord
     gnupg

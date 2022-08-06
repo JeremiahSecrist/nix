@@ -24,6 +24,10 @@ in {
   };
   programs = {
     home-manager.enable = true;
+    vscode = {
+      enable = true;
+      mutableExtensionsDir = true;
+    };
     gpg = {
       mutableTrust = true;
       mutableKeys = true;
