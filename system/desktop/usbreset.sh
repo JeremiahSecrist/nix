@@ -68,8 +68,7 @@ main() {
 	systemctl restart bluetooth & wait
 	echo "Done resetting USB bluetooth devices."
 }
-
-# Calls up main.
-main "$@"
 ip link set ${2} down & wait
-ip link set ${2} up
+# Calls up main.
+main "$@" & wait
+ip link set ${2} up & wait
