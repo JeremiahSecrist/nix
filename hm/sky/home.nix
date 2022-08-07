@@ -100,6 +100,7 @@ in {
         precmd_functions+=(set_win_title)
       '';
       shellAliases = {
+        nru = "pushd ~/nix && nix flake update ; popd";
         nrs = "pushd ~/nix && make switch ; popd";
         nrc = "pushd ~/nix && make clean ; popd";
         nrb = "pushd ~/nix && make boot ; popd";
