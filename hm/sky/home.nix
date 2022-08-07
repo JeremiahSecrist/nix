@@ -17,10 +17,10 @@ in {
     enableZshIntegration = true;
     sshKeys = [ "8D53CA91572B3252096210F0A5D58142765E3114" ];
     pinentryFlavor = "gnome3";
-    defaultCacheTtl = 34560000;
-    defaultCacheTtlSsh = 34560000;
-    maxCacheTtl = 34560000;
-    maxCacheTtlSsh = 34560000;
+    defaultCacheTtl = 345600;
+    defaultCacheTtlSsh = 345600;
+    maxCacheTtl = 345600;
+    maxCacheTtlSsh = 345600;
     extraConfig = "\n";
   };
   programs = {
@@ -94,7 +94,12 @@ in {
             echo -ne "\033]0; $(basename "$PWD") \007"
         }
         bindkey "^[[3~" delete-char
-        gpg-connect-agent reloadagent /bye > /dev/null
+        # unset SSH_AGENT_PID
+        # if [ "''${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+        #   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        #   wait $!
+        # fi
+        gpg-connect-agent /bye > /dev/null
       '';
       envExtra = ''
         starship_precmd_user_func="set_win_title"
