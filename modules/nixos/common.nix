@@ -1,10 +1,7 @@
 _:
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nixpkgs, ... }:
 
 {
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = lib.mkDefault true;
-
   # base packages
   environment.systemPackages = with pkgs; [
     gnumake
@@ -14,6 +11,7 @@ _:
 
   ];
 
+  nixpkgs.config.allowUnfree = true;
   nix = {
     # settings = {
     #   substituters = [

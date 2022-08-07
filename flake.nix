@@ -13,10 +13,7 @@
     in {
       nixosModules = import ./modules/nixos inputs;
       nixosConfigurations = {
-        skytop = import ./system/laptop (inputs // {
-          inherit system;
-          inherit (nixpkgs) lib;
-        });
+        skytop = import ./system/laptop (inputs // { inherit system nixpkgs; });
         desksky = import ./system/desktop (inputs // {
           inherit system;
           inherit (nixpkgs) lib;
