@@ -9,6 +9,7 @@ in {
     homeDirectory = "/home/sky";
     stateVersion = "22.05";
   };
+  xdg.enable = true;
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
