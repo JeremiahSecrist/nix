@@ -86,6 +86,7 @@ in {
     };
     zsh = {
       enable = true;
+      dotDir = ".config/zsh";
       history = { save = 10000000; };
       initExtra = ''
         function set_win_title(){
