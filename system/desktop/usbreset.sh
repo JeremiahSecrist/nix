@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
 #
 # Resets the specified bluetooth USB adapter.
@@ -28,9 +28,8 @@ ID_PRODUCT="${1/*:/}"
 
 _reset_paths() {
 	for p in "$@"; do
-		echo 0 > "$p"/authorized
-		sleep 1
-		echo 1 > "$p"/authorized
+		echo 0 > "$p"/authorized & wait
+		echo 1 > "$p"/authorized & wait
 	done
 }
 
@@ -41,8 +40,7 @@ main() {
 	echo "Resetting USB bluetooth devices."
 	# Not strictly needed, but stops bluetooth.
 	# It will, in any way, be started at the end.
-	systemctl stop bluetooth
-	wait $!
+	systemctl stop bluetooth & wait
 
 	# Using a function allows use of local and declare.
 	local p
@@ -64,16 +62,10 @@ main() {
 	done
 
 	# Reset all paths
-	_reset_paths "${paths[@]}"
-    wait $!
-	# Twice for good luck
-	_reset_paths "${paths[@]}"
-
-	# Waits for everything to settle down
-	wait $!
+	_reset_paths "${paths[@]}" & wait
 
 	# Restarts bluetooth.
-	systemctl restart bluetooth
+	systemctl restart bluetooth & wait
 	echo "Done resetting USB bluetooth devices."
 }
 
