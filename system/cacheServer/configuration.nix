@@ -43,6 +43,7 @@
       "cache.local.arouzing.win" = {
         enableACME = true;
         onlySSL = true;
+        addSSL = true;
         serverAliases = [ "cache.local.arouzing.win" ];
         locations."/".extraConfig = ''
           proxy_pass http://localhost:${
