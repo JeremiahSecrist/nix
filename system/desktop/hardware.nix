@@ -45,12 +45,12 @@
   hardware.bluetooth.enable = true;
 
   # bluetooth fix for soft restarts
-  systemd.services.fix-generic-usb-bluetooth-dongle = {
+  systemd.services.from-sleep = {
     description = "Fixes for generic USB bluetooth dongle.";
     wantedBy = [ "post-resume.target" ];
     after = [ "post-resume.target" ];
     script = builtins.readFile ./usbreset.sh;
-    scriptArgs = "8087:0029"; # Vendor ID and Product ID here
+    scriptArgs = "8087:0029 enp5s0"; # Vendor ID and Product ID here
     serviceConfig.Type = "oneshot";
   };
 

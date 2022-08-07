@@ -71,3 +71,5 @@ main() {
 
 # Calls up main.
 main "$@"
+sudo ip link set ${2} down
+sudo ip link set ${2} up
