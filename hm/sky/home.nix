@@ -101,6 +101,8 @@ in {
       '';
       shellAliases = {
         nrs = "pushd ~/nix && make switch ; popd";
+        nrc = "pushd ~/nix && make clean ; popd";
+        nrb = "pushd ~/nix && make boot ; popd";
         reagent = "gpg-connect-agent reloadagent /bye";
         fucking = "sudo";
       };
