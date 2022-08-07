@@ -45,7 +45,7 @@
         enableACME = true;
         onlySSL = true;
         # # addSSL = true;
-        # serverAliases = [ "cache.local.arouzing.win" ];
+        serverAliases = [ "cache.local.arouzing.win" ];
         locations."/".extraConfig = ''
           proxy_pass http://localhost:${
             toString config.services.nix-serve.port
