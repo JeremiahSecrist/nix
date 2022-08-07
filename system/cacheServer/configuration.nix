@@ -32,7 +32,7 @@
     acceptTerms = true;
     certs."local.arouzing.win" = {
       server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-      extraDomainName = [ "cache.local.arouzing.win" ];
+      extraDomainNames = [ "cache.local.arouzing.win" ];
       dnsResolver = "1.1.1.1:53";
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
