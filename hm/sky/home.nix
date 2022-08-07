@@ -43,14 +43,16 @@ in {
       enable = true;
       compression = true;
       forwardAgent = true;
-      extraOptionOverrides = {
-        "IdentityAgent" = "/run/user/${g.myuid}/gnupg/S.gpg-agent.ssh";
-      };
       matchBlocks = {
         "github.com" = {
           hostname = "github.com";
           user = "git";
           forwardAgent = false;
+        };
+        "cache.local.arouzing.win" = {
+          hostname = "cache.local.arouzing.win";
+          user = "admin";
+          identityFile = "/home/sky/.ssh/arouzing@gitlab";
         };
         "10.27.27.226" = {
           user = "admin";
@@ -94,11 +96,10 @@ in {
             echo -ne "\033]0; $(basename "$PWD") \007"
         }
         bindkey "^[[3~" delete-char
-        # unset SSH_AGENT_PID
-        # if [ "''${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-        #   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-        #   wait $!
-        # fi
+        unset SSH_AGENT_PID
+        if [ "''${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+          export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        fi
         gpg-connect-agent /bye > /dev/null
       '';
       envExtra = ''
