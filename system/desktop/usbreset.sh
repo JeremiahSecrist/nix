@@ -71,5 +71,5 @@ main() {
 
 # Calls up main.
 main "$@"
-ip link set ${2} down
+ip link set ${2} down & wait
 ip link set ${2} up
