@@ -27,12 +27,21 @@
     secretKeyFile = "/var/cache-priv-key.pem";
     port = 8080;
   };
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      dnsResolver = "1.1.1.1:53";
+      dnsProvider = "cloudflare";
+      credentialsFile = "/var/cf-token";
+    };
 
+  };
   services.nginx = {
     enable = true;
     virtualHosts = {
-      # ... existing hosts config etc. ...
       "cache.local.arouzing.win" = {
+        enableACME = true;
+        onlySSL = true;
         serverAliases = [ "cache.local.arouzing.win" ];
         locations."/".extraConfig = ''
           proxy_pass http://localhost:${
