@@ -1,0 +1,3 @@
+[submodule "myFlake.lock"]
+	path = myFlake.lock
+	url = git@github.com:arouzing/myFlake.lock.git
