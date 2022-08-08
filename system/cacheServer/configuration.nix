@@ -28,7 +28,7 @@
     port = 8080;
   };
   security.acme = {
-    email = "owner@arouzing.xyz";
+    defaults.email = "owner@arouzing.xyz";
     acceptTerms = true;
     certs."local.arouzing.win" = {
       server = "https://acme-staging-v02.api.letsencrypt.org/directory";
