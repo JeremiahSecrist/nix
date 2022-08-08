@@ -38,7 +38,7 @@
         webroot = lib.mkForce null;
         dnsProvider = "cloudflare";
         credentialsFile = "/var/cf-token";
-        extraDomains = { "*.local.arouzing.win" = null; };
+        extraDomains = [ "*.local.arouzing.win" ];
       };
     };
   };
