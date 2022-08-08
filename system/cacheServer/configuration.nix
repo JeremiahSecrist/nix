@@ -73,7 +73,7 @@
           # when the upstream host is not reachable for a short time when
           # nginx is started.
           resolver 1.1.1.1;
-          set $upstream_endpoint http://cache.nixos.org;
+          set $upstream_endpoint https://cache.nixos.org;
         '';
 
         locations."@fallback" = {
