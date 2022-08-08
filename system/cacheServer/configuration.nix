@@ -38,7 +38,9 @@
       credentialsFile = "/var/cf-token";
     };
     certs = {
-      "local.arouzing.win" = { extraDomains = [ "cache.local.arouzing.win" ]; };
+      "cache.local.arouzing.win" = {
+        extraDomains = [ "cache.local.arouzing.win" ];
+      };
     };
   };
   users.users.nginx.extraGroups = [ "acme" ];
