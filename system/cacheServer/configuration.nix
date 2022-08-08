@@ -23,11 +23,6 @@
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     networkmanager.enable = true;
   };
-  services.nix-serve = {
-    enable = true;
-    secretKeyFile = "/var/cache-priv-key.pem";
-    port = 8080;
-  };
   security.acme = {
     acceptTerms = true;
     defaults = {
@@ -46,15 +41,25 @@
       "cache.local.arouzing.win" = {
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
-        locations."/".extraConfig = ''
-          proxy_pass http://localhost:${
-            toString config.services.nix-serve.port
-          };
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        locations."~ ^/nix-cache-info" = ''
+          proxy_store        on;
+          proxy_store_access user:rw group:rw all:r;
+          proxy_temp_path    /data/nginx/nix-cache-info/temp;
+          root               /data/nginx/nix-cache-info/store;
+
+          proxy_set_header Host "cache.nixos.org";
+          proxy_pass https://cache.nixos.org;
         '';
       };
+      location."~^/nar/.+$" = ''
+        proxy_store        on;
+        proxy_store_access user:rw group:rw all:r;
+        proxy_temp_path    /data/nginx/nar/temp;
+        root               /data/nginx/nar/store;
+
+        proxy_set_header Host "cache.nixos.org";
+        proxy_pass https://cache.nixos.org;
+      '';
     };
   };
 
