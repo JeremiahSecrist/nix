@@ -33,7 +33,7 @@
     defaults = {
       email = "owner@arouzing.xyz";
       server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-      dnsResolver = "1.1.1.1:53";
+      dnsResolver = "100.100.100.100:53";
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
     };
@@ -46,10 +46,8 @@
     enable = true;
     virtualHosts = {
       "cache.local.arouzing.win" = {
-        enableACME = true;
+        useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
-        # # addSSL = true;
-        serverAliases = [ "cache.local.arouzing.win" ];
         locations."/".extraConfig = ''
           proxy_pass http://localhost:${
             toString config.services.nix-serve.port
