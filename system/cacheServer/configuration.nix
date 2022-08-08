@@ -30,16 +30,16 @@
   };
   security.acme = {
     acceptTerms = true;
-    defaults = { email = "owner@arouzing.xyz"; };
+    defaults = {
+      email = "owner@arouzing.xyz";
+      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+      dnsResolver = "1.1.1.1:53";
+      dnsProvider = "cloudflare";
+      webroot = lib.mkForce null;
+      credentialsFile = "/var/cf-token";
+    };
     certs = {
-      "local.arouzing.win" = {
-        server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-        email = "owner@arouzing.xyz";
-        webroot = lib.mkForce null;
-        dnsProvider = "cloudflare";
-        credentialsFile = "/var/cf-token";
-        extraDomains = [ "*.local.arouzing.win" ];
-      };
+      "local.arouzing.win" = { extraDomains = [ "*.local.arouzing.win" ]; };
     };
   };
   users.users.nginx.extraGroups = [ "acme" ];
