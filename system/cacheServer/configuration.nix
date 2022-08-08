@@ -38,7 +38,7 @@
     };
 
   };
-  users.users.nginx.extraGroups = [ "acme" ];
+  # users.users.nginx.extraGroups = [ "acme" ];
   # services.nginx = {
   #   enable = true;
   #   virtualHosts = {
