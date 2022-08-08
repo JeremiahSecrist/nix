@@ -53,7 +53,7 @@
       "cache.local.arouzing.win" = {
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
-        ocations."/" = {
+        locations."/" = {
           root = "/var/public-nix-cache";
           extraConfig = ''
             expires max;
