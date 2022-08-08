@@ -41,26 +41,26 @@
       };
     };
   };
-  # users.users.nginx.extraGroups = [ "acme" ];
-  # services.nginx = {
-  #   enable = true;
-  #   virtualHosts = {
-  #     "cache.local.arouzing.win" = {
-  #       enableACME = true;
-  #       onlySSL = true;
-  #       # # addSSL = true;
-  #       serverAliases = [ "cache.local.arouzing.win" ];
-  #       locations."/".extraConfig = ''
-  #         proxy_pass http://localhost:${
-  #           toString config.services.nix-serve.port
-  #         };
-  #         proxy_set_header Host $host;
-  #         proxy_set_header X-Real-IP $remote_addr;
-  #         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  #       '';
-  #     };
-  #   };
-  # };
+  users.users.nginx.extraGroups = [ "acme" ];
+  services.nginx = {
+    enable = true;
+    virtualHosts = {
+      "cache.local.arouzing.win" = {
+        enableACME = true;
+        onlySSL = true;
+        # # addSSL = true;
+        serverAliases = [ "cache.local.arouzing.win" ];
+        locations."/".extraConfig = ''
+          proxy_pass http://localhost:${
+            toString config.services.nix-serve.port
+          };
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
+      };
+    };
+  };
 
   time.timeZone = "America/New_York";
 
