@@ -72,7 +72,7 @@
           #   nginx: [emerg] host not found in upstream "upstream.example.com"
           # when the upstream host is not reachable for a short time when
           # nginx is started.
-          resolver 10.42.42.42;
+          resolver 1.1.1.1;
           set $upstream_endpoint http://cache.nixos.org;
         '';
 
