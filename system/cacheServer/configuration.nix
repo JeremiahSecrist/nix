@@ -32,7 +32,7 @@
     acceptTerms = true;
     defaults = {
       email = "owner@arouzing.xyz";
-      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+      # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
       dnsResolver = "1.1.1.1:53";
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
