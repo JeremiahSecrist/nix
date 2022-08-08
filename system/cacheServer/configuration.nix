@@ -29,15 +29,18 @@
     port = 8080;
   };
   security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "owner@arouzing.xyz";
+  acceptTerms = true;
+  certs = {
+    "local.arouzing.win" = {
       server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+      email = "owner@arouzing.xyz";
+      webroot = lib.mkForce null;
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
+      extraDomains = { "*.local.arouzing.win" = null; };
     };
-
-  };
+  }
+}
   # users.users.nginx.extraGroups = [ "acme" ];
   # services.nginx = {
   #   enable = true;
