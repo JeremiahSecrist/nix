@@ -37,11 +37,7 @@
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
     };
-    certs = {
-      "cache.local.arouzing.win" = {
-        extraDomains = [ "cache.local.arouzing.win" ];
-      };
-    };
+    certs = { "cache.local.arouzing.win" = { dnsResolver = "1.1.1.1:53"; }; };
   };
   users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
