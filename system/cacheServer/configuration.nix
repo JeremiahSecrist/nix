@@ -35,7 +35,6 @@
       server = "https://acme-staging-v02.api.letsencrypt.org/directory";
       dnsResolver = "1.1.1.1:53";
       dnsProvider = "cloudflare";
-      webroot = lib.mkForce null;
       credentialsFile = "/var/cf-token";
     };
     certs = {
