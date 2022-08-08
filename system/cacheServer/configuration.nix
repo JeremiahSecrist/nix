@@ -41,6 +41,10 @@
       "cache.local.arouzing.win" = {
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
+        locations."/nix-cache-info".extraConfig = ''
+          proxy_set_header Host "cache.nixos.org";
+          proxy_pass https://cache.nixos.org/nix-cache-info;
+        '';
         locations."~ ^/nix-cache-info".extraConfig = ''
           proxy_store        on;
           proxy_store_access user:rw group:rw all:r;
