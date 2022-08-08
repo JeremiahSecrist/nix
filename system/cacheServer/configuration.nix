@@ -98,9 +98,9 @@
             add_header Cache-Control $cache_header always;
           '';
         };
+      };
     };
   };
-
   time.timeZone = "America/New_York";
 
   # Disable wait for network
