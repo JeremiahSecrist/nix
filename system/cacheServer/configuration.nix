@@ -37,21 +37,22 @@
   users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
+    appendHttpConfig = ''
+      proxy_cache_path /tmp/cache/ levels=1:2 keys_zone=cachecache:100m max_size=10g inactive=365d use_temp_path=off;
+      # Cache only success status codes; in particular we don't want to cache 404s.
+      # See https://serverfault.com/a/690258/128321
+      map $status $cache_header {
+        200     "public";
+        302     "public";
+        default "no-cache";
+      }
+      access_log logs/access.log;
+    '';
     virtualHosts = {
       "cache.local.arouzing.win" = {
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
-        appendHttpConfig = ''
-          proxy_cache_path /tmp/cache/ levels=1:2 keys_zone=cachecache:100m max_size=10g inactive=365d use_temp_path=off;
-          # Cache only success status codes; in particular we don't want to cache 404s.
-          # See https://serverfault.com/a/690258/128321
-          map $status $cache_header {
-            200     "public";
-            302     "public";
-            default "no-cache";
-          }
-          access_log logs/access.log;
-        '';
+
         locations."/" = {
           root = "/var/public-nix-cache";
           extraConfig = ''
