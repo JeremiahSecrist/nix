@@ -20,6 +20,7 @@
   networking = {
     firewall.checkReversePath = "loose";
     hostName = "cache"; # Define your hostname.
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
     networkmanager.enable = true;
   };
   services.nix-serve = {
