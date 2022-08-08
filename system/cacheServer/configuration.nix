@@ -29,9 +29,11 @@
     port = 8080;
   };
   security.acme = {
-    defaults.email = "owner@arouzing.xyz";
+    defaults = {
+      email = "owner@arouzing.xyz";
+      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    };
     acceptTerms = true;
-    server = "https://acme-staging-v02.api.letsencrypt.org/directory";
     certs."local.arouzing.win" = {
       extraDomainNames = [ "cache.local.arouzing.win" ];
       # dnsResolver = "1.1.1.1:53";
