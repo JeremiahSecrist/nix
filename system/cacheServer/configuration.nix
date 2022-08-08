@@ -41,7 +41,7 @@
       "cache.local.arouzing.win" = {
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
-        locations."~ ^/nix-cache-info" = ''
+        locations."~ ^/nix-cache-info".extraConfig = ''
           proxy_store        on;
           proxy_store_access user:rw group:rw all:r;
           proxy_temp_path    /data/nginx/nix-cache-info/temp;
@@ -51,7 +51,7 @@
           proxy_pass https://cache.nixos.org;
         '';
       };
-      locations."~^/nar/.+$" = ''
+      locations."~^/nar/.+$".extraConfig = ''
         proxy_store        on;
         proxy_store_access user:rw group:rw all:r;
         proxy_temp_path    /data/nginx/nar/temp;
