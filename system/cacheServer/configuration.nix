@@ -33,12 +33,12 @@
     defaults = {
       email = "owner@arouzing.xyz";
       server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-      dnsResolver = "100.100.100.100:53";
+      dnsResolver = "1.1.1.1:53";
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
     };
     certs = {
-      "local.arouzing.win" = { extraDomains = [ "*.local.arouzing.win" ]; };
+      "local.arouzing.win" = { extraDomains = [ "cache.local.arouzing.win" ]; };
     };
   };
   users.users.nginx.extraGroups = [ "acme" ];
