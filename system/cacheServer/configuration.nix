@@ -51,7 +51,7 @@
           proxy_pass https://cache.nixos.org;
         '';
       };
-      location."~^/nar/.+$" = ''
+      locations."~^/nar/.+$" = ''
         proxy_store        on;
         proxy_store_access user:rw group:rw all:r;
         proxy_temp_path    /data/nginx/nar/temp;
