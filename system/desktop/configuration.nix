@@ -7,6 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware.nix
+    ./fancontrol.nix
   ];
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
