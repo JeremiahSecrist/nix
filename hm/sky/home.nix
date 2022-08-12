@@ -75,12 +75,14 @@ in {
     };
     git = {
       enable = true;
-      userName = "arouzing";
+      userName = "Arouzing";
       userEmail = "owner@arouzing.xyz";
       signing = {
         key = "71F252936D785219";
         signByDefault = true;
       };
+      diff-so-fancy.enable = true;
+      lfs.enable = true;
     };
 
     starship = {
@@ -90,7 +92,10 @@ in {
     zsh = {
       enable = true;
       dotDir = ".config/zsh";
-      history = { save = 10000000; };
+      history = {
+        path = "$ZDOTDIR/.zsh_history";
+        save = 10000000;
+      };
       initExtra = ''
         function set_win_title(){
             echo -ne "\033]0; $(basename "$PWD") \007"
@@ -116,7 +121,7 @@ in {
       };
       enableCompletion = true;
       completionInit = ''
-        autoload -U compinit && zstyle ':completion:*' menu select && zmodload zsh/complist && compinit && _comp_options+=(globdots)	
+        compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION" && autoload -U compinit && zstyle ':completion:*' menu select && zmodload zsh/complist && compinit && _comp_options+=(globdots)	
       '';
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
