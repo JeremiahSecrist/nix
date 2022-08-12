@@ -14,7 +14,7 @@
       MAXTEMP= hwmon4/pwm1=70
       MINSTART= hwmon4/pwm1=150
       MINSTOP= hwmon4/pwm1=0
-      MAXPWM=hwmon4/pwm1=175
+      MAXPWM=hwmon4/pwm1=200
     '';
   };
 }
