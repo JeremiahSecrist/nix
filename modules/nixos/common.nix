@@ -2,6 +2,8 @@ _:
 { config, pkgs, lib, nixpkgs, ... }:
 
 {
+  #enable sysrq
+  boot.kernel.sysctl = { "kernel.sysrq" = 1; };
   # base packages
   environment.systemPackages = with pkgs; [
     gnumake
