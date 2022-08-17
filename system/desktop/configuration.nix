@@ -18,17 +18,7 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
   };
-  nix.settings = {
-    substituters = [
-      "https://cache.local.arouzing.win"
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
-    ];
-    trusted-public-keys = [
-      "cache.local.arouzing.win:BkVYfoGhkASIADD2q8nMvKuRfheqWoyoO5hbvhr8hx4="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
+  nix.binaryCaches = [ "https://cache.local.arouzing.win" ];
   # fixes gnome login issues
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
