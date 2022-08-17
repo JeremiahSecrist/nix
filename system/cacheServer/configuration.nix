@@ -79,7 +79,7 @@
         locations."@fallback" = {
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
-            proxy_cache cachecache;
+            # proxy_cache cachecache;
             proxy_cache_valid  200 302  60d;
             expires max;
             add_header Cache-Control $cache_header always;
