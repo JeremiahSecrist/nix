@@ -32,7 +32,10 @@
   # fixes gnome login issues
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
-
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+  };
   services = { flatpak.enable = true; };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
