@@ -40,6 +40,6 @@ _:
   # enable zram
   zramSwap.enable = lib.mkDefault true;
   # clock speed management
-  services.auto-cpufreq.enable = lib.mkDefault true;
+  # services.auto-cpufreq.enable = lib.mkDefault true;
 
 }
