@@ -37,7 +37,7 @@
   users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
-    # recommendedProxySettings = true;
+    recommendedProxySettings = true;
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
     recommendedGzipSettings = true;
@@ -55,10 +55,10 @@
         onlySSL = true;
         locations."/" = {
           proxyPass = "https://cache.nixos.org";
-          proxyCache = "cachecache";
           extraConfig = ''
             aio threads;
             resolver 1.1.1.1;
+            proxy_cache cachecache;
             proxy_ssl_server_name on;
             proxy_pass_header Authorization;
           '';
