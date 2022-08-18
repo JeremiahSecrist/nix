@@ -47,6 +47,8 @@
         302     "public";
         default "no-cache";
       }
+      worker_processes auto;
+      worker_cpu_affinity auto;
       access_log /var/log/nginx/access.log;
     '';
     virtualHosts = {
