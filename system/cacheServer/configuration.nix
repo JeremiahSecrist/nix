@@ -33,7 +33,7 @@
   };
   users.users.nginx.extraGroups = [ "acme" ];
 
-  fileSystems."/var/cache/nginx/tmp" = {
+  fileSystems."/var/cache/nginx/tempfs" = {
     device = "none";
     fsType = "tmpfs";
     options = [
@@ -41,7 +41,7 @@
       "gid=${toString config.users.groups.nginx.gid}"
       "rw"
       "size=4G"
-      "mode=770"
+      "mode=777"
     ];
   };
   users.users.nginx.uid = 60;
