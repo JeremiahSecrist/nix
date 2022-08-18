@@ -40,7 +40,7 @@
     # recommendedProxySettings = true;
     recommendedOptimisation = true;
     # recommendedTlsSettings = true;
-    # recommendedGzipSettings = true;
+    recommendedGzipSettings = true;
     appendConfig = ''
       worker_processes auto;
       worker_cpu_affinity auto;
