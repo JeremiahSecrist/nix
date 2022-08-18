@@ -38,8 +38,8 @@
     fsType = "tmpfs";
     options = [
       "defaults"
-      "uid=${users.users.nginx.uid}"
-      "gid=${users.groups.nginx.gid}"
+      "uid=${config.users.users.nginx.uid}"
+      "gid=${config.users.groups.nginx.gid}"
       "size=4G"
       "mode=700"
     ];
