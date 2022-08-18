@@ -38,7 +38,8 @@
   services.nginx = {
     enable = true;
     appendConfig = ''
-      worker_processes 4;
+      worker_processes auto;
+      worker_cpu_affinity auto;
     '';
     appendHttpConfig = ''
       proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:100m max_size=20g inactive=365d use_temp_path=off;
