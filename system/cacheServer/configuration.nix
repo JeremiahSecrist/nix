@@ -36,7 +36,7 @@
     enable = true;
     recommendedOptimisation = true;
     appendHttpConfig = ''
-      proxy_cache_path /tmp/cache/ levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d use_temp_path=off;
+      proxy_cache_path /var/cache/nginx/ levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d use_temp_path=off;
       # Cache only success status codes; in particular we don't want to cache 404s.
       # See https://serverfault.com/a/690258/128321
       map $status $cache_header {
@@ -69,7 +69,7 @@
           # when the upstream host is not reachable for a short time when
           # nginx is started.
           resolver 1.1.1.1;
-          set $upstream_endpoint http://cache.nixos.org;
+          set $upstream_endpoint https://cache.nixos.org;
         '';
         locations."@fallback" = {
           proxyPass = "$upstream_endpoint";
