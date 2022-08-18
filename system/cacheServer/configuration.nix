@@ -51,8 +51,7 @@
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     appendConfig = ''
-      worker_processes  1;
-      worker_connections 1024;
+      worker_processes  4;
       master_process off;
     '';
     appendHttpConfig = ''
