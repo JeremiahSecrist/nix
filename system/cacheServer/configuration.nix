@@ -78,7 +78,7 @@
         locations."@fallback" = {
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
-            proxy_http_version 2;
+            proxy_http_version 1.1;
             proxy_set_header Connection "";
             proxy_ssl_server_name on;
 
@@ -100,7 +100,7 @@
           # would be nicer if we could redirect to the @fallback instead.
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
-            proxy_http_version 2;
+            proxy_http_version 1.1;
             proxy_set_header Connection "";
             proxy_ssl_server_name on;
 
