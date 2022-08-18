@@ -41,7 +41,7 @@
       "gid=${toString config.users.groups.nginx.gid}"
       "rw"
       "size=4G"
-      "mode=777"
+      "mode=770"
     ];
   };
   users.users.nginx.uid = 60;
