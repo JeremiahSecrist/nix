@@ -37,6 +37,9 @@
   users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
+    appendConfig = ''
+      worker_processes 4;
+    '';
     appendHttpConfig = ''
       proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:100m max_size=20g inactive=365d use_temp_path=off;
 
@@ -47,7 +50,6 @@
         302     "public";
         default "no-cache";
       }
-      worker_processes 4;
       access_log /var/log/nginx/access.log;
     '';
     virtualHosts = {
