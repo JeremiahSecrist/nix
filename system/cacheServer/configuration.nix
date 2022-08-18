@@ -36,7 +36,13 @@
   fileSystems."/var/cache/nginx-temp" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "nginx" "size=4G" "mode=700" ];
+    options = [
+      "defaults"
+      "uid=${users.users.nginx.uid}"
+      "gid=${users.groups.nginx.gid}"
+      "size=4G"
+      "mode=700"
+    ];
   };
 
   services.nginx = {
