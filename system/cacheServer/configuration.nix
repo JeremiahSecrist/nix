@@ -55,12 +55,11 @@
       levels=1:2 
       keys_zone=cachecache:100m 
       max_size=20g 
-      inactive=365d;
+      inactive=365d
+      use_temp_path=on;
       proxy_temp_path /var/cache/nginx-temp
-      levels=1:2 
-      keys_zone=cachecache:100m 
-      max_size=20g 
-      inactive=365d;
+      1 2
+      ;
       # Cache only success status codes; in particular we don't want to cache 404s.
       # See https://serverfault.com/a/690258/128321
       map $status $cache_header {
