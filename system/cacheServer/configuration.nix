@@ -13,12 +13,12 @@
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     networkmanager.enable = true;
   };
-  # boot.kernelModules = [ "tcp_bbr" ];
+  boot.kernelModules = [ "tcp_bbr" ];
 
-  # # Enable BBR congestion control
-  # boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
-  # boot.kernel.sysctl."net.core.default_qdisc" =
-  #   "fq"; # see https://news.ycombinator.com/item?id=14814530
+  # Enable BBR congestion control
+  boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+  boot.kernel.sysctl."net.core.default_qdisc" =
+    "fq"; # see https://news.ycombinator.com/item?id=14814530
 
   security.acme = {
     acceptTerms = true;
@@ -34,9 +34,9 @@
   users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
-    # recommendedOptimisation = true;
     appendHttpConfig = ''
-      proxy_cache_path /var/cache/nginx/ levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d use_temp_path=off;
+      proxy_cache_path /tmp/pkgcache levels=1:2 keys_zone=cachecache:100m max_size=20g inactive=365d use_temp_path=off;
+
       # Cache only success status codes; in particular we don't want to cache 404s.
       # See https://serverfault.com/a/690258/128321
       map $status $cache_header {
@@ -44,7 +44,7 @@
         302     "public";
         default "no-cache";
       }
-      access_log logs/access.log;
+      access_log /var/log/nginx/access.log;
     '';
     virtualHosts = {
       "cache.local.arouzing.win" = {
@@ -59,6 +59,7 @@
             error_page 404 = @fallback;
           '';
         };
+
         extraConfig = ''
           # Using a variable for the upstream endpoint to ensure that it is
           # resolved at runtime as opposed to once when the config file is loaded
@@ -71,15 +72,17 @@
           resolver 1.1.1.1;
           set $upstream_endpoint https://cache.nixos.org;
         '';
+
         locations."@fallback" = {
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
             proxy_cache cachecache;
-            proxy_cache_valid  200 302  60m;
+            proxy_cache_valid  200 302  60d;
             expires max;
             add_header Cache-Control $cache_header always;
           '';
         };
+
         # We always want to copy cache.nixos.org's nix-cache-info file,
         # and ignore our own, because `nix-push` by default generates one
         # without `Priority` field, and thus that file by default has priority
@@ -91,7 +94,7 @@
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
             proxy_cache cachecache;
-            proxy_cache_valid  200 302  60m;
+            proxy_cache_valid  200 302  60d;
             expires max;
             add_header Cache-Control $cache_header always;
           '';
