@@ -57,6 +57,7 @@
           root = "/var/public-nix-cache";
           extraConfig = ''
             expires max;
+            aio threads;
             add_header Cache-Control $cache_header always;
             # Ask the upstream server if a file isn't available locally
             error_page 404 = @fallback;
