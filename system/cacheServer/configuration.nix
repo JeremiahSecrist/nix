@@ -59,7 +59,6 @@
             resolver 1.1.1.1;
             proxy_cache_valid 404 302 1m;
             proxy_cache_valid 200 3650d;
-            add_header X-Cache-Status $upstream_cache_status;
             proxy_cache cachecache;
 
           '';
