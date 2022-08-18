@@ -39,6 +39,7 @@
     options = [
       "uid=${toString config.users.users.nginx.uid}"
       "gid=${toString config.users.groups.nginx.gid}"
+      "rw"
       "size=4G"
       "mode=700"
     ];
