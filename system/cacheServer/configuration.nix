@@ -78,19 +78,15 @@
         locations."@fallback" = {
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
-            # Default is HTTP/1, keepalive is only enabled in HTTP/1.1.
             proxy_http_version 1.1;
-            # Remove the Connection header if the client sends it, it could
-            # be "close" to close a keepalive connection
-            proxy_set_header Connection "";
-            # Needed for CloudFront.
+            proxy_set_headder Connection "";
             proxy_ssl_server_name on;
             proxy_set_header Host $proxy_host;
+
             proxy_cache cachecache;
-            proxy_cache_valid 200 302 60m;
-            proxy_cache_valid 404 1m;
+            proxy_cache_valid  200 302  360d;
             expires max;
-            add_header Cache-Control $nix_cache_cache_header always;
+            add_header Cache-Control $cache_header always;
           '';
         };
 
@@ -104,19 +100,15 @@
           # would be nicer if we could redirect to the @fallback instead.
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
-            # Default is HTTP/1, keepalive is only enabled in HTTP/1.1.
             proxy_http_version 1.1;
-            # Remove the Connection header if the client sends it, it could
-            # be "close" to close a keepalive connection
-            proxy_set_header Connection "";
-            # Needed for CloudFront.
+            proxy_set_headder Connection "";
             proxy_ssl_server_name on;
             proxy_set_header Host $proxy_host;
+
             proxy_cache cachecache;
-            proxy_cache_valid 200 302 60m;
-            proxy_cache_valid 404 1m;
+            proxy_cache_valid  200 302  360d;
             expires max;
-            add_header Cache-Control $nix_cache_cache_header always;
+            add_header Cache-Control $cache_header always;
           '';
         };
       };
