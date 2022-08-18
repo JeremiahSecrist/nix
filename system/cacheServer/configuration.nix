@@ -56,7 +56,6 @@
           proxyPass = "https://cache.nixos.org";
           extraConfig = ''
             aio threads;
-            proxy_ssl_server_name on;
             resolver 1.1.1.1;
             proxy_cache cachecache;
           '';
