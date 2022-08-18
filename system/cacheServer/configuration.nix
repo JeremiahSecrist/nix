@@ -57,7 +57,7 @@
       max_size=20g 
       inactive=365d
       use_temp_path=on;
-      proxy_temp_path /var/cache/nginx/tmp
+      proxy_temp_path /var/cache/nginx/tempfs
       1 2
       ;
       # Cache only success status codes; in particular we don't want to cache 404s.
