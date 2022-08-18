@@ -43,14 +43,6 @@
     '';
     appendHttpConfig = ''
       proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d use_temp_path=off;
-
-      # Cache only success status codes; in particular we don't want to cache 404s.
-      # See https://serverfault.com/a/690258/128321
-      map $status $cache_header {
-        200     "public";
-        302     "public";
-        default "no-cache";
-      }
       access_log /var/log/nginx/access.log;
     '';
     virtualHosts = {
@@ -61,32 +53,9 @@
           root = "/var/public-nix-cache";
           extraConfig = ''
             aio threads;
+            resolver 1.1.1.1;
             proxy_cache cachecache;
             proxy_pass https://cache.nixos.org; 
-          '';
-        };
-
-        extraConfig = ''
-          # Using a variable for the upstream endpoint to ensure that it is
-          # resolved at runtime as opposed to once when the config file is loaded
-          # and then cached forever (we don't want that):
-          # see https://tenzer.dk/nginx-with-dynamic-upstreams/
-          # This fixes errors like
-          #   nginx: [emerg] host not found in upstream "upstream.example.com"
-          # when the upstream host is not reachable for a short time when
-          # nginx is started.
-          resolver 1.1.1.1;
-          set $upstream_endpoint https://cache.nixos.org;
-        '';
-
-        locations."@fallback" = {
-          proxyPass = "$upstream_endpoint";
-          extraConfig = ''
-            proxy_cache cachecache;
-            proxy_cache_valid  200 302  60d;
-            expires max;
-            aio threads;
-            # add_header Cache-Control $cache_header always;
           '';
         };
 
