@@ -62,7 +62,7 @@
 
           proxy_set_header Host "cache.nixos.org";
           proxy_pass https://cache.nixos.org;
-          ''
+          '';
         };
 
         location."~^/nar/.+$" = {
