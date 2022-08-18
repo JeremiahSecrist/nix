@@ -42,7 +42,7 @@
       worker_cpu_affinity auto;
     '';
     appendHttpConfig = ''
-      proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:1g max_size=200g inactive=365d use_temp_path=off;
+      proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d use_temp_path=off;
       access_log /var/log/nginx/access.log;
     '';
     virtualHosts = {
@@ -50,6 +50,7 @@
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
         locations."/" = {
+          root = "/var/public-nix-cache";
           extraConfig = ''
             aio threads;
             resolver 1.1.1.1;
