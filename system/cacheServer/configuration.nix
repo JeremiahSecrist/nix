@@ -61,7 +61,7 @@
           root = "/var/public-nix-cache";
           extraConfig = ''
             expires max;
-            add_header Cache-Control $cache_header always;
+            # add_header Cache-Control $cache_header always;
             aio threads;
             # Ask the upstream server if a file isn't available locally
             error_page 404 = @fallback;
@@ -78,7 +78,7 @@
           # when the upstream host is not reachable for a short time when
           # nginx is started.
           resolver 1.1.1.1;
-          set $upstream_endpoint http://cache.nixos.org;
+          set $upstream_endpoint https://cache.nixos.org;
         '';
 
         locations."@fallback" = {
