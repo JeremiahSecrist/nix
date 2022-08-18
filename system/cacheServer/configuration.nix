@@ -44,7 +44,8 @@
       "mode=700"
     ];
   };
-
+  users.users.nginx.uid = 60;
+  users.groups.nginx.gid = 60;
   services.nginx = {
     enable = true;
     recommendedOptimisation = true;
