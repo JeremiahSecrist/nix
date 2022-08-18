@@ -55,29 +55,28 @@
         onlySSL = true;
         location."~ ^/nix-cache-info" = {
           extraConfig = ''
-          proxy_store        on;
-          proxy_store_access user:rw group:rw all:r;
-          proxy_temp_path    /data/nginx/nix-cache-info/temp;
-          root               /data/nginx/nix-cache-info/store;
+            proxy_store        on;
+            proxy_store_access user:rw group:rw all:r;
+            proxy_temp_path    /data/nginx/nix-cache-info/temp;
+            root               /data/nginx/nix-cache-info/store;
 
-          proxy_set_header Host "cache.nixos.org";
-          proxy_pass https://cache.nixos.org;
+            proxy_set_header Host "cache.nixos.org";
+            proxy_pass https://cache.nixos.org;
           '';
         };
 
         location."~^/nar/.+$" = {
           extraConfig = ''
-          proxy_store        on;
-          proxy_store_access user:rw group:rw all:r;
-          proxy_temp_path    /data/nginx/nar/temp;
-          root               /data/nginx/nar/store;
+            proxy_store        on;
+            proxy_store_access user:rw group:rw all:r;
+            proxy_temp_path    /data/nginx/nar/temp;
+            root               /data/nginx/nar/store;
 
-          proxy_set_header Host "cache.nixos.org";
-          proxy_pass https://cache.nixos.org;
+            proxy_set_header Host "cache.nixos.org";
+            proxy_pass https://cache.nixos.org;
           '';
         };
-        
-        
+
         # locations."/" = {
         #   root = "/var/public-nix-cache";
         #   extraConfig = ''
@@ -127,7 +126,7 @@
         #     add_header Cache-Control $cache_header always;
         #   '';
         # };
-      # };
+      };
     };
   };
   time.timeZone = "America/New_York";
