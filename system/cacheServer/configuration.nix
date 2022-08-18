@@ -125,7 +125,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 443 5000 ];
-    allowedUDPPorts = [ ];
+    allowedUDPPorts = [ 5000 ];
   };
 
   system.stateVersion = "22.05"; # Did you read the comment?
