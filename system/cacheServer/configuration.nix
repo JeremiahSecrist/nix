@@ -13,12 +13,12 @@
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     networkmanager.enable = true;
   };
-  boot.kernelModules = [ "tcp_bbr" ];
+  # boot.kernelModules = [ "tcp_bbr" ];
 
-  # Enable BBR congestion control
-  boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
-  boot.kernel.sysctl."net.core.default_qdisc" =
-    "fq"; # see https://news.ycombinator.com/item?id=14814530
+  # # Enable BBR congestion control
+  # boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+  # boot.kernel.sysctl."net.core.default_qdisc" =
+  #   "fq"; # see https://news.ycombinator.com/item?id=14814530
 
   security.acme = {
     acceptTerms = true;
