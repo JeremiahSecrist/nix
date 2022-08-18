@@ -53,7 +53,7 @@
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
         locations."/" = {
-          proxy_pass = "https://cache.nixos.org";
+          proxyPass = "https://cache.nixos.org";
           extraConfig = ''
             aio threads;
             proxy_ssl_server_name on;
