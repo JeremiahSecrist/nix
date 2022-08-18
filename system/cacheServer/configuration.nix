@@ -86,8 +86,6 @@
             proxy_cache_valid  200 302  60d;
             expires max;
             aio threads;
-            worker_processes auto;
-            worker_cpu_affinity auto;
             add_header Cache-Control $cache_header always;
           '';
         };
