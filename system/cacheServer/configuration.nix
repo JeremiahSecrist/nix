@@ -50,7 +50,6 @@
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
         locations."/" = {
-          root = "/var/public-nix-cache";
           extraConfig = ''
             aio threads;
             resolver 1.1.1.1;
