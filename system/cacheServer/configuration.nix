@@ -79,7 +79,7 @@
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
             proxy_http_version 1.1;
-            proxy_set_headder Connection "";
+            proxy_set_header Connection "";
             proxy_ssl_server_name on;
 
 
@@ -101,7 +101,7 @@
           proxyPass = "$upstream_endpoint";
           extraConfig = ''
             proxy_http_version 1.1;
-            proxy_set_headder Connection "";
+            proxy_set_header Connection "";
             proxy_ssl_server_name on;
 
 
