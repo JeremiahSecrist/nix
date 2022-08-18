@@ -53,7 +53,7 @@
       "cache.local.arouzing.win" = {
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
-        location."~ ^/nix-cache-info" = {
+        locations."~ ^/nix-cache-info" = {
           extraConfig = ''
             proxy_store        on;
             proxy_store_access user:rw group:rw all:r;
@@ -65,7 +65,7 @@
           '';
         };
 
-        location."~^/nar/.+$" = {
+        locations."~^/nar/.+$" = {
           extraConfig = ''
             proxy_store        on;
             proxy_store_access user:rw group:rw all:r;
