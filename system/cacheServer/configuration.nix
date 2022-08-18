@@ -50,6 +50,14 @@
     enable = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
+    appendConfig = ''
+      worker_processes  1;
+      master_process off;
+      events {
+        worker_connections 1024;
+      }
+
+    '';
     appendHttpConfig = ''
       proxy_cache_path /var/cache/nginx/ 
       levels=1:2 
