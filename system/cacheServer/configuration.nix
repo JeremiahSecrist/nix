@@ -42,7 +42,7 @@
       worker_cpu_affinity auto;
     '';
     appendHttpConfig = ''
-      proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d;
+      proxy_cache_path /var/cache/nginx/  levels=1:2 keys_zone=cachecache:100m max_size=200g inactive=365d use_temp_path=off;
 
       # Cache only success status codes; in particular we don't want to cache 404s.
       # See https://serverfault.com/a/690258/128321
@@ -88,7 +88,7 @@
             proxy_cache_valid  200 302  60d;
             expires max;
             aio threads;
-            add_header Cache-Control $cache_header always;
+            # add_header Cache-Control $cache_header always;
           '';
         };
 
