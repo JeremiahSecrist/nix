@@ -37,6 +37,9 @@
   users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    recommendedGzipSettings = true;
     appendConfig = ''
       worker_processes auto;
       worker_cpu_affinity auto;
@@ -50,12 +53,12 @@
         useACMEHost = "cache.local.arouzing.win";
         onlySSL = true;
         locations."/" = {
-          root = "/var/public-nix-cache";
+          proxy_pass = "https://cache.nixos.org";
           extraConfig = ''
             aio threads;
+            proxy_ssl_server_name on;
             resolver 1.1.1.1;
             proxy_cache cachecache;
-            proxy_pass https://cache.nixos.org; 
           '';
         };
       };
