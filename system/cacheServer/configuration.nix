@@ -57,8 +57,7 @@
           extraConfig = ''
             aio threads;
             resolver 1.1.1.1;
-            proxy_cache_valid 404 302 1m;
-            proxy_cache_valid 200 3650d;
+            proxy_cache_valid 404 302 1s;
             proxy_cache cachecache;
 
           '';
