@@ -52,7 +52,6 @@
     recommendedGzipSettings = true;
     appendConfig = ''
       worker_processes  4;
-      master_process off;
     '';
     appendHttpConfig = ''
       proxy_cache_path /var/cache/nginx/ 
