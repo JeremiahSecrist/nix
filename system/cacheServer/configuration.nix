@@ -58,24 +58,6 @@
             proxy_pass https://cache.nixos.org; 
           '';
         };
-
-        # We always want to copy cache.nixos.org's nix-cache-info file,
-        # and ignore our own, because `nix-push` by default generates one
-        # without `Priority` field, and thus that file by default has priority
-        # 50 (compared to cache.nixos.org's `Priority: 40`), which will make
-        # download clients prefer `cache.nixos.org` over our binary cache.
-        locations."= /nix-cache-info" = {
-          # Note: This is duplicated with the `@fallback` above,
-          # would be nicer if we could redirect to the @fallback instead.
-          proxyPass = "$upstream_endpoint";
-          extraConfig = ''
-            proxy_cache cachecache;
-            proxy_cache_valid  200 302  60d;
-            expires max;
-
-            add_header Cache-Control $cache_header always;
-          '';
-        };
       };
     };
   };
