@@ -18,12 +18,12 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
   };
-  nix = {
-    settings = {
-      trusted-substituters = [ "https://cache.local.arouzing.win" ];
-      substituters =
-        [ "https://cache.local.arouzing.win" "https://cache.nixos.org/" ];
-    };
+  nix.settings = {
+    substituters = [ "https://cache.local.arouzing.win" ];
+    trusted-substituters = [ "https://cache.local.arouzing.win" ];
+    trusted-public-keys = [
+      "cache.local.arouzing.win:BkVYfoGhkASIADD2q8nMvKuRfheqWoyoO5hbvhr8hx4="
+    ];
   };
   # fixes gnome login issues
   programs.zsh.enable = true;
