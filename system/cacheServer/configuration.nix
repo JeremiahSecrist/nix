@@ -39,7 +39,7 @@
     enable = true;
     # recommendedProxySettings = true;
     recommendedOptimisation = true;
-    # recommendedTlsSettings = true;
+    recommendedTlsSettings = true;
     recommendedGzipSettings = true;
     appendConfig = ''
       worker_processes auto;
