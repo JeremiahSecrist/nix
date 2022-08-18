@@ -33,7 +33,7 @@
   };
   users.users.nginx.extraGroups = [ "acme" ];
 
-  fileSystems."/var/cache/nginx-temp" = {
+  fileSystems."/var/cache/nginx/temp" = {
     device = "none";
     fsType = "tmpfs";
     options = [
@@ -57,7 +57,7 @@
       max_size=20g 
       inactive=365d
       use_temp_path=on;
-      proxy_temp_path /var/cache/nginx-temp
+      proxy_temp_path /var/cache/nginx/temp
       1 2
       ;
       # Cache only success status codes; in particular we don't want to cache 404s.
