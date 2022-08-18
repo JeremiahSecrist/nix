@@ -38,8 +38,8 @@
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-    recommendedGzipSettings = true;
+    # recommendedTlsSettings = true;
+    # recommendedGzipSettings = true;
     appendConfig = ''
       worker_processes auto;
       worker_cpu_affinity auto;
