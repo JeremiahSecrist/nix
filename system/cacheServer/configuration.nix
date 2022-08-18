@@ -55,10 +55,12 @@
         onlySSL = true;
         locations."/" = {
           proxyPass = "https://cache.nixos.org";
+          proxyCache = "cachecache";
           extraConfig = ''
             aio threads;
             resolver 1.1.1.1;
-            proxy_cache cachecache;
+            proxy_ssl_server_name on;
+            proxy_pass_header Authorization;
           '';
         };
       };
