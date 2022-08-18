@@ -18,7 +18,7 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
   };
-  nix.binaryCaches = [ "https://cache.local.arouzing.win" ];
+  nix.settings.trusted-substituters = [ "https://cache.local.arouzing.win" ];
   # fixes gnome login issues
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
