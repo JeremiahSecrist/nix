@@ -105,7 +105,7 @@
             proxy_http_version 1.1;
             proxy_set_header Connection "";
             proxy_ssl_server_name on;
-            slice             1m;
+
             proxy_set_header Host $proxy_host;
             proxy_cache cachecache;
             proxy_cache_valid  200 302  360d;
@@ -127,7 +127,7 @@
             proxy_http_version 1.1;
             proxy_set_header Connection "";
             proxy_ssl_server_name on;
-            slice             1m;
+
             proxy_set_header Host $proxy_host;
             proxy_cache cachecache;
             proxy_cache_valid  200 302  360d;
