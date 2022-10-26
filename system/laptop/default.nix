@@ -1,8 +1,9 @@
-{ self, lib, system, home-manager, ... }:
+{ self, lib, system, nixos-hardware, home-manager, ... }:
 lib.nixosSystem {
   inherit system;
   modules = [
     ./configuration.nix
+    nixos-hardware.nixosModules.framework-12th-gen-intel
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;

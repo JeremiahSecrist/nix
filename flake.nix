@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-22.05-small";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -9,12 +10,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixpkgs-small, home-manager, ... }@inputs:
+  outputs =
+    { self, nixpkgs, nixos-hardware, nixpkgs-small, home-manager, ... }@inputs:
     let system = "x86_64-linux";
     in {
       nixosModules = import ./modules/nixos inputs;
       nixosConfigurations = {
-        skytop = import ./system/laptop (inputs // { inherit system nixpkgs; });
+        laptop = import ./system/laptop
+          (inputs // { inherit system nixpkgs nixos-hardware; });
         desksky = import ./system/desktop (inputs // {
           inherit system;
           inherit (nixpkgs) lib;
