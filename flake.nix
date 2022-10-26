@@ -16,8 +16,10 @@
     in {
       nixosModules = import ./modules/nixos inputs;
       nixosConfigurations = {
-        laptop = import ./system/laptop
-          (inputs // { inherit system nixpkgs nixos-hardware; });
+        laptop = import ./system/laptop (inputs // {
+          inherit system nixos-hardware;
+          inherit (nixpkgs) lib;
+        });
         desksky = import ./system/desktop (inputs // {
           inherit system;
           inherit (nixpkgs) lib;
