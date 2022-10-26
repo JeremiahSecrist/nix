@@ -16,18 +16,21 @@
     cmatrix
     noisetorch
     # protonvpn-cli
-
+    cpu-x
+    sl
+    lolcat
     # Desktop
     rustdesk
     distrobox
     cryptomator
-    firefox-wayland
+    firefox
+    brave
     yubioath-desktop
     spotify
     discord
     virt-manager
-    # development
-    terraform
 
+    #work
+    teams
   ];
 }

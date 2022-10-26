@@ -4,30 +4,33 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod;
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    zenpower
-    zfs
-    xpadneo
-    dpdk
-  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
   boot.initrd.kernelModules = [ ];
   boot.initrd.availableKernelModules =
-    [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
-  boot.kernelModules =
-    [ "kvm-amd" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
-  # boot.extraModprobeConfig = "options vfio-pci ids=10de:13c0,10de:0fbb";
-  # boot.postBootCommands = ''
-  #   DEVS="0000:0f:00.0 0000:0f:00.1"
-  #   for DEV in $DEVS; do
-  #     echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
-  #   done
-  #   modprobe -i vfio-pci
-  # '';
-  boot.kernelParams = [ "amd_iommu=on" "mitigations=off" ];
+    [ "amdgpu" "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  # boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "mitigations=off" ];
 
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # gpu settings
+
+  hardware.opengl.extraPackages = with pkgs; [
+    rocm-opencl-icd
+    rocm-opencl-runtime
+    amdvlk
+  ];
+
+  hardware.opengl.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+
+  hardware.opengl = {
+    driSupport = lib.mkDefault true;
+    driSupport32Bit = lib.mkDefault true;
+  };
+
+  environment.variables.AMD_VULKAN_ICD = lib.mkDefault "RADV";
 
   #File systems
 

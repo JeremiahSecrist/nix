@@ -7,7 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware.nix
-    ./fancontrol.nix
+    # ./fancontrol.nix
   ];
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sky = {
@@ -18,14 +18,8 @@
     description = "sky";
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
   };
-  nix.settings = {
-    substituters = [ "https://cache.local.arouzing.win" ];
-    trusted-substituters = [ "https://cache.local.arouzing.win" ];
-    trusted-public-keys = [
-      "cache.local.arouzing.win:BkVYfoGhkASIADD2q8nMvKuRfheqWoyoO5hbvhr8hx4="
-    ];
-  };
   # fixes gnome login issues
+  services.teamviewer.enable = true;
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
   programs.gamemode = {
@@ -33,27 +27,36 @@
     enableRenice = true;
   };
   services = { flatpak.enable = true; };
-
+  services.fwupd.enable = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-original"
       "steam-runtime"
     ];
-  environment.systemPackages = with pkgs; [ tailscale ];
+  environment.systemPackages = with pkgs; [
+    wooting-udev-rules
+    wootility
+    lutris
+    tailscale
+
+  ];
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall =
       true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
+      false; # Open ports in the firewall for Source Dedicated Server
   };
-
+  services.ipfs = { enable = true; };
   # Open ports in the firewall.
+  hardware.wooting.enable = true;
+  hardware.steam-hardware.enable = true;
   networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
+    enable = false;
+    allowedTCPPorts = [ 34197 27015 ];
+    allowedUDPPorts = [ 34197 27015 ];
   };
 
   system.stateVersion = "22.05"; # Did you read the comment?

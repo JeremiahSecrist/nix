@@ -226,11 +226,12 @@ with lib.hm.gvariant;
         "drive-menu@gnome-shell-extensions.gcampax.github.com"
       ];
       favorite-apps = [
-        "firefox.desktop"
-        "code.desktop"
-        "discord.desktop"
-        "org.gnome.Console.desktop"
+        "brave-browser.desktop"
         "org.gnome.Nautilus.desktop"
+        "steam.desktop"
+        "discord.desktop"
+        "code.desktop"
+        "org.gnome.Console.desktop"
       ];
       welcome-dialog-last-shown-version = "42.2";
     };

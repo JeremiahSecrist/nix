@@ -11,6 +11,7 @@ nixpkgs.lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.sky = {
+        # modules = [{ nix.registry.nixpkgs.flake = nixpkgs; }];
         imports = [ ../../hm/sky/home.nix ../../hm/sky/desktop ];
       };
     }
