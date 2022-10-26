@@ -24,10 +24,10 @@ sgdisk --zap-all "${DISK}"
 Await
 
 sgdisk --clear \
-         --new=1:0:+550MiB --typecode=1:ef00 \
-         --new=2:0:+16GiB   --typecode=2:8200 \
-         --new=3:0:0       --typecode=3:8300 \
-           "${DISK}"
+        --new=1:0:+550MiB --typecode=1:ef00 \
+        --new=2:0:+16GiB   --typecode=2:8200 \
+        --new=3:0:0       --typecode=3:8300 \
+        "${DISK}"
 
 #Partition the drive and create subvolumes
 mkfs.fat -F 32 -n boot "${DISK}1"
@@ -49,8 +49,8 @@ Encrypted_Format_Disk(){
 
     # Create Partitions
     sgdisk --clear \
-         --new=1:0:+550MiB  --typecode=1:ef00 \
-         --new=2:0:0        --typecode=2:8300 \
+        --new=1:0:+550MiB  --typecode=1:ef00 \
+        --new=2:0:0        --typecode=2:8300 \
     "${DISK}"
     cryptsetup luksFormat  --label luks  ${DISK}2
     cryptsetup luksOpen     ${DISK}2 enc-pv
