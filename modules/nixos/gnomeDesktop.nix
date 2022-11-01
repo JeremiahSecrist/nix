@@ -8,11 +8,11 @@ _:
       xkbVariant = "";
       displayManager = {
         gdm.enable = true;
-        gdm.wayland = false;
+        gdm.wayland = true;
         # defaultSession = lib.mkDefault "gnome";
       };
       desktopManager = {
-        xterm.enable = lib.mkDefault false;
+        xterm.enable = lib.mkForce false;
         gnome.enable = lib.mkDefault true;
       };
     };
@@ -38,8 +38,8 @@ _:
       atomix # puzzle game
 
     ]);
-  # programs = {
-  #   xwayland.enable = lib.mkDefault true;
-  # };
+  programs = {
+    xwayland.enable = lib.mkDefault true;
+  };
   xdg.portal = { enable = lib.mkDefault true; };
 }

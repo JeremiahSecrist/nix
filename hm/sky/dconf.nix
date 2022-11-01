@@ -6,8 +6,7 @@ with lib.hm.gvariant;
 {
   dconf.settings = {
     "apps/seahorse/listing" = {
-      keyrings-selected =
-        [ "secret-service:///org/freedesktop/secrets/collection/login" ];
+      keyrings-selected = [ "secret-service:///org/freedesktop/secrets/collection/login" ];
     };
 
     "apps/seahorse/windows/key-manager" = {
@@ -19,14 +18,16 @@ with lib.hm.gvariant;
       left-paned = 377;
       pos-x = 0;
       pos-y = 0;
-      recently-opened = [ ];
+      recently-opened = [];
       right-paned = 1305;
       version = "0.0.16";
       window-height = 983;
       window-width = 1920;
     };
 
-    "org/gnome/Console" = { font-scale = 1.2; };
+    "org/gnome/Console" = {
+      font-scale = 1.2;
+    };
 
     "org/gnome/calculator" = {
       accuracy = 9;
@@ -49,31 +50,17 @@ with lib.hm.gvariant;
       window-size = mkTuple [ 768 600 ];
     };
 
-    "org/gnome/control-center" = { window-state = mkTuple [ 980 640 ]; };
+    "org/gnome/control-center" = {
+      last-panel = "display";
+      window-state = mkTuple [ 980 640 ];
+    };
 
     "org/gnome/desktop/app-folders" = {
       folder-children = [ "Utilities" "YaST" ];
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [
-        "gnome-abrt.desktop"
-        "gnome-system-log.desktop"
-        "nm-connection-editor.desktop"
-        "org.gnome.baobab.desktop"
-        "org.gnome.Connections.desktop"
-        "org.gnome.DejaDup.desktop"
-        "org.gnome.Dictionary.desktop"
-        "org.gnome.DiskUtility.desktop"
-        "org.gnome.eog.desktop"
-        "org.gnome.Evince.desktop"
-        "org.gnome.FileRoller.desktop"
-        "org.gnome.fonts.desktop"
-        "org.gnome.seahorse.Application.desktop"
-        "org.gnome.tweaks.desktop"
-        "org.gnome.Usage.desktop"
-        "vinagre.desktop"
-      ];
+      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.eog.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" ];
       categories = [ "X-GNOME-Utilities" ];
       name = "X-GNOME-Utilities.directory";
       translate = true;
@@ -98,15 +85,12 @@ with lib.hm.gvariant;
       gtk-theme = "Adwaita-dark";
     };
 
+    "org/gnome/desktop/lockdown" = {
+      disable-lock-screen = false;
+    };
+
     "org/gnome/desktop/notifications" = {
-      application-children = [
-        "org-gnome-console"
-        "gnome-power-panel"
-        "org-gnome-software"
-        "code"
-        "firefox"
-        "discord"
-      ];
+      application-children = [ "org-gnome-console" "gnome-power-panel" "org-gnome-software" "code" "firefox" "discord" ];
     };
 
     "org/gnome/desktop/notifications/application/code" = {
@@ -133,6 +117,10 @@ with lib.hm.gvariant;
       application-id = "org.gnome.Nautilus.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-settings" = {
+      application-id = "org.gnome.Settings.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-gnome-software" = {
       application-id = "org.gnome.Software.desktop";
     };
@@ -141,15 +129,35 @@ with lib.hm.gvariant;
       application-id = "org.mozilla.firefox.desktop";
     };
 
-    "org/gnome/desktop/peripherals/keyboard" = { numlock-state = true; };
+    "org/gnome/desktop/peripherals/keyboard" = {
+      numlock-state = true;
+    };
 
-    "org/gnome/desktop/session" = { idle-delay = mkUint32 0; };
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
+      two-finger-scrolling-enabled = true;
+    };
 
-    "org/gnome/desktop/wm/keybindings" = { maximize = [ "<Super>Up" ]; };
+    "org/gnome/desktop/session" = {
+      idle-delay = mkUint32 0;
+    };
 
-    "org/gnome/desktop/wm/preferences" = { workspace-names = [ "1" "2" ]; };
+    "org/gnome/desktop/sound" = {
+      event-sounds = true;
+      theme-name = "__custom";
+    };
 
-    "org/gnome/eog/ui" = { sidebar = false; };
+    "org/gnome/desktop/wm/keybindings" = {
+      maximize = [ "<Super>Up" ];
+    };
+
+    "org/gnome/desktop/wm/preferences" = {
+      workspace-names = [ "1" "2" ];
+    };
+
+    "org/gnome/eog/ui" = {
+      sidebar = false;
+    };
 
     "org/gnome/eog/view" = {
       background-color = "rgb(0,0,0)";
@@ -161,7 +169,27 @@ with lib.hm.gvariant;
       network-monitor-gio-name = "";
     };
 
+    "org/gnome/file-roller/dialogs/extract" = {
+      recreate-folders = true;
+      skip-newer = false;
+    };
+
+    "org/gnome/file-roller/listing" = {
+      list-mode = "as-folder";
+      name-column-width = 250;
+      show-path = false;
+      sort-method = "name";
+      sort-type = "ascending";
+    };
+
+    "org/gnome/file-roller/ui" = {
+      sidebar-width = 200;
+      window-height = 480;
+      window-width = 600;
+    };
+
     "org/gnome/gnome-system-monitor" = {
+      current-tab = "resources";
       maximized = false;
       network-total-in-bits = false;
       show-dependencies = false;
@@ -178,6 +206,7 @@ with lib.hm.gvariant;
       attach-modal-dialogs = true;
       dynamic-workspaces = true;
       edge-tiling = true;
+      
       focus-change-on-pointer-rest = true;
       workspaces-only-on-primary = true;
     };
@@ -187,10 +216,13 @@ with lib.hm.gvariant;
       toggle-tiled-right = [ "<Super>Right" ];
     };
 
-    "org/gnome/mutter/wayland/keybindings" = { restore-shortcuts = [ "" ]; };
+    "org/gnome/mutter/wayland/keybindings" = {
+      restore-shortcuts = [ "" ];
+    };
 
     "org/gnome/nautilus/preferences" = {
       default-folder-viewer = "icon-view";
+      migrated-gtk-settings = true;
       search-filter-time-type = "last_modified";
       search-view = "list-view";
     };
@@ -205,51 +237,43 @@ with lib.hm.gvariant;
       ignore-phase2-ca-cert = false;
     };
 
+    "org/gnome/nm-applet/eap/f115300e-76a0-4c71-a91f-e64ddcd1a8a4" = {
+      ignore-ca-cert = false;
+      ignore-phase2-ca-cert = false;
+    };
+
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "suspend";
       sleep-inactive-ac-timeout = 3600;
     };
-    "org/gnome/desktop/lockdown" = { disable-lock-screen = false; };
+
     "org/gnome/shell" = {
-      app-picker-layout =
-        "[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'org.gnome.Calculator.desktop': <{'position': <4>}>, 'simple-scan.desktop': <{'position': <5>}>, 'org.gnome.Settings.desktop': <{'position': <6>}>, 'gnome-system-monitor.desktop': <{'position': <7>}>, 'Utilities': <{'position': <8>}>, 'yelp.desktop': <{'position': <9>}>, 'org.gnome.Calendar.desktop': <{'position': <10>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <11>}>, 'org.gnome.Extensions.desktop': <{'position': <12>}>, 'firefox.desktop': <{'position': <13>}>, 'cups.desktop': <{'position': <14>}>, 'nixos-manual.desktop': <{'position': <15>}>, 'org.gnome.Software.desktop': <{'position': <16>}>, 'spotify.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
+      app-picker-layout = "[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'org.gnome.Calculator.desktop': <{'position': <4>}>, 'simple-scan.desktop': <{'position': <5>}>, 'org.gnome.Settings.desktop': <{'position': <6>}>, 'gnome-system-monitor.desktop': <{'position': <7>}>, 'Utilities': <{'position': <8>}>, 'yelp.desktop': <{'position': <9>}>, 'org.gnome.Calendar.desktop': <{'position': <10>}>, 'org.cryptomator.Cryptomator.desktop': <{'position': <11>}>, 'org.gnome.Extensions.desktop': <{'position': <12>}>, 'firefox.desktop': <{'position': <13>}>, 'cups.desktop': <{'position': <14>}>, 'nixos-manual.desktop': <{'position': <15>}>, 'org.gnome.Software.desktop': <{'position': <16>}>, 'spotify.desktop': <{'position': <17>}>, 'test-tabby.desktop': <{'position': <18>}>, 'org.gnome.TextEditor.desktop': <{'position': <19>}>, 'org.gnome.Tour.desktop': <{'position': <20>}>, 'xterm.desktop': <{'position': <21>}>, 'com.yubico.yubioath.desktop': <{'position': <22>}>}]";
       command-history = [ "pkill Discord" ];
       disable-user-extensions = true;
-      disabled-extensions = [
-        "dash-to-dock@micxgx.gmail.com"
-        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
-      ];
-      enabled-extensions = [
-        "appindicatorsupport@rgcjonas.gmail.com"
-        "material-shell@papyelgringo"
-        "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
-        "drive-menu@gnome-shell-extensions.gcampax.github.com"
-      ];
-      favorite-apps = [
-        "brave-browser.desktop"
-        "org.gnome.Nautilus.desktop"
-        "steam.desktop"
-        "discord.desktop"
-        "code.desktop"
-        "org.gnome.Console.desktop"
-      ];
+      disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" ];
+      enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" "material-shell@papyelgringo" "auto-move-windows@gnome-shell-extensions.gcampax.github.com" "drive-menu@gnome-shell-extensions.gcampax.github.com" ];
+      favorite-apps = [ "brave-browser.desktop" "org.gnome.Nautilus.desktop" "steam.desktop" "discord.desktop" "code.desktop" "org.gnome.Console.desktop" ];
+      had-bluetooth-devices-setup = true;
       welcome-dialog-last-shown-version = "42.2";
     };
 
     "org/gnome/shell/extensions/auto-move-windows" = {
-      application-list = [
-        "discord.desktop:1"
-        "firefox.desktop:3"
-        "code.desktop:2"
-        "org.gnome.Console.desktop:2"
-      ];
+      application-list = [ "discord.desktop:1" "firefox.desktop:3" "code.desktop:2" "org.gnome.Console.desktop:2" ];
     };
 
-    "org/gnome/shell/world-clocks" = { locations = "@av []"; };
+    "org/gnome/shell/world-clocks" = {
+      locations = "@av []";
+    };
 
-    "org/gnome/software" = { first-run = false; };
+    "org/gnome/software" = {
+      check-timestamp = mkInt64 1667257094;
+      first-run = false;
+    };
 
-    "org/gnome/tweaks" = { show-extensions-notice = false; };
+    "org/gnome/tweaks" = {
+      show-extensions-notice = false;
+    };
 
     "org/gtk/gtk4/settings/file-chooser" = {
       date-format = "regular";
