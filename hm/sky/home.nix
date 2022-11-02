@@ -30,11 +30,11 @@ in {
       mutableExtensionsDir = true;
     };
     gpg = {
-      mutableTrust = true;
-      mutableKeys = true;
+      mutableTrust = false;
+      mutableKeys = false;
       publicKeys = [{
         me = {
-          trust = 5;
+          trust = "5";
           source = ./publickeys.gpg;
         };
       }];

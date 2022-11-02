@@ -22,7 +22,7 @@ _:
       experimental-features = nix-command flakes
     '';
     #auto maintainence
-    autoOptimiseStore = lib.mkDefault true;
+    settings.auto-optimise-store = lib.mkDefault true;
     gc = {
       automatic = true;
       dates = "weekly";

@@ -8,7 +8,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware.nix
   ];
-
+ 
   networking = {
     hostName = "skytop"; # Define your hostname.
     networkmanager.enable = true;
@@ -41,8 +41,12 @@
   services = {
     flatpak.enable = true;
     xserver.libinput.enable = true;
+    tlp.enable = true;
+    # auto-cpufreq.enable = true;
+    power-profiles-daemon.enable = false;
   };
-
+  powerManagement.powertop.enable = true;
+  # powerManagement.cpufreq.max = 2000000;
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
