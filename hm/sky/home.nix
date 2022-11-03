@@ -9,6 +9,11 @@ in {
     homeDirectory = "/home/sky";
     stateVersion = "22.05";
   };
+  file.wallpapers = {
+    recusive = true;
+    source = ./wallpapers ;
+    target = Pictures/wallpapers
+  };
   xdg.enable = true;
   services.gpg-agent = {
     enable = true;
