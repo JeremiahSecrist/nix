@@ -5,6 +5,7 @@
     # extensions
     gnomeExtensions.appindicator
     # CLI
+    (pkgs.uutils-coreutils.override { prefix = ""; })
     btop
     dconf2nix
     nano
@@ -20,7 +21,9 @@
     sl
     lolcat
     # Desktop
-    rustdesk
+    tor-browser-bundle-bin
+    firmware-manager
+    lutris
     distrobox
     cryptomator
     firefox
@@ -28,8 +31,10 @@
     yubioath-desktop
     spotify
     discord
+    armcord
     virt-manager
-
+    protonvpn-gui
+    protonvpn-cli
     #work
     teams
   ];
