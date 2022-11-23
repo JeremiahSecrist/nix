@@ -1,5 +1,5 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, ... }:
+{ lib, config, ... }:
 
 with lib.hm.gvariant;
 
@@ -8,7 +8,10 @@ with lib.hm.gvariant;
     "apps/seahorse/listing" = {
       keyrings-selected = [ "secret-service:///org/freedesktop/secrets/collection/login" ];
     };
-
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${ config.home.homeDirectory }/Pictures/wallpapers/frameworkoptix.jpg";
+      picture-uri-dark = "file://${ config.home.homeDirectory }/Pictures/wallpapers/frameworkoptix.jpg";
+    };
     "apps/seahorse/windows/key-manager" = {
       height = 476;
       width = 600;

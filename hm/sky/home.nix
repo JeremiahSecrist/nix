@@ -9,12 +9,16 @@ in {
     homeDirectory = "/home/sky";
     stateVersion = "22.05";
   };
-  file.wallpapers = {
-    recusive = true;
+  home.file.wallpapers = {
+    recursive = true;
     source = ./wallpapers ;
-    target = Pictures/wallpapers
+    target = "./Pictures/wallpapers" ;
   };
   xdg.enable = true;
+  services.easyeffects = {
+      enable = true;
+      preset = "noisereduc";
+    }; 
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
@@ -78,6 +82,7 @@ in {
       enableZshIntegration = true;
       enable = true;
     };
+    
     git = {
       enable = true;
       userName = "Arouzing";
