@@ -13,6 +13,28 @@
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ ];
   hardware.video.hidpi.enable = lib.mkDefault true;
+  hardware.pulseaudio.daemon.config = {
+    flat-volumes = "no";
+  };
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  #  boot.kernelPatches = [ {
+    # name = "tickless";
+    # patch = null;
+    # ignoreConfigErrors = true;
+    # structuredExtraConfig = with lib.kernel; {
+      # NO_HZ_FULL = yes;
+      # NO_HZ_IDLE = yes;
+      # SCHED_IDLE = yes;
+    # }; 
+    # }];
+    # extraConfig = ''
+    #         # NO_HZ y
+    #         NO_HZ_IDLE y
+    #         NO_HZ_FULL y
+    #       '';
+    # } ];
+  # CONFIG_NO_HZ_IDLE y
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

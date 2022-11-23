@@ -37,15 +37,36 @@
   networking.firewall.checkReversePath = "loose";
   # fixes gnome login issues
   programs.zsh.enable = true;
-
+  systemd.services.systemd-udevd.restartIfChanged = false;
+  systemd.services.NetworkManager-wait-online.enable = false;
   services = {
     flatpak.enable = true;
+    fwupd.enable = true;
     xserver.libinput.enable = true;
-    tlp.enable = true;
+    tlp = {
+      enable = false;
+    #   settings = {
+    #     CPU_BOOST_ON_BAT = 0;
+    #     CPU_SCALING_GOVERNOR_ON_BATTERY = "powersave";
+    #     START_CHARGE_THRESH_BAT0 = 90;
+    #     STOP_CHARGE_THRESH_BAT0 = 97;h
+    #     RUNTIME_PM_ON_BAT = "auto";
+    #   };
+    };
+    thermald.enable = true;
     # auto-cpufreq.enable = true;
     power-profiles-daemon.enable = false;
   };
-  powerManagement.powertop.enable = true;
+  boot.kernel.sysctl = {
+  "kernel.nmi_watchdog" = 0;
+  "vm.dirty_writeback_centisecs" = 6000;
+  "vm.laptop_mode" = 5;
+  };
+  powerManagement = {
+   enable = true;
+   powertop.enable = true;
+   scsiLinkPolicy = "med_power_with_dipm";
+  };
   # powerManagement.cpufreq.max = 2000000;
   # Open ports in the firewall.
   networking.firewall = {
