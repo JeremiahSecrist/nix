@@ -1,36 +1,23 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; #22.05";
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-22.05-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
-      url = "github:nix-community/home-manager/master";#release-22.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
-    { self, nixpkgs, nixos-hardware, nixpkgs-small, home-manager, ... }@inputs:
+    { self, nixpkgs, nixos-hardware, disko, home-manager, ... }@inputs:
     let system = "x86_64-linux";
     in {
-      nixosModules = import ./modules/nixos inputs;
       nixosConfigurations = {
-        laptop = import ./system/laptop (inputs // {
-          inherit system nixos-hardware;
-          inherit (nixpkgs) lib;
-        });
-        desksky = import ./system/desktop (inputs // {
-          inherit system;
-          inherit (nixpkgs) lib;
-        });
-        cacheServer = import ./system/cacheServer (inputs // {
-          inherit system;
-          inherit (nixpkgs-small) lib;
-        });
-        logiCacheServer = import ./system/logiCacheServer (inputs // {
-          inherit system;
-          inherit (nixpkgs-small) lib;
+        framework-laptop = import ./hosts/framework-laptop (inputs // {
+          inherit system nixos-hardware nixpkgs ;
         });
       };
     };
