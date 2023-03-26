@@ -14,7 +14,7 @@
     in {
       nixosConfigurations = {
         framework-laptop = import ./hosts/framework-laptop (inputs // {
-          inherit self system nixos-hardware home-manager disko;
+          inherit system nixos-hardware home-manager disko;
           inherit nixpkgs (lib);
         });
       };
