@@ -8,7 +8,7 @@
     efi.canTouchEfiVariables = true;
     timeout = 1;
   };
-  boot.luks.devices = {
+  boot.initrd.luks.devices = {
 	  crypted = {
 	    device = "/dev/sda3";
 	    preLVM = true;
