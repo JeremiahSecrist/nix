@@ -3,7 +3,6 @@ lib.nixosSystem {
   inherit system;
   modules = [
     ./configuration.nix
-    ./configuration.nix
     ./hardware.nix
     ./modules.nix
     ./packages.nix
