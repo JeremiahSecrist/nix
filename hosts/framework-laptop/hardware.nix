@@ -29,7 +29,7 @@
     # laptop supports bt
     bluetooth.enable = true;
   };
-  boot.initrd.luks.devices.crypted.device = "/dev/sda3/dev/disk/by-id/usb-_USB_DISK_3.2_0700199604A32D02-0:0-part3";
+  boot.initrd.luks.devices.crypted.device = "/dev/disk/by-id/usb-_USB_DISK_3.2_0700199604A32D02-0:0-part3";
   disko.devices = import ../../modules/disko/lvm-luks.nix {
     disks = [ "/dev/disk/by-id/usb-_USB_DISK_3.2_0700199604A32D02-0:0" ];
     partitionSizes = [ "34G" "120G" "700G" ];
