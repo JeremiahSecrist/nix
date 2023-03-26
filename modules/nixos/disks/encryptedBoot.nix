@@ -10,7 +10,7 @@
   };
   boot.initrd.luks.devices = {
 	  crypted = {
-	    device = "/dev/sda3";
+	    # device = "/dev/sda3";
 	    preLVM = true;
       allowDiscards = true;
 	  };

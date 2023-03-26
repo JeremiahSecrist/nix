@@ -8,7 +8,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     initrd = {
-      kernelModules = [ ];
+      kernelModules = [ "dm-snapshot" ];
       availableKernelModules =
       [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
     };
@@ -29,9 +29,10 @@
     # laptop supports bt
     bluetooth.enable = true;
   };
+  boot.initrd.luks.devices.crypted.device = "/dev/sda3/dev/disk/by-id/usb-_USB_DISK_3.2_0700199604A32D02-0:0-part3";
   disko.devices = import ../../modules/disko/lvm-luks.nix {
-    disks = [ "/dev/sda" ];
-    # partitionSizes = [ "34G" "40%" "55%" ];
+    disks = [ "/dev/disk/by-id/usb-_USB_DISK_3.2_0700199604A32D02-0:0" ];
+    partitionSizes = [ "34G" "120G" "700G" ];
   };
   # dynamic dhcp
   # networking.useDHCP = true;
