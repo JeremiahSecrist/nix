@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
   {
-    import = [
+    imports = [
       ../../modules/nixos/desktop/gnome.nix
       ../../modules/nixos/disks/encryptedBoot.nix { installDir = "/dev/sda"; }
       ../../modules/nixos/kernel/sysctl.nix
