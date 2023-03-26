@@ -30,8 +30,8 @@
     bluetooth.enable = true;
   };
   disko.devices = import ../../modules/disko/lvm-luks.nix {
-    disks = [ "/dev/nvme0n1" ];
-    partitionSizes = [ "34G" "40%" "55%" ];
+    disks = [ "/dev/sda" ];
+    # partitionSizes = [ "34G" "40%" "55%" ];
   };
   # dynamic dhcp
   networking.useDHCP = true;

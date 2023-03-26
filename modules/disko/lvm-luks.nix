@@ -1,4 +1,4 @@
-{ disks ? [ "/dev/sda" ], partitionSizes ? [ "34G" "40%" "55%" ], ... }: {
+{ disks ? [ "/dev/sda" ], partitionSizes ? [ "34G" "120G" "700G" ], ... }: {
   disk = {
     disk0 = {
       type = "disk";
