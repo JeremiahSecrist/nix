@@ -1,4 +1,4 @@
-{ installDir ? "/dev/sda", config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Bootloader.
@@ -10,7 +10,7 @@
   };
   boot.initrd.luks.devices.luksroot = {
     #name = "root";
-    device = installDir;
+    device = "/dev/sda";
     preLVM = true;
     allowDiscards = true;
   };
