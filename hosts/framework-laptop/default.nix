@@ -15,10 +15,9 @@ lib.nixosSystem {
       home-manager.useUserPackages = true;
       home-manager.users.sky = {
         imports = [ 
-          
           ../../modules/home-manager/sky/home.nix
         ];
       };
     }
-  ] 
+  ];
 }
