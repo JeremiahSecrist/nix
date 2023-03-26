@@ -9,18 +9,14 @@ lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.sky = {
-        imports = [ ../../hm/sky/home.nix ../../hm/sky/laptop ];
+        imports = [ 
+          ./configuration.nix
+          ./hardware.nix
+          ./modules.nix
+          ./packages.nix
+          ../../modules/home-manager/sky/home.nix
+        ];
       };
     }
-  ] ++ (with self.nixosModules; [
-    common
-    sound
-    yubikey
-    u2fLogin
-    gnomeDesktop
-    encryptedBoot
-    docker
-    virtual
-    # harden
-  ]);
+  ] 
 }

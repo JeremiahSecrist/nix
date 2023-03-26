@@ -7,7 +7,7 @@ in {
   home = {
     username = "sky";
     homeDirectory = "/home/sky";
-    stateVersion = "22.05";
+    stateVersion = "22.11";
   };
   home.file.wallpapers = {
     recursive = true;

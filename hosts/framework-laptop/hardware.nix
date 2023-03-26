@@ -5,43 +5,40 @@
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-  boot.kernelParams = [ ];
-  hardware.video.hidpi.enable = lib.mkDefault true;
-  hardware.pulseaudio.daemon.config = {
-    flat-volumes = "no";
+  boot = {
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    initrd = {
+      kernelModules = [ ];
+      availableKernelModules =
+      [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+    };
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+    kernelParams = [ ];
   };
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  #  boot.kernelPatches = [ {
-    # name = "tickless";
-    # patch = null;
-    # ignoreConfigErrors = true;
-    # structuredExtraConfig = with lib.kernel; {
-      # NO_HZ_FULL = yes;
-      # NO_HZ_IDLE = yes;
-      # SCHED_IDLE = yes;
-    # }; 
-    # }];
-    # extraConfig = ''
-    #         # NO_HZ y
-    #         NO_HZ_IDLE y
-    #         NO_HZ_FULL y
-    #       '';
-    # } ];
-  # CONFIG_NO_HZ_IDLE y
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  # enable proper mouse usage on xorg.
+  services.xserver.libinput.enable = true;
+  hardware = {
+    # needed from monitor resolution
+    video.hidpi.enable = true;
+    # needed for some games
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+    # laptop supports bt
+    bluetooth.enable = true;
+  };
+  disko.devices = import ../../modules/disko/lvm-luks.nix {
+    disks = [ "/dev/nvme0n1" ];
+    partitionSizes = [ "34G" "40%" "55%" ];
+  };
+  # dynamic dhcp
+  networking.useDHCP = true;
+  # SSD optimization
+  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
+  # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
+  powerManagement.cpuFreqGovernor = "powersave";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

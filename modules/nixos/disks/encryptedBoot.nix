@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ installDir ? "", config, pkgs, lib, ... }:
 
 {
   # Bootloader.
@@ -10,19 +10,8 @@
   };
   boot.initrd.luks.devices.luksroot = {
     #name = "root";
-    device = "/dev/disk/by-label/luks";
+    device = installDir;
     preLVM = true;
     allowDiscards = true;
   };
-  fileSystems."/" = {
-    options = [ "noatime" "nodiratime" "discard" ];
-    device = "/dev/vg/nixos";
-    fsType = "ext4";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-  };
-
-  swapDevices = [{ device = "/dev/vg/swap"; }];
 }
