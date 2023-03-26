@@ -34,7 +34,7 @@
     # partitionSizes = [ "34G" "40%" "55%" ];
   };
   # dynamic dhcp
-  networking.useDHCP = true;
+  # networking.useDHCP = true;
   # SSD optimization
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
