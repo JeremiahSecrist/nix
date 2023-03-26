@@ -13,10 +13,10 @@
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {
-        framework-laptop = import ./hosts/framework-laptop {
+        framework-laptop = import ./hosts/framework-laptop (inputs // {
           inherit self system nixos-hardware home-manager disko;
           inherit nixpkgs (lib);
-        };
+        });
       };
     };
 }
