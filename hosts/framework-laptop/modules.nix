@@ -2,7 +2,7 @@
   {
     imports = [
       ../../modules/nixos/desktop/gnome.nix
-      ../../modules/nixos/disks/encryptedBoot.nix { installDir = "/dev/sda"; }
+      ../../modules/nixos/disks/encryptedBoot.nix #{ installDir = "/dev/sda"; }
       ../../modules/nixos/kernel/sysctl.nix
       ../../modules/nixos/networking/nm.nix
       ../../modules/nixos/networking/tailscale.nix

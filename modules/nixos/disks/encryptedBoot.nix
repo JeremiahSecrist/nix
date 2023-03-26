@@ -1,4 +1,4 @@
-{ installDir ? "", config, pkgs, lib, ... }:
+{ installDir ? "/dev/sda", config, pkgs, lib, ... }:
 
 {
   # Bootloader.
