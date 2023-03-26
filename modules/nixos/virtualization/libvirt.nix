@@ -1,1 +1,1 @@
-_: { config, pkgs, lib, ... }: { virtualisation.libvirtd.enable = true; }
+{ config, pkgs, lib, ... }: { virtualisation.libvirtd.enable = true; }
