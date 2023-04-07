@@ -7,7 +7,7 @@ mkShell {
     broot
     zsh
     zellij
-    # cowsay  
+    gitui  
   ];
 
   shellHook = ''   
