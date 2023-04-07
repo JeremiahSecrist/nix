@@ -1,1 +1,1 @@
-{ config, pkgs, stdenv, lib, ... }: { imports = [ ./laptopU2f.nix ./dconf.nix]; }
+{ config, pkgs, stdenv, lib, ... }: { imports = [ ../dconf.nix ./laptopU2f.nix]; }
