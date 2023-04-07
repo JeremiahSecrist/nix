@@ -10,12 +10,42 @@
     initrd = {
       kernelModules = [ "dm-snapshot" ];
       availableKernelModules =
-      [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+      [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" ];
     };
+    supportedFilesystems = [ "ntfs" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     kernelParams = [ ];
+    loader.systemd-boot.extraEntries = {
+       "win10.conf" = ''
+          title win10
+          efi /run/media/sky/windows10boot/bootx64.efi
+      '';
+    };
   };
+ 
+  specialisation = {
+    egpu.configuration = {
+      system.nixos.tags = [ "egpu" ];
+      boot.blacklistedKernelModules = lib.mkForce [ "i915" ];
+      programs.steam.enable = true;
+      programs.gamemode.enable = true;
+      hardware.steam-hardware.enable = true;
+      # KMS will load the module, regardless of blacklisting
+      boot.kernelParams = lib.mkForce [ "i915.modeset=0" "mitigations=off" ];
+    };
+  };
+  
+  fileSystems."/run/media/sky/windows10" =
+    { device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S59ANMFNB34577E-part3";
+      fsType = "auto"; 
+      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" ];
+    };
+  fileSystems."/run/media/sky/windows10boot" =
+    { device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S59ANMFNB34577E-part1";
+      fsType = "auto"; 
+      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" ];
+    };
   # enable proper mouse usage on xorg.
   services.xserver.libinput.enable = true;
   hardware = {
@@ -35,11 +65,12 @@
     partitionSizes = [ "34G" "120G" "700G" ];
   };
   # dynamic dhcp
-  # networking.useDHCP = true;
+  networking.useDHCP = lib.mkDefault true;
   # SSD optimization
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
   powerManagement.cpuFreqGovernor = "powersave";
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
