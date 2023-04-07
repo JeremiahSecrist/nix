@@ -7,6 +7,7 @@
       ../../modules/nixos/networking/nm.nix
       ../../modules/nixos/networking/tailscale.nix
       ../../modules/nixos/nix/flakes.nix
+      ../../modules/nixos/nix/registry.nix
       ../../modules/nixos/nix/garbage-collection.nix
       ../../modules/nixos/nix/unfree.nix
       ../../modules/nixos/packages/base.nix
