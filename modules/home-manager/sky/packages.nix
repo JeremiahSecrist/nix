@@ -8,34 +8,35 @@
     (pkgs.uutils-coreutils.override { prefix = ""; })
     btop
     dconf2nix
-    nano
+    # nano
     git
     gnupg
     tldr
     sshfs
     nixfmt
-    cmatrix
-    noisetorch
+    # cmatrix
+    # noisetorch
     # protonvpn-cli
-    cpu-x
-    sl
-    lolcat
-    # Desktop
-    tor-browser-bundle-bin
-    firmware-manager
-    lutris
+    # cpu-x
+    # sl
+    # lolcat
+    
+    ## Desktop
+    # tor-browser-bundle-bin
+    # firmware-manager
+    # lutris
     distrobox
-    cryptomator
-    firefox
+    # cryptomator
+    # firefox
     brave
     yubioath-desktop
     spotify
     discord
-    armcord
-    virt-manager
+    # armcord
+    # virt-manager
     protonvpn-gui
     protonvpn-cli
     #work
-    teams
+    # teams
   ];
 }
