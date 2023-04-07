@@ -6,7 +6,7 @@
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-    timeout = 1;
+    timeout = 2;
   };
   boot.initrd.luks.devices = {
 	  crypted = {
