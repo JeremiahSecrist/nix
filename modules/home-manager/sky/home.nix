@@ -3,7 +3,7 @@ let g = { myuid = "1000"; };
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  imports = [ ./dconf.nix ./packages.nix ];
+  imports = [ ./dconf.nix ./packages.nix ./laptop/noisetorch.nix ];
   home = {
     username = "sky";
     homeDirectory = "/home/sky";
@@ -34,10 +34,20 @@ in {
   };
   programs = {
     home-manager.enable = true;
-    vscode = {
+    zellij = {
       enable = true;
-      mutableExtensionsDir = true;
+    
     };
+    helix = {
+      enable = true;
+      
+    };
+    
+    # vscode = {
+    #   enable = true;
+    #   mutableExtensionsDir = true;
+    # };
+
     gpg = {
       mutableTrust = false;
       mutableKeys = false;
@@ -111,16 +121,22 @@ in {
             echo -ne "\033]0; $(basename "$PWD") \007"
         }
         bindkey "^[[3~" delete-char
+        bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;5D" backward-word
         unset SSH_AGENT_PID
         if [ "''${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
           export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
         fi
         gpg-connect-agent /bye > /dev/null
-      '';
+        eval "$(zellij setup --generate-auto-start zsh)"        
+       '';
       envExtra = ''
         starship_precmd_user_func="set_win_title"
         precmd_functions+=(set_win_title)
       '';
+      localVariables = {
+        EDITOR = "hx";
+      };
       shellAliases = {
         nru = "pushd ~/nix && nix flake update ; popd";
         nrs = "pushd ~/nix && make switch ; popd";
