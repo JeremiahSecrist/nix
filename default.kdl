@@ -1,0 +1,32 @@
+layout {
+
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+    pane split_direction="vertical" {
+        pane split_direction="vertical" {
+            pane size="20%" name="File Explorer" command="broot"
+            pane size="80%" split_direction="horizontal" {
+                pane size="75%" name="Editor" borderless=true edit="./flake.nix"
+                pane size="25%" split_direction="vertical" {
+                   pane {
+                        name "CLI"
+                        cwd "./" 
+                        // command "nixos-rebuild" 
+                        // args "dry-activate" "--flake" ".#"  
+                        // start_suspended true
+                    }
+                   // nix { 
+                        // args "test"; 
+                    // }
+                }
+            }
+        }     
+    }
+
+    
+    pane_template size="50%" name="nix" {
+        command "nix"
+        start_suspended true
+    }
+}

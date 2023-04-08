@@ -1,37 +1,35 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; #22.05";
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-22.05-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    disko.url = "github:nix-community/disko";
+    devenv.url = "github:cachix/devenv/latest";
+    nix-software-center.url = "github:vlinkz/nix-software-center";
     home-manager = {
-      url = "github:nix-community/home-manager/master";#release-22.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs =
-    { self, nixpkgs, nixos-hardware, nixpkgs-small, home-manager, ... }@inputs:
-    let system = "x86_64-linux";
+  outputs = { nixpkgs, self, nixos-hardware, disko, home-manager, devenv
+    , nix-software-center, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in {
-      nixosModules = import ./modules/nixos inputs;
       nixosConfigurations = {
-        laptop = import ./system/laptop (inputs // {
-          inherit system nixos-hardware;
-          inherit (nixpkgs) lib;
-        });
-        desksky = import ./system/desktop (inputs // {
-          inherit system;
-          inherit (nixpkgs) lib;
-        });
-        cacheServer = import ./system/cacheServer (inputs // {
-          inherit system;
-          inherit (nixpkgs-small) lib;
-        });
-        logiCacheServer = import ./system/logiCacheServer (inputs // {
-          inherit system;
-          inherit (nixpkgs-small) lib;
-        });
+        framework-laptop =
+          import ./hosts/framework-laptop { inherit system inputs; };
       };
+      devShells.${system}.default = import ./shell.nix { inherit pkgs; };
+      packages.${system} = {
+        nixInstaller = pkgs.writeScriptBin "nixInstaller" ./scripts/install.sh;
+        dcnixd = pkgs.writeScriptBin "dcnixd" ''
+          dconf dump / | dconf2nix > dconf.nix
+        '';
+        editor = pkgs.writeScriptBin "editor" ''
+          #!/usr/bin/env zsh
+          zellij -l ./default.nix
+        '';
+        };
     };
 }

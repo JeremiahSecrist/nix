@@ -1,8 +1,15 @@
-with (import <nixpkgs> {});
+{ pkgs ? import <nixpkgs> { } }:
+with pkgs;
 mkShell {
-  shellHook = '' 
-  '';
   buildInputs = [
-    gnumake
+    nixpkgs-fmt
+    helix
+    broot
+    zsh
+    zellij
+    gitui  
   ];
+
+  shellHook = ''   
+    '';
 }
