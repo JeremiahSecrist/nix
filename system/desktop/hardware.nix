@@ -1,16 +1,19 @@
-{ config, lib, pkgs, modulesPath, ... }:
-
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod;
-  boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
-  boot.initrd.kernelModules = [ ];
-  boot.initrd.availableKernelModules =
-    [ "amdgpu" "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
+  boot.initrd.kernelModules = [];
+  boot.initrd.availableKernelModules = ["amdgpu" "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
   # boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelParams = [ "mitigations=off" ];
+  boot.kernelModules = ["kvm-amd"];
+  boot.kernelParams = ["mitigations=off"];
 
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -23,7 +26,7 @@
     amdvlk
   ];
 
-  hardware.opengl.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+  hardware.opengl.extraPackages32 = with pkgs; [driversi686Linux.amdvlk];
 
   hardware.opengl = {
     driSupport = lib.mkDefault true;
@@ -35,7 +38,7 @@
   #File systems
 
   # ssd optimization:
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
+  fileSystems."/".options = ["noatime" "nodiratime" "discard"];
 
   # mount games drive
   fileSystems."/home/sky/Games" = {
@@ -50,8 +53,8 @@
   # bluetooth fix for soft restarts
   systemd.services.from-sleep = {
     description = "Fixes for generic USB bluetooth dongle.";
-    wantedBy = [ "post-resume.target" ];
-    after = [ "post-resume.target" ];
+    wantedBy = ["post-resume.target"];
+    after = ["post-resume.target"];
     script = builtins.readFile ./usbreset.sh;
     scriptArgs = "8087:0029 enp5s0"; # Vendor ID and Product ID here
     serviceConfig.Type = "oneshot";

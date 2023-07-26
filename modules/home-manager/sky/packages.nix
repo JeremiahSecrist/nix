@@ -1,11 +1,16 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = with pkgs; [
     # desktop look & feel
     gnome.gnome-tweaks # desktop settings
     # extensions
     gnomeExtensions.appindicator
     # CLI
-    (pkgs.uutils-coreutils.override { prefix = ""; })
+    (pkgs.uutils-coreutils.override {prefix = "";})
     btop
     dconf2nix
     # nano
@@ -20,7 +25,7 @@
     # cpu-x
     # sl
     # lolcat
-    
+
     ## Desktop
     # tor-browser-bundle-bin
     # firmware-manager
@@ -29,7 +34,7 @@
     # cryptomator
     # firefox
     brave
-    yubioath-desktop
+    yubioath-flutter
     spotify
     discord
     # armcord

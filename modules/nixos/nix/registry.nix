@@ -1,7 +1,10 @@
-{config, inputs, ...}:
 {
+  config,
+  inputs,
+  ...
+}: {
   # registry = {
-    # self.flake = inputs.self;
-    # nixpkgs.flake = inputs.nixpkgs;
+  # self.flake = inputs.self;
+  # nixpkgs.flake = inputs.nixpkgs;
   # };
 }

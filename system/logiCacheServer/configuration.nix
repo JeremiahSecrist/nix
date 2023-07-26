@@ -1,7 +1,11 @@
-{ config, pkgs, lib, ... }:
-
 {
-  imports = [ # Include the results of the hardware scan.
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware.nix
     ./docker.nix
   ];
@@ -34,7 +38,6 @@
     };
     # prevent tampering
     readOnlyStore = true;
-
   };
 
   # Select internationalisation properties.
@@ -50,12 +53,14 @@
   networking = {
     hostName = "logicacheserver"; # Define your hostname.
     defaultGateway = "192.168.1.254";
-    nameservers = [ "1.1.1.1" ];
+    nameservers = ["1.1.1.1"];
     enableIPv6 = false;
-    interfaces.enp6s18.ipv4.addresses = [{
-      address = "192.168.1.2";
-      prefixLength = 24;
-    }];
+    interfaces.enp6s18.ipv4.addresses = [
+      {
+        address = "192.168.1.2";
+        prefixLength = 24;
+      }
+    ];
     networkmanager.enable = true;
   };
   time.timeZone = "America/Huston";
@@ -73,7 +78,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC9lk11IKYSwwbtv3ZPHZQTLrXrfmfbvbPbk2Q+Q+A9W"
     ];
     description = "admin";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
   };
   services.qemuGuest.enable = true;
   # Open ports in the firewall.
@@ -84,5 +89,4 @@
   };
 
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }

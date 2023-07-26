@@ -1,13 +1,15 @@
-{ config, pkgs, lib, ... }:
-
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
       portainer = {
         image = "portainer/portainer-ce:2.14.0";
-        ports = [ "0.0.0.0:9443:9443" ];
+        ports = ["0.0.0.0:9443:9443"];
         volumes = [
           "portainer_data:/data"
           "/var/run/docker.sock:/var/run/docker.sock"
@@ -29,7 +31,7 @@
           CACHE_MAX_AGE = "3650d";
           TZ = "America/Huston";
         };
-        extraOptions = [ "--network=host" ];
+        extraOptions = ["--network=host"];
       };
       lancache_dns = {
         image = "lancachenet/lancache-dns:latest";
@@ -43,7 +45,7 @@
           CACHE_MAX_AGE = "3650d";
           TZ = "America/Huston";
         };
-        extraOptions = [ "--network=host" ];
+        extraOptions = ["--network=host"];
       };
     };
   };

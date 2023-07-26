@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   nix = {
     #auto maintainence
     settings.auto-optimise-store = true;
@@ -9,6 +12,6 @@
       options = "--delete-older-than 7d";
     };
     # prevent tampering
-    readOnlyStore = true;
+    # readOnlyNixStore = true;
   };
 }

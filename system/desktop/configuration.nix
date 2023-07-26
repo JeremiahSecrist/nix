@@ -1,11 +1,14 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, ... }:
-
 {
-  imports = [ # Include the results of the hardware scan.
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware.nix
     # ./fancontrol.nix
   ];
@@ -16,7 +19,7 @@
     initialPassword = "password";
     shell = pkgs.zsh;
     description = "sky";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "kvm"];
   };
   # fixes gnome login issues
   services.teamviewer.enable = true;
@@ -26,7 +29,7 @@
     enable = true;
     enableRenice = true;
   };
-  services = { flatpak.enable = true; };
+  services = {flatpak.enable = true;};
   services.fwupd.enable = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
@@ -39,7 +42,6 @@
     wootility
     lutris
     tailscale
-
   ];
 
   programs.steam = {
@@ -49,16 +51,15 @@
     dedicatedServer.openFirewall =
       false; # Open ports in the firewall for Source Dedicated Server
   };
-  services.ipfs = { enable = true; };
+  services.ipfs = {enable = true;};
   # Open ports in the firewall.
   hardware.wooting.enable = true;
   hardware.steam-hardware.enable = true;
   networking.firewall = {
     enable = false;
-    allowedTCPPorts = [ 34197 27015 ];
-    allowedUDPPorts = [ 34197 27015 ];
+    allowedTCPPorts = [34197 27015];
+    allowedUDPPorts = [34197 27015];
   };
 
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }

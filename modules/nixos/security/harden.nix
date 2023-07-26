@@ -1,15 +1,17 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
 {
-  meta = { maintainers = [ maintainers.joachifm maintainers.emily ]; };
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; {
+  meta = {maintainers = [maintainers.joachifm maintainers.emily];};
 
   # systemd.coredump.enable = mkDefault falset;
 
   boot.kernelPackages = mkDefault pkgs.linuxPackages_hardened;
   boot.kernel.sysctl."kernel.unprivileged_userns_clone" = mkDefault true;
-  nix.settings.allowed-users = mkDefault [ "@users" ];
+  nix.settings.allowed-users = mkDefault ["@users"];
 
   # environment.memoryAllocator.provider = mkDefault "graphene-hardened";
   # environment.variables.SCUDO_OPTIONS = mkDefault "ZeroContents=1";

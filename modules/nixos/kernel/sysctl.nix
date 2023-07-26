@@ -1,4 +1,3 @@
-{config, ... }:
-{
-  boot.kernel.sysctl = { "kernel.sysrq" = 1; };
+{config, ...}: {
+  boot.kernel.sysctl = {"kernel.sysrq" = 1;};
 }

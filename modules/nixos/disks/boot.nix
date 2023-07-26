@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # Bootloader.
   boot.plymouth.enable = true;
   boot.loader = {
@@ -17,5 +20,5 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [{device = "/dev/disk/by-label/swap";}];
 }

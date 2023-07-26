@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # Bootloader.
   boot.plymouth.enable = true;
   boot.loader = {
@@ -9,11 +12,11 @@
     timeout = 2;
   };
   boot.initrd.luks.devices = {
-	  crypted = {
-	    # device = "/dev/sda3";
-	    preLVM = true;
+    crypted = {
+      # device = "/dev/sda3";
+      preLVM = true;
       allowDiscards = true;
-	  };
+    };
   };
   # boot.initrd.luks.devices.luksroot = {
   #   #name = "root";

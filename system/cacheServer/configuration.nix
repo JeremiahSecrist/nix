@@ -1,24 +1,27 @@
-{ config, pkgs, lib, ... }:
-
 {
-  imports = [ # Include the results of the hardware scan.
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware.nix
     # ./docker.nix
   ];
-  environment.systemPackages = with pkgs; [ htop tailscale ];
+  environment.systemPackages = with pkgs; [htop tailscale];
   services.tailscale.enable = true;
   networking = {
     firewall.checkReversePath = "loose";
     hostName = "cache"; # Define your hostname.
-    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    nameservers = ["1.1.1.1" "1.0.0.1"];
     networkmanager.enable = true;
   };
-  boot.kernelModules = [ "tcp_bbr" ];
+  boot.kernelModules = ["tcp_bbr"];
 
   # Enable BBR congestion control
   boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
-  boot.kernel.sysctl."net.core.default_qdisc" =
-    "fq"; # see https://news.ycombinator.com/item?id=14814530
+  boot.kernel.sysctl."net.core.default_qdisc" = "fq"; # see https://news.ycombinator.com/item?id=14814530
 
   security.acme = {
     acceptTerms = true;
@@ -29,9 +32,9 @@
       dnsProvider = "cloudflare";
       credentialsFile = "/var/cf-token";
     };
-    certs = { "cache.local.arouzing.win" = { dnsResolver = "1.1.1.1:53"; }; };
+    certs = {"cache.local.arouzing.win" = {dnsResolver = "1.1.1.1:53";};};
   };
-  users.users.nginx.extraGroups = [ "acme" ];
+  users.users.nginx.extraGroups = ["acme"];
 
   fileSystems."/var/cache/nginx/tempfs" = {
     device = "none";
@@ -54,10 +57,10 @@
       worker_processes  4;
     '';
     appendHttpConfig = ''
-      proxy_cache_path /var/cache/nginx/ 
-      levels=1:2 
-      keys_zone=cachecache:100m 
-      max_size=20g 
+      proxy_cache_path /var/cache/nginx/
+      levels=1:2
+      keys_zone=cachecache:100m
+      max_size=20g
       inactive=365d
       use_temp_path=on;
       proxy_temp_path /var/cache/nginx/tempfs
@@ -149,7 +152,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAGm66rJsr8vjRCYDkH4lEPncPq27o6BHzpmRmkzOiM"
     ];
     description = "admin";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
   };
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -157,10 +160,9 @@
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 80 443 5000 ];
-    allowedUDPPorts = [ 5000 ];
+    allowedTCPPorts = [22 80 443 5000];
+    allowedUDPPorts = [5000];
   };
 
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }

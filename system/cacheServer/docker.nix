@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # networking.firewall.allowedTCPPorts = [ 53 80 443 9443 ];
 
   # virtualisation.oci-containers = {
@@ -50,7 +53,7 @@
   #     };
   #     # pihole = {
   #     #     image = "pihole/pihole:latest";
-  #     #     volumes = [ 
+  #     #     volumes = [
   #     #         "pihole_data/etc-pihole:/etc/pihole"
   #     #         "pihole_data/etc-dnsmasq.d:/etc/dnsmasq.d"
   #     #         ];

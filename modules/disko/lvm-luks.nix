@@ -1,4 +1,8 @@
-{ disks ? [ "/dev/sda" ], partitionSizes ? [ "34G" "120G" "700G" ], ... }: {
+{
+  disks ? ["/dev/sda"],
+  partitionSizes ? ["34G" "120G" "700G"],
+  ...
+}: {
   disk = {
     disk0 = {
       type = "disk";
@@ -8,7 +12,7 @@
         format = "gpt";
         partitions = [
           {
-            type = "partition";
+            # type = "partition";
             name = "ESP";
             start = "1MiB";
             end = "2g";
@@ -24,7 +28,7 @@
           }
           {
             name = "swap";
-            type = "partition";
+            # type = "partition";
             start = "2G";
             end = builtins.elemAt partitionSizes 0;
             part-type = "primary";
@@ -34,14 +38,14 @@
             };
           }
           {
-            type = "partition";
+            # type = "partition";
             name = "luks";
             start = builtins.elemAt partitionSizes 0;
             end = "100%";
             content = {
               type = "luks";
               name = "crypted";
-              extraOpenArgs = [ "--allow-discards" ];
+              extraOpenArgs = ["--allow-discards"];
               content = {
                 type = "lvm_pv";
                 vg = "pool";
@@ -57,7 +61,7 @@
       type = "lvm_vg";
       lvs = {
         root = {
-          type = "lvm_lv";
+          # type = "lvm_lv";
           size = builtins.elemAt partitionSizes 1;
           content = {
             type = "filesystem";
@@ -69,7 +73,7 @@
           };
         };
         home = {
-          type = "lvm_lv";
+          # type = "lvm_lv";
           size = builtins.elemAt partitionSizes 2;
           content = {
             type = "filesystem";
