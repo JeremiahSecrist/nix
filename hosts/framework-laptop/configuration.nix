@@ -8,7 +8,6 @@
   lib,
   ...
 }: {
-  
   networking = {
     hostName = "lappy"; # Define your hostname.
   };
@@ -36,13 +35,13 @@
   #     # wayland = true;
   #   };
   # };
-  programs.swaylock.enable = true;
-  programs.hyprland.enable = true;
+  services.fstrim.enable = true;
   programs.steam.enable = true;
   programs.gamemode = {
     enable = true;
     enableRenice = true;
   };
+  base.defaults.region.enable = true;
   hardware = {
     opengl.enable = true;
     opengl.driSupport = true;

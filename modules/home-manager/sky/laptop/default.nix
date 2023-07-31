@@ -4,4 +4,4 @@
   stdenv,
   lib,
   ...
-}: {imports = [../dconf.nix ./laptopU2f.nix ];}
+}: {imports = [../dconf.nix ./laptopU2f.nix];}

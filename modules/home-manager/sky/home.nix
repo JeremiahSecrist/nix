@@ -6,10 +6,13 @@
   ...
 }: let
   g = {myuid = "1000";};
+  font = "JetBrainsMono Nerd Font";
+  accent = "bd93f9";
+  background = "11111B";
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  imports = [./dconf.nix ./packages.nix ./laptop/noisetorch.nix ./sway-lock.nix];
+  imports = [./dconf.nix ./packages.nix ./laptop/noisetorch.nix];
   home = {
     username = "sky";
     homeDirectory = "/home/sky";
@@ -20,6 +23,187 @@ in {
       vscode.enable = false;
     };
   };
+  nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      });
+    })
+  ];
+  programs.waybar = {
+    enable = true;
+    settings.mainBar = {
+      height = 35;
+      spacing = 4;
+      modules-left = ["wlr/workspaces"];
+      # modules-right = ["pulseaudio" "network" "cpu" "memory" "temperature" "battery" "clock" "tray"];
+      clock = {
+        timezone = "America/New_York";
+        tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        format = "{:%a, %d %b, %I:%M %p}";
+      };
+      battery = {
+        states = {
+          good = 95;
+          warning = 30;
+          critical = 15;
+        };
+        format = "{capacity}% {icon}";
+        format-charging = "{capacity}% ";
+        format-plugged = "{capacity}% ";
+        format-alt = "{time} {icon}";
+        format-icons = ["" "" "" "" ""];
+      };
+      network = {
+        format-wifi = "{essid} ({signalStrength}%) ";
+        format-ethernet = "Ethernet ";
+        tooltip-format = "{ifname} via {gwaddr}";
+        format-linked = "{ifname} (No IP)";
+        format-disconnected = "Disconnected ⚠";
+        format-alt = "{ifname}: {ipaddr}/{cidr}";
+      };
+      pulseaudio = {
+        format = "{volume}% {icon} {format_source}";
+        format-bluetooth = "{volume}% {icon} {format_source}";
+        format-bluetooth-muted = "{icon} {format_source}";
+        format-muted = "{format_source}";
+        format-source = "{volume}% ";
+        format-source-muted = "";
+        format-icons = {
+          headphone = "";
+          hands-free = "";
+          headset = "";
+          phone = "";
+          portable = "";
+          car = "";
+          default = ["" "" ""];
+        };
+        on-click = "pavucontrol";
+      };
+      # tray = {
+      #     spacing = 10;
+      # };
+      cpu = {
+        format = "{usage}% ";
+        tooltip = false;
+      };
+      memory = {
+        format = "{}% ";
+      };
+      temperature = {
+        format = "{temperatureC}°C {icon}";
+        format-icons = [""];
+      };
+    };
+    style = ''
+      * {
+          font-family: ${font}, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          color: #${accent};
+      }
+
+      window#waybar {
+          background-color: rgba(43, 48, 59, 0);
+          border-bottom: 3px solid rgba(100, 114, 125, 0);
+          transition-property: background-color;
+          transition-duration: .5s;
+      }
+
+      window#waybar.hidden {
+          opacity: 0.2;
+      }
+
+      button {
+          /* Use box-shadow instead of border so the text isn't offset */
+          box-shadow: inset 0 -3px transparent;
+          /* Avoid rounded borders under each button name */
+          border: none;
+          border-radius: 0;
+      }
+
+      button:hover {
+          background: inherit;
+          box-shadow: inset 0 -3px #ffffff;
+      }
+
+      #workspaces button {
+          padding: 5px;
+          background-color: transparent;
+          color: #${accent};
+      }
+
+      #workspaces button:hover {
+          background: rgba(0, 0, 0, 0.2);
+      }
+
+      #workspaces button.active{
+          color: #${accent};
+          border-radius: 10px;
+          box-shadow: inset 0 -3px #${accent};
+      }
+
+      #workspaces button.urgent {
+          background-color: #eb4d4b;
+      }
+
+      #mode {
+          background-color: #64727D;
+          border-bottom: 3px solid #ffffff;
+      }
+
+      #clock,
+      #battery,
+      #cpu,
+      #memory,
+      #disk,
+      #temperature,
+      #backlight,
+      #network,
+      #pulseaudio,
+      #wireplumber,
+      #custom-media,
+      #tray,
+      #mode,
+      #idle_inhibitor,
+      #scratchpad,
+      #mpd,
+      #window,
+      #workspaces {
+          margin-top: .70rem;
+          background: #${background};
+          padding: 0 1rem;
+          border-radius: .75rem;
+      }
+      #battery{
+          padding-right: 1.75rem;
+      }
+      #network{
+          padding-right: 1.5rem;
+      }
+      #memory,
+      #cpu{
+          padding-right: 1.25rem;
+      }
+      #tray{
+          margin-right: .5rem;
+      }
+      /* If workspaces is the leftmost module, omit left margin */
+      .modules-left > widget:first-child > #workspaces {
+          margin-left: .9rem;
+      }
+
+      .modules-right{
+          margin-right: .70rem;
+      }
+
+      /* If workspaces is the rightmost module, omit right margin */
+      .modules-right > widget:last-child > #workspaces {
+          margin-right: .9rem;
+      }
+
+    '';
+  };
+
   #   wayland.windowManager.hyprland.enable = true;
   #  wayland.windowManager.hyprland.extraConfig = ''
   #   $mod = SUPER
@@ -68,7 +252,11 @@ in {
     maxCacheTtlSsh = 345600;
     extraConfig = "\n";
   };
+  wayland.windowManager.hyprland.systemdIntegration = true;
+  wayland.windowManager.hyprland.xwayland.hidpi = true;
   programs = {
+    swaylock.enable = true;
+
     home-manager.enable = true;
     # zellij = {
     #   enable = true;

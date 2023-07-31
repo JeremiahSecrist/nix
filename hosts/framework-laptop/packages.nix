@@ -7,6 +7,7 @@
     wofi
     foot
     waybar
+    (pkgs.callPackage ./lemurs.nix {})
     # rest of your packages
   ];
 }

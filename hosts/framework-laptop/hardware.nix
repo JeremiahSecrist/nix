@@ -12,13 +12,41 @@
   boot = {
     #    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     initrd = {
-      kernelModules = ["dm-snapshot"];
-      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod"];
+      kernelModules = ["dm-snapshot" "vendor-reset"];
+      availableKernelModules = [
+        "xhci_pci"
+        "thunderbolt"
+        "nvme"
+        "uas"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+        "amdgpu"
+        "vendor-reset"
+      ];
     };
+    kernelModules = [
+      "kvm-intel"
+      "amdgpu"
+      "vendor-reset"
+    ];
     supportedFilesystems = ["ntfs"];
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
+    extraModulePackages = with config.boot.kernelPackages; [vendor-reset];
     kernelParams = [];
+    kernelPatches = [
+      {
+        name = "config";
+        patch = null;
+        extraConfig = ''
+          KALLSYMS_ALL y
+          FTRACE y
+          KPROBES y
+          PCI_QUIRKS y
+          KALLSYMS y
+          FUNCTION_TRACER y
+        '';
+      }
+    ];
   };
   services.xserver.videoDriver = "i915";
 

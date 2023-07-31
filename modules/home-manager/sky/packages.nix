@@ -6,6 +6,7 @@
 }: {
   home.packages = with pkgs; [
     # desktop look & feel
+    waybar
     gnome.gnome-tweaks # desktop settings
     # extensions
     gnomeExtensions.appindicator
