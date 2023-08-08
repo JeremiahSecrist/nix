@@ -10,9 +10,11 @@
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
   boot = {
+    kernelPackages = pkgs.linuxPackages_lqx;
+
     #    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     initrd = {
-      kernelModules = ["dm-snapshot" "vendor-reset"];
+      kernelModules = ["dm-snapshot"];
       availableKernelModules = [
         "xhci_pci"
         "thunderbolt"
@@ -21,34 +23,18 @@
         "usb_storage"
         "usbhid"
         "sd_mod"
-        "amdgpu"
-        "vendor-reset"
       ];
     };
     kernelModules = [
       "kvm-intel"
-      "amdgpu"
-      "vendor-reset"
     ];
     supportedFilesystems = ["ntfs"];
-    extraModulePackages = with config.boot.kernelPackages; [vendor-reset];
+    extraModulePackages = with config.boot.kernelPackages; [];
     kernelParams = [];
     kernelPatches = [
-      {
-        name = "config";
-        patch = null;
-        extraConfig = ''
-          KALLSYMS_ALL y
-          FTRACE y
-          KPROBES y
-          PCI_QUIRKS y
-          KALLSYMS y
-          FUNCTION_TRACER y
-        '';
-      }
     ];
   };
-  services.xserver.videoDriver = "i915";
+  # services.xserver.videoDriver = "i915";
 
   fileSystems."/run/media/sky/windows10" = {
     device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S59ANMFNB34577E-part3";
@@ -64,6 +50,7 @@
     opengl = {
       enable = true;
       driSupport = true;
+      driSupport32Bit = true;
     };
     # laptop supports bt
     bluetooth.enable = true;

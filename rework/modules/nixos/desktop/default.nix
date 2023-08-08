@@ -1,0 +1,6 @@
+{
+    imports = [
+        ./displayManager
+        ./hyprland
+    ];
+}

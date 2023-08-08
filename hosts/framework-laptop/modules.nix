@@ -5,11 +5,11 @@
   ...
 }: {
   imports = [
-    ../../modules/nixos/stylix.nix
+    #../../modules/nixos/stylix.nix
     ../../modules/nixos/desktop/hyprland.nix
     ../../modules/nixos/desktop/gnome.nix
     ../../modules/nixos/desktop/sound.nix
-    ../../modules/nixos/desktop/lemurs.nix
+    ../../modules/nixos/desktop/lemurs
     ../../modules/nixos/disks/encryptedBoot.nix #{ installDir = "/dev/sda"; }
     ../../modules/nixos/kernel/sysctl.nix
     ../../modules/nixos/networking/nm.nix

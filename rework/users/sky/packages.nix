@@ -8,17 +8,16 @@
     # desktop look & feel
     # waybar
     swaynotificationcenter
-    swaybg
-    gnome.gnome-tweaks # desktop settings
+    # gnome.gnome-tweaks # desktop settings
     # extensions
-    gnomeExtensions.appindicator
+    # gnomeExtensions.appindicator
     # CLI
     kitty
     nix-index
     comma
     #(pkgs.uutils-coreutils.override {prefix = "";})
     btop
-    dconf2nix
+    # dconf2nix
     # nano
     git
     gnupg
@@ -36,7 +35,7 @@
     # tor-browser-bundle-bin
     # firmware-manager
     # lutris
-    distrobox
+    # distrobox
     # cryptomator
     # firefox
     brave

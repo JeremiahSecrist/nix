@@ -9,6 +9,6 @@
     initialPassword = "password";
     shell = pkgs.zsh;
     description = "sky";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "seat"];
   };
 }

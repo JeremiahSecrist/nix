@@ -3,6 +3,7 @@
   lib,
   linux-pam,
   rustPlatform,
+  bash,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "lemurs";
@@ -10,17 +11,21 @@ rustPlatform.buildRustPackage rec {
 
   src = fetchFromGitHub {
     owner = "coastalwhite";
-    repo = pname;
+    repo = "lemurs";
     rev = "v${version}";
-    sha256 = "sha256-6mNSLEWafw8yDGnemOhEiK8FTrBC+6+PuhlbOXTGmN0=";
+    hash = "sha256-6mNSLEWafw8yDGnemOhEiK8FTrBC+6+PuhlbOXTGmN0=";
   };
 
-  cargoSha256 = "sha256-nfUBC1HSs7PcIbD7MViJFkfFAPda83XbAupNeShfwOs=";
+  cargoHash = "sha256-nfUBC1HSs7PcIbD7MViJFkfFAPda83XbAupNeShfwOs=";
 
   # Fixes a lock issue
   preConfigure = "cargo update --offline";
 
-  buildInputs = [linux-pam];
+  LEMURS_SYSTEM_SHELL = "${bash}/bin/bash";
+
+  buildInputs = [
+    linux-pam
+  ];
 
   meta = with lib; {
     description = "A customizable TUI display/login manager written in Rust";

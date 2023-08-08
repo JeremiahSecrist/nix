@@ -20,7 +20,6 @@ in
       ./packages.nix
       inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
       inputs.disko.nixosModules.disko
-      inputs.stylix.nixosModules.stylix
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;

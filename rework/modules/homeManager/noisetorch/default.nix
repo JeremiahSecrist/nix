@@ -13,6 +13,10 @@ in {
       default = "";
       type = types.str;
     };
+    threshold = mkOption {
+      default = 95;
+      type = types.int;
+    };
   };
   config = mkIf cfg.enable {
     systemd.user.services = {
@@ -25,7 +29,7 @@ in {
         Service = {
           Type = "simple";
           RemainAfterExit = "yes";
-          ExecStart = "${pkgs.noisetorch}/bin/noisetorch -i -s ${cfg.device} -t 95";
+          ExecStart = "${pkgs.noisetorch}/bin/noisetorch -i -s ${cfg.device} -t ${builtins.toString cfg.threshold}";
           ExecStop = "${pkgs.noisetorch}/bin/noisetorch -u";
           Restart = "on-failure";
           RestartSec = "3";

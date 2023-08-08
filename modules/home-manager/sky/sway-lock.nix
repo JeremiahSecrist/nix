@@ -52,11 +52,11 @@ in {
 
     xdg.configFile."swaylock/config" = mkIf (cfg.settings != {}) {
       text = concatStrings (mapAttrsToList (n: v:
-        if v == false
+        if !v
         then ""
         else
           (
-            if v == true
+            if v
             then n
             else n + "=" + builtins.toString v
           )
