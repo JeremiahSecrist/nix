@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   config,
   pkgs,
@@ -32,7 +33,9 @@
       ];
     };
   };
-
+  system.nixos.tags = [
+    "${toString self.rev or self.dirtyRev}"
+  ];
   # TODO decide what should be in defaults module
   environment.systemPackages = with pkgs; [
   ];
