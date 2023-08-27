@@ -77,6 +77,7 @@
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           just
+          alejandra
         ];
 
         shellHook = ''
