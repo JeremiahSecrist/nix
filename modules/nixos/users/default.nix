@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./sky.nix
+  ];
+}
