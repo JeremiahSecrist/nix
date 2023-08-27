@@ -43,7 +43,7 @@ in {
         "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
         "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
       ];
-      width = { fraction = 0.3; };
+      width = {fraction = 0.3;};
       # position = "top";
       # verticalOffset = { absolute = 0; };
       hideIcons = false;
@@ -68,7 +68,7 @@ in {
       )
     '';
   };
-   dconf = {
+  dconf = {
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {

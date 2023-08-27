@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkEnableOption mkOption mkIf types;
   cfg = config.personal.noisetorch;
-  settingsFormat = pkgs.formats.toml { };
+  settingsFormat = pkgs.formats.toml {};
   settingsFile = settingsFormat.generate "config.toml" cfg.settings;
 in {
   options.personal.noisetorch = {
@@ -25,11 +25,11 @@ in {
         type = types.bool;
       };
       FilterInput = mkOption {
-        default = (cfg.settings.LastUsedInput != "") ;
+        default = cfg.settings.LastUsedInput != "";
         type = types.bool;
       };
       FilterOutput = mkOption {
-        default = (cfg.settings.LastUsedOutput != "");
+        default = cfg.settings.LastUsedOutput != "";
         type = types.bool;
       };
       LastUsedInput = mkOption {

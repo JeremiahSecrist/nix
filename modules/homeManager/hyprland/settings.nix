@@ -53,12 +53,10 @@
     "CTRL SHIFT,left,resizeactive,-50 0"
     "CTRL SHIFT,up,resizeactive,0 -50"
     "CTRL SHIFT,down,resizeactive,0 50"
-
   ];
   binde = [
     ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
     ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
-
   ];
   bindl = [
     ",switch:off:Lid Switch, exec,hyprctl keyword monitor \"eDP-1, highres , 0x0, 1\""
