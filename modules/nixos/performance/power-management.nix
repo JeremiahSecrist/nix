@@ -1,6 +1,0 @@
-{ config, ... }:
-{
-  powerManagement = {
-   enable = true;
-  };
-}

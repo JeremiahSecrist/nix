@@ -1,0 +1,110 @@
+root {
+    --accent: bd93f9;
+    --font: JetBrainsMono Nerd Font;
+    --background: #11111B;
+
+}
+* {
+    font-family: var(--accent), FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 28pt;
+    color: var(--accent);
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0);
+    border-bottom: 3px solid rgba(100, 114, 125, 0);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button {
+    padding: .35rem;
+    background-color: transparent;
+    color: var(--accent);
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active{
+    color: var(--accent);
+    border-radius: 10px;
+    box-shadow: inset 0 -3px var(--accent);
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd,
+#window,
+#workspaces {
+    margin: .20rem;
+    background: var(--background);
+
+    border-radius: .75rem;
+}
+#battery{
+    padding-right: 1.75rem;
+}
+#network{
+    padding-right: 1.5rem;
+}
+#memory,
+#cpu{
+    padding-right: 1.25rem;
+}
+#tray{
+    margin-right: .20rem;
+}
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: .20rem;
+}
+
+.modules-right{
+    margin-right: .20rem;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: .20rem;
+}
