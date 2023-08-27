@@ -7,6 +7,9 @@ default:
 vm:
     {{base}} build-vm {{flake}}
 
+run-vm: vm
+    ./result/bin/run-*-vm
+
 switch:
     {{base}} switch {{flake}}
 
@@ -21,3 +24,6 @@ test:
 
 dry:
     {{base}} dry-build {{flake}}
+
+fmt:
+    alejandra .
