@@ -33,6 +33,7 @@ in {
       MOZ_ENABLE_WAYLAND = 1;
       TERMINAL = "kitty";
       XDG_CURRENT_DESKTOP = "hyprland";
+      DIRENV_LOG_FORMAT="";
       # TERM = "kitty";
     };
   };
