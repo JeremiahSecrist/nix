@@ -23,7 +23,6 @@
       specialArgs = {inherit inputs self;};
       pkgs = import nixpkgs {
         inherit system;
-
         config.allowUnfree = true;
       };
       homeManagerModules = import ./modules/homeManager;
