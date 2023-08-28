@@ -48,6 +48,8 @@
   #     gtk.enable = true;
   #   };
   # };
+  security.apparmor.enable = true;
+  security.apparmor.packages = [ pkgs.apparmor-profiles ];
 
   zramSwap.enable = lib.mkDefault true;
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
