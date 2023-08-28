@@ -119,6 +119,7 @@ in {
     settings = {
       confirm_os_window_close = 0;
       detect_urls = true;
+      enable_audio_bell = false;
       open_url_with = "${pkgs.firefox-beta}/bin/firefox";
     };
     extraConfig = ''
