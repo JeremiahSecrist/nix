@@ -8,10 +8,16 @@
     # desktop look & feel
     # waybar
     webcord
+    xdg-utils
+    appimage-run
+    popsicle
+
+    # zathura # pdf viewer
     # gnome.gnome-tweaks # desktop settings
     # extensions
     # gnomeExtensions.appindicator
     # CLI
+    prismlauncher
     nix-index
     comma
     #(pkgs.uutils-coreutils.override {prefix = "";})

@@ -20,6 +20,7 @@ in {
     xdg.mime = {
       defaultApplications = {
         "inode/directory" = "thunar.desktop";
+        "application/pdf" = "zathura.desktop";
       };
       removedAssociations = {
         "inode/directory" = "nemo.desktop";

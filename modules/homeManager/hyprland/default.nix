@@ -10,7 +10,7 @@ in {
   options.personal.desktop.hyprland = {
     enable = mkEnableOption "";
     settings = mkOption {
-      default = import ./settings.nix {};
+      default = import ./settings.nix {inherit config;};
       type = types.attrs;
     };
   };

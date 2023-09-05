@@ -18,7 +18,6 @@
     services.qemuGuest.enable = true;
     services.spice-vdagentd.enable = true;
     environment.sessionVariables = {
-      MOZ_ENABLE_WAYLAND = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
       WLR_RENDERER_ALLOW_SOFTWARE = "1";
     };
@@ -49,7 +48,7 @@
   #   };
   # };
   security.apparmor.enable = true;
-  security.apparmor.packages = [ pkgs.apparmor-profiles ];
+  security.apparmor.packages = [pkgs.apparmor-profiles];
 
   zramSwap.enable = lib.mkDefault true;
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};

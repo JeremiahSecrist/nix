@@ -7,10 +7,10 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # anyrun = {
+    #   url = "github:Kirottu/anyrun";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     disko = {
       url = "github:nix-community/disko/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,7 +47,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 sharedModules = [
-                  anyrun.homeManagerModules.default
+                  # anyrun.homeManagerModules.default
                   self.homeManagerModules.default
                 ];
                 users = homeUsers;
@@ -86,11 +86,13 @@
         extra-trusted-public-keys = [
           "laptop-deploy:OMe69aOGxkvIhEYIECd1U3CE/PAouObowS7W4nDS460="
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+          # "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+          "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
         ];
         builders-use-substitutes = true;
-         extra-substituters = [
-          "https://anyrun.cachix.org"
+        extra-substituters = [
+          "https://cache.ngi0.nixos.org"
+          # "https://anyrun.cachix.org"
           "https://cache.nixos.org"
         ];
       };

@@ -1,10 +1,19 @@
-{...}: {
+{config, ...}: let
+  pointer = config.home.pointerCursor;
+in {
   env = [
     "WLR_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0"
-    "XCURSOR_SIZE,36"
+    "XCURSOR_SIZE,${toString pointer.size}"
+    "GDK_SCALE,1.75"
   ];
 
-  monitor = ",highrr,auto,auto";
+  monitor = [
+    "eDP-1,highres,auto,1.75"
+    ",highrr,auto,auto"
+  ];
+  xwayland = {
+    force_zero_scaling = true;
+  };
 
   "$mainMod" = "SUPER";
 
@@ -22,7 +31,7 @@
     "$mainMod, P, pseudo," # dwindle
     "$mainMod, J, togglesplit," # dwindle
     "$mainMod, F, fullscreen"
-    "CTRL ALT, V, exec, sleep 1 && YDOTOOL_SOCKET=/tmp/ydotools ydotool type -d 150 \"$(wl-paste)\""
+    "CTRL ALT, V, exec, sleep 1 && YDOTOOL_SOCKET=/run/user/1000/.ydotool_socket ydotool type -d 150 $(wl-paste)"
     "$mainMod, left, movefocus, l"
     "$mainMod, right, movefocus, r"
     "$mainMod, up, movefocus, u"
@@ -47,21 +56,21 @@
     "$mainMod SHIFT, 8, movetoworkspace, 8"
     "$mainMod SHIFT, 9, movetoworkspace, 9"
     "$mainMod SHIFT, 0, movetoworkspace, 10"
-    "CTRL ALT, left, workspace, e-1"
-    "CTRL ALT, right, workspace, e+1"
-    "CTRL SHIFT,right,resizeactive,50 0"
-    "CTRL SHIFT,left,resizeactive,-50 0"
-    "CTRL SHIFT,up,resizeactive,0 -50"
-    "CTRL SHIFT,down,resizeactive,0 50"
+    "$mainMod ALT, left, workspace, e-1"
+    "$mainMod ALT, right, workspace, e+1"
   ];
   binde = [
     ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
     ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+    "$mainMod SHIFT,right,resizeactive,50 0"
+    "$mainMod SHIFT,left,resizeactive,-50 0"
+    "$mainMod SHIFT,up,resizeactive,0 -50"
+    "$mainMod SHIFT,down,resizeactive,0 50"
   ];
   bindl = [
-    ",switch:off:Lid Switch, exec,hyprctl keyword monitor \"eDP-1, highres , 0x0, 1\""
-    ",switch:on:Lid Switch, exec,hyprctl keyword monitor \"eDP-1, disable\""
-    ",switch:on:Lid Switch, exec,swaylock"
+    # ",switch:off:Lid Switch, exec,hyprctl keyword monitor \"eDP-1, highres, auto, 1.75\""
+    # ",switch:on:Lid Switch, exec,hyprctl keyword monitor \"eDP-1, disable\""
+    ",switch:off:Lid Switch, exec,swaylock"
   ];
   bindm = [
     "$mainMod, mouse:272, movewindow"
@@ -76,9 +85,10 @@
   exec-once = [
     # "waybar"
     # "swaync"
+    "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
     "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     "swaybg -i $HOME/Pictures/wallpapers/Darth-VaderSci-Fi-Star-Wars-4k-Ultra-HD-Wallpaper.jpg"
-    "systemctl --user restart waybar.service"
+    "sleep 1 && systemctl --user restart waybar.service"
   ];
 
   # Some default env vars.

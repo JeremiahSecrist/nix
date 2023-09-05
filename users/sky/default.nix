@@ -33,42 +33,49 @@ in {
       MOZ_ENABLE_WAYLAND = 1;
       TERMINAL = "kitty";
       XDG_CURRENT_DESKTOP = "hyprland";
-      DIRENV_LOG_FORMAT="";
+      DIRENV_LOG_FORMAT = "";
       # TERM = "kitty";
     };
-  };
-  programs.anyrun = {
-    enable = true;
-    config = {
-      plugins = [
-        "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
-        "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
-      ];
-      width = {fraction = 0.3;};
-      # position = "top";
-      # verticalOffset = { absolute = 0; };
-      hideIcons = false;
-      ignoreExclusiveZones = false;
-      layer = "overlay";
-      hidePluginInfo = false;
-      closeOnClick = false;
-      showResultsImmediately = true;
-      maxEntries = null;
+    pointerCursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 22;
+      # x11.enable = true;
+      gtk.enable = true;
     };
-    extraCss = ''
-      .some_class {
-        background: red;
-      }
-    '';
-
-    extraConfigFiles."some-plugin.ron".text = ''
-      Config(
-        // for any other plugin
-        // this file will be put in ~/.config/anyrun/some-plugin.ron
-        // refer to docs of xdg.configFile for available options
-      )
-    '';
   };
+  # programs.anyrun = {
+  #   enable = true;
+  #   config = {
+  #     plugins = [
+  #       "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libapplications.so"
+  #       "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/libkidex.so"
+  #     ];
+  #     width = {fraction = 0.3;};
+  #     # position = "top";
+  #     # verticalOffset = { absolute = 0; };
+  #     hideIcons = false;
+  #     ignoreExclusiveZones = false;
+  #     layer = "overlay";
+  #     hidePluginInfo = false;
+  #     closeOnClick = false;
+  #     showResultsImmediately = true;
+  #     maxEntries = null;
+  #   };
+  #   extraCss = ''
+  #     .some_class {
+  #       background: red;
+  #     }
+  #   '';
+
+  #   extraConfigFiles."some-plugin.ron".text = ''
+  #     Config(
+  #       // for any other plugin
+  #       // this file will be put in ~/.config/anyrun/some-plugin.ron
+  #       // refer to docs of xdg.configFile for available options
+  #     )
+  #   '';
+  # };
   dconf = {
     enable = true;
     settings = {
@@ -89,6 +96,7 @@ in {
       package = pkgs.rose-pine-icon-theme;
     };
   };
+
   editorconfig = {
     enable = true;
     settings = {
@@ -132,6 +140,11 @@ in {
     target = "./Pictures/wallpapers";
   };
   xdg.enable = true;
+  xdg.mime.enable = true;
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps = {
+    defaultApplications."application/pdf" = ["zathura.desktop"];
+  };
   # services.easyeffects = {
   #     enable = true;
   #     preset = "noisereduc";
@@ -218,6 +231,12 @@ in {
       };
     };
     home-manager.enable = true;
+    zathura = {
+      enable = true;
+      options = {
+        selection-clipboard = "clipboard";
+      };
+    };
     # zellij = {
     #   enable = true;
 
@@ -228,7 +247,7 @@ in {
 
     vscode = {
       enable = true;
-      mutableExtensionsDir = true;
+      # mutableExtensionsDir = true;
     };
 
     gpg = {
@@ -267,10 +286,10 @@ in {
       enable = true;
       userName = "Jermeiah S";
       userEmail = "owner@arouzing.xyz";
-      signing = {
-        key = "59472c1F0709FBA9";
-        signByDefault = true;
-      };
+      # signing = {
+      #   key = "59472c1F0709FBA9";
+      #   signByDefault = true;
+      # };
       diff-so-fancy.enable = true;
       lfs.enable = true;
     };

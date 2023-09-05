@@ -97,6 +97,14 @@
             ];
           };
         };
+        nix = {
+          size = "200g";
+          content = {
+            type = "filesystem";
+            format = "bcachefs";
+            mountpoint = "/nix";
+          };
+        };
         home = {
           # type = "lvm_lv";
           size = builtins.elemAt partitionSizes 2;
@@ -106,7 +114,31 @@
             mountpoint = "/home";
           };
         };
+        games = {
+          size = "510.6G";
+          content = {
+            type = "filesystem";
+            format = "bcachefs";
+            mountpoint = "/mnt/games";
+          };
+        };
+        var = {
+          size = "15g";
+          content = {
+            type = "filesystem";
+            format = "ext4";
+            mountpoint = "/var";
+          };
+        };
       };
     };
   };
+  nodev = {
+      "/tmp" = {
+        fsType = "tmpfs";
+        mountOptions = [
+          "size=16G"
+        ];
+      };
+    };
 }

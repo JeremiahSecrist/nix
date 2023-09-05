@@ -28,14 +28,15 @@ in {
       };
     };
     boot = {
-      kernelPackages = pkgs.linuxPackages_lqx;
-
-      #    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+      # kernelPackages = pkgs.linuxPackages_lqx;
+      kernel.sysctl = {
+        "net.core.default_qdisc" = "fq";
+        "net.ipv4.tcp_congestion_control" = "bbr";
+      };
       initrd = {
         kernelModules = [
           "dm-snapshot"
           "dm_mirror"
-          "i915"
           "usbhid"
           # "vendor-reset"
         ];
@@ -53,10 +54,14 @@ in {
         #"amdgpu"
         "kvm-intel"
       ];
-      supportedFilesystems = ["ntfs"];
-      # extraModulePackages = with config.boot.kernelPackages; [vendor-reset];
+      supportedFilesystems = [
+        "ntfs"
+        "bcachefs"
+        ];
+      # extraModulePackages = with config.boot.kernelPackages; [linuxPackages_testing_bcachefs];
       kernelParams = [
         # "amdgpu.noretry=0"
+        "i915.enable_fbc=1"
         "amdgpu.lockup_timeout=1000"
         "amdgpu.gpu_recovery=1"
         # "amdgpu.audio=0"
@@ -64,18 +69,18 @@ in {
         # "radeon.si_support=0"
       ];
       kernelPatches = [
-        {
-          name = "config";
-          patch = null;
-          extraConfig = ''
-            KALLSYMS_ALL y
-            FTRACE y
-            KPROBES y
-            PCI_QUIRKS y
-            KALLSYMS y
-            FUNCTION_TRACER y
-          '';
-        }
+        # {
+        #   name = "config";
+        #   patch = null;
+        #   extraConfig = ''
+        #     KALLSYMS_ALL y
+        #     FTRACE y
+        #     KPROBES y
+        #     PCI_QUIRKS y
+        #     KALLSYMS y
+        #     FUNCTION_TRACER y
+        #   '';
+        # }
       ];
     };
     # enable proper mouse usage on xorg.
@@ -105,7 +110,7 @@ in {
     services.fstrim.enable = true;
     # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
     powerManagement.cpuFreqGovernor = "powersave";
-    powerManagement.powertop.enable = true;
+    #powerManagement.powertop.enable = true;
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.cpu.intel.updateMicrocode =
       lib.mkDefault config.hardware.enableRedistributableFirmware;

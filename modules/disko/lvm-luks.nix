@@ -80,6 +80,15 @@
             format = "ext4";
             mountpoint = "/home";
           };
+        var = {
+          # type = "lvm_lv";
+          size = builtins.elemAt partitionSizes 2;
+          content = {
+            type = "filesystem";
+            format = "ext4";
+            mountpoint = "/var`
+            ";
+          };
         };
       };
     };
