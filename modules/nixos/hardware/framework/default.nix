@@ -58,30 +58,32 @@ in {
       ];
       # extraModulePackages = with config.boot.kernelPackages; [vendor-reset];
       kernelParams = [
-        # "amdgpu.noretry=0"
         "intel_iommu=on"
         "iommu=pt"
         "i915.enable_fbc=1"
-        "amdgpu.lockup_timeout=1000"
-        "amdgpu.gpu_recovery=1"
+        "i915.modeset=1"
+        # "amdgpu.lockup_timeout=1000"
+        # "amdgpu.gpu_recovery=1"
+        # "amdgpu.noretry=0"
+        # "amdgpu.reset_method=4"
         # "amdgpu.audio=0"
         # "amdgpu.si_support=1"
         # "radeon.si_support=0"
       ];
-      kernelPatches = [
-        # {
-        #   name = "config";
-        #   patch = null;
-        #   extraConfig = ''
-        #     KALLSYMS_ALL y
-        #     FTRACE y
-        #     KPROBES y
-        #     PCI_QUIRKS y
-        #     KALLSYMS y
-        #     FUNCTION_TRACER y
-        #   '';
-        # }
-      ];
+      # kernelPatches = [
+      #   {
+      #     name = "config";
+      #     patch = null;
+      #     extraConfig = ''
+      #       KALLSYMS_ALL y
+      #       FTRACE y
+      #       KPROBES y
+      #       PCI_QUIRKS y
+      #       KALLSYMS y
+      #       FUNCTION_TRACER y
+      #     '';
+      #   }
+      # ];
     };
     # enable proper mouse usage on xorg.
     services.xserver.libinput.enable = true;

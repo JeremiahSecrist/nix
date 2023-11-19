@@ -14,22 +14,33 @@
   # nixpkgs.config.permittedInsecurePackages = [
   #   "openssl-1.1.1u"
   # ];
+  services.pcscd.enable = true;
+  services.pcscd.plugins = [
+    pkgs.ccid
+    pkgs.pcsclite
+  ];
+  services.udev.packages = [
+      pkgs.yubikey-personalization
+      pkgs.libu2f-host
+    ];
+    services.yubikey-agent.enable = true;
   environment.sessionVariables = {
     # NIXOS_SPECIALIZATION = lib.mkDefault "default";
   };
   # specialisation = {
   # gnome.configuration = {
   environment.sessionVariables = {
-    MESA_VK_DEVICE_SELECT_FORCE_DEFAULT_DEVICE = "1";
-    MESA_VK_WSI_PRESENT_MODE = "immediate";
+    # MESA_VK_DEVICE_SELECT_FORCE_DEFAULT_DEVICE = "1";
+    # MESA_VK_WSI_PRESENT_MODE = "immediate";
     KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+    RADV_PERFTEST = "nosam"; #performance improvement for eGPUs
   };
   # personal.desktop.hyprland.enable = lib.mkForce false;
-  services.udev.extraRules = ''
-    #  SUBSYSTEM=="drm", KERNEL=="card[0-9]", TAG-="seat", TAG-="master-of-seat", ENV{ID_FOR_SEAT}="", ENV{ID_PATH}=""
+#  services.udev.extraRules = ''
+#     SUBSYSTEM=="drm", KERNEL=="card[0-9]", TAG-="seat", TAG-="master-of-seat", ENV{ID_FOR_SEAT}="", ENV{ID_PATH}=""
     #  SUBSYSTEM=="drm", KERNEL=="card[0-9]", TAG-="mutter-device-preferred-primary"
-     SUBSYSTEM=="drm", KERNEL=="card1", TAG+="seat", TAG+="master-of-seat"
-  '';
+#     SUBSYSTEM=="drm", KERNEL=="card1", TAG+="seat", TAG+="master-of-seat"
+#  '';
   #  ENV{DEVNAME}=="/dev/dri/card0", TAG="dummytag"
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable = false;
@@ -75,7 +86,7 @@
   # security.apparmor.packages = [pkgs.apparmor-profiles];
 
   zramSwap.enable = lib.mkDefault true;
-
+  services.teamviewer.enable = true;
   virtualisation.libvirtd.enable = true;
   environment.systemPackages = with pkgs; [
     virt-manager
@@ -102,12 +113,7 @@
     };
     defaultSession = "plasmawayland";
   };
-  services = {
-    narrowlink = {
-      gateway = builtins.fromYaml ./gateway.yml;
-      };
-    };
-  };
+
   personal = {
     hardware = {
       disks.encryptedBoot.enable = true;

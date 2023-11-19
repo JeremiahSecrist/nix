@@ -8,13 +8,18 @@
     # desktop look & feel
     # waybar
     (callPackage ../../packages/bambu-studio {})
-    webcord
-    # discord
+    # webcord
+    # ollama
+    # openblas
+    discord
     xdg-utils
     appimage-run
-    popsicle
+    # popsicle
     distrobox
-    webkitgtk
+    bottles
+    winetricks
+    wineWowPackages.fonts
+    wineWowPackages.stagingFull
     # zathura # pdf viewer
     # gnome.gnome-tweaks # desktop settings
     # extensions

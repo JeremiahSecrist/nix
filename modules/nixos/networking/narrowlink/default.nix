@@ -13,7 +13,11 @@ in {
     gateway = {
       enable = mkEnableOption "enables narrowlink gateway";
       settings = mkOption {
-        type = types.attrs;
+        type = types.nullOr types.attrs;
+        default = null;
+      };
+       raw = mkOption {
+        type = types.nullOr types.path;
       };
     };
     agent = {
@@ -41,7 +45,7 @@ in {
         after = ["network.target"];
         serviceConfig = {
           DynamicUser = true;
-          ExecStart = "${pkgs.narrowlink}/bin/narrowlink-gateway --config='${mkConfigFile cfg.gateway.settings}'";
+          ExecStart = "${pkgs.narrowlink}/bin/narrowlink-gateway --config='${if cfg.gateway.settings != null then mkConfigFile cfg.gateway.settings else toString cfg.gateway.raw}'";
           Restart = "on-failure";
 
           AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];

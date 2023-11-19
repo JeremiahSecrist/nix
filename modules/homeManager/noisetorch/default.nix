@@ -50,10 +50,10 @@ in {
         message = "personal.noisetorch.threshold valid values: 0-95";
       }
     ];
-    home.file.noisetorch-config = {
-      target = ".config/noisetorch/config.toml";
-      source = settingsFile;
-    };
+    # home.file.noisetorch-config = {
+    #   target = ".config/noisetorch/config.toml";
+    #   source = settingsFile;
+    # };
     systemd.user.services = {
       noisetorch = {
         Unit = {

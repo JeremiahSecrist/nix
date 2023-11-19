@@ -7,9 +7,9 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    bambu-studio = {
-      url = "github:zhaofengli/nixpkgs/bambu-studio";
-    };
+    # bambu-studio = {
+    #   url = "github:zhaofengli/nixpkgs/bambu-studio";
+    # };
     disko = {
       url = "github:nix-community/disko/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -5,8 +5,8 @@
 }: let
   name = "bambu-studio";
   src = pkgs.fetchurl {
-    url = "https://github.com/bambulab/BambuStudio/releases/download/v01.07.04.52/Bambu_Studio_linux_fedora-v01.07.04.52.AppImage";
-    hash = "sha256-UM1hfy2qsQX0oVXtscqRHKdwO4aYsnavOfT7SvefW2s=";
+    url = "https://github.com/bambulab/BambuStudio/releases/download/v01.07.06.92/Bambu_Studio_linux_fedora_v01.07.06.92-20230923002726.AppImage";
+    hash = "sha256-UEUi4N6wGtPkHbi1pbnQ37c5Z86rFnkvCKOzsAK7xRM=";
   };
   desktopItem = pkgs.makeDesktopItem {
     inherit name;
