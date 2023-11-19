@@ -15,8 +15,8 @@ in {
   ];
   personal = {
     desktop = {
-      hyprland.enable = true;
-      waybar.enable = true;
+      # hyprland.enable = true;
+      # waybar.enable = true;
     };
     noisetorch = {
       enable = true;
@@ -32,17 +32,17 @@ in {
       EDITOR = "hx";
       MOZ_ENABLE_WAYLAND = 1;
       TERMINAL = "kitty";
-      XDG_CURRENT_DESKTOP = "hyprland";
+      # XDG_CURRENT_DESKTOP = "hyprland";
       DIRENV_LOG_FORMAT = "";
       # TERM = "kitty";
     };
-    pointerCursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 22;
-      # x11.enable = true;
-      gtk.enable = true;
-    };
+    # pointerCursor = {
+    #   package = pkgs.bibata-cursors;
+    #   name = "Bibata-Modern-Classic";
+    #   size = 22;
+    #   # x11.enable = true;
+    #   gtk.enable = true;
+    # };
   };
   # programs.anyrun = {
   #   enable = true;
@@ -79,23 +79,33 @@ in {
   dconf = {
     enable = true;
     settings = {
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = ["qemu:///system"];
+        uris = ["qemu:///system"];
+      };
+      "org/gnome/desktop/wm/preferences" = {
+        auto-raise = true;
+      };
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
       };
+      "org/gnome/mutter" = {
+        experimental-features = ["scale-monitor-framebuffer"];
+      };
     };
   };
-  gtk = {
-    enable = true;
-    font.name = "Victor Mono SemiBold 12";
-    theme = {
-      name = "spacx";
-      package = pkgs.spacx-gtk-theme;
-    };
-    iconTheme = {
-      name = "rose-pine";
-      package = pkgs.rose-pine-icon-theme;
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   font.name = "Victor Mono SemiBold 12";
+  #   theme = {
+  #     name = "spacx";
+  #     package = pkgs.spacx-gtk-theme;
+  #   };
+  #   iconTheme = {
+  #     name = "rose-pine";
+  #     package = pkgs.rose-pine-icon-theme;
+  #   };
+  # };
 
   editorconfig = {
     enable = true;
@@ -142,9 +152,9 @@ in {
   xdg.enable = true;
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
-  xdg.mimeApps = {
-    defaultApplications."application/pdf" = ["zathura.desktop"];
-  };
+  # xdg.mimeApps = {
+  #   defaultApplications."application/pdf" = ["zathura.desktop"];
+  # };
   # services.easyeffects = {
   #     enable = true;
   #     preset = "noisereduc";
@@ -223,20 +233,20 @@ in {
         };
       };
     };
-    swaylock = {
-      enable = true;
-      settings = {
-        indicator-idle-visible = true;
-        image = "$HOME/Pictures/wallpapers/Darth-VaderSci-Fi-Star-Wars-4k-Ultra-HD-Wallpaper.jpg";
-      };
-    };
+    # swaylock = {
+    #   enable = true;
+    #   settings = {
+    #     indicator-idle-visible = true;
+    #     image = "$HOME/Pictures/wallpapers/Darth-VaderSci-Fi-Star-Wars-4k-Ultra-HD-Wallpaper.jpg";
+    #   };
+    # };
     home-manager.enable = true;
-    zathura = {
-      enable = true;
-      options = {
-        selection-clipboard = "clipboard";
-      };
-    };
+    # zathura = {
+    #   enable = true;
+    #   options = {
+    #     selection-clipboard = "clipboard";
+    #   };
+    # };
     # zellij = {
     #   enable = true;
 

@@ -56,7 +56,7 @@ in {
       hyprland-autoname-workspaces
       sway-contrib.grimshot
     ];
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    # environment.sessionVariables.NIXOS_OZONE_WL = "1";
     fonts.packages = with pkgs; [
       font-awesome
       (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka"];})

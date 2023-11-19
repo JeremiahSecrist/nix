@@ -13,27 +13,27 @@ in {
     gateway = {
       enable = mkEnableOption "enables narrowlink gateway";
       settings = mkOption {
-        types = types.attrset;
+        type = types.attrs;
       };
     };
     agent = {
       enable = mkEnableOption "enables narrowlink agent";
       settings = mkOption {
-        types = types.attrset;
+        type = types.attrs;
       };
     };
     client = {
       enable = mkEnableOption "enables narrowlink client";
       settings = mkOption {
-        types = types.attrset;
+        type = types.attrs;
       };
     };
   };
   config = mkMerge [
-    (mkIf cfg.gateway.enable
-      || cfg.agent.enable
-      || cfg.client.enable {
-      })
+    # (mkIf cfg.gateway.enable
+    #   || cfg.agent.enable
+    #   || cfg.client.enable {
+    #   })
     (mkIf cfg.gateway.enable {
       systemd.services.narrowlink-gateway = {
         description = "gateway service for narrowlink";
@@ -41,7 +41,7 @@ in {
         after = ["network.target"];
         serviceConfig = {
           DynamicUser = true;
-          ExecStart = "${pkgs.narrowlink}/bin/narrowlink-gateway --config ${mkConfigFile cfg.gateway.settings}";
+          ExecStart = "${pkgs.narrowlink}/bin/narrowlink-gateway --config='${mkConfigFile cfg.gateway.settings}'";
           Restart = "on-failure";
 
           AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];

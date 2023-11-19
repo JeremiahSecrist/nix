@@ -6,14 +6,38 @@
   lib,
   ...
 }: {
-  nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-      });
-    })
-  ];
-  services.switcherooControl.enable = true;
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     bambu-studio = inputs.bambu-studio.legacyPackages.x86_64-linux.bambu-studio;
+  #   })
+  # ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "openssl-1.1.1u"
+  # ];
+  environment.sessionVariables = {
+    # NIXOS_SPECIALIZATION = lib.mkDefault "default";
+  };
+  # specialisation = {
+  # gnome.configuration = {
+  environment.sessionVariables = {
+    MESA_VK_DEVICE_SELECT_FORCE_DEFAULT_DEVICE = "1";
+    MESA_VK_WSI_PRESENT_MODE = "immediate";
+    KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+  };
+  # personal.desktop.hyprland.enable = lib.mkForce false;
+  services.udev.extraRules = ''
+    #  SUBSYSTEM=="drm", KERNEL=="card[0-9]", TAG-="seat", TAG-="master-of-seat", ENV{ID_FOR_SEAT}="", ENV{ID_PATH}=""
+    #  SUBSYSTEM=="drm", KERNEL=="card[0-9]", TAG-="mutter-device-preferred-primary"
+     SUBSYSTEM=="drm", KERNEL=="card1", TAG+="seat", TAG+="master-of-seat"
+  '';
+  #  ENV{DEVNAME}=="/dev/dri/card0", TAG="dummytag"
+  services.gnome.tracker-miners.enable = false;
+  services.gnome.tracker.enable = false;
+  # personal.desktop.displayManager.tuigreet.enable = true;
+  # };
+  # };
+  networking.stevenblack.enable = true;
+  # services.switcherooControl.enable = true;
   virtualisation.vmVariant = {
     services.qemuGuest.enable = true;
     services.spice-vdagentd.enable = true;
@@ -36,8 +60,8 @@
     "${toString self.rev or self.dirtyRev}"
   ];
   # TODO decide what should be in defaults module
-  environment.systemPackages = with pkgs; [
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
   # stylix = {
   #   image = ../home-manager/sky/wallpapers/Darth-VaderSci-Fi-Star-Wars-4k-Ultra-HD-Wallpaper.jpg; # TODO new mapping
   #   polarity = "dark";
@@ -47,10 +71,18 @@
   #     gtk.enable = true;
   #   };
   # };
-  security.apparmor.enable = true;
-  security.apparmor.packages = [pkgs.apparmor-profiles];
+  # security.apparmor.enable = true;
+  # security.apparmor.packages = [pkgs.apparmor-profiles];
 
   zramSwap.enable = lib.mkDefault true;
+
+  virtualisation.libvirtd.enable = true;
+  environment.systemPackages = with pkgs; [
+    virt-manager
+  ];
+  virtualisation.podman = {
+    enable = true;
+  };
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
   programs.noisetorch.enable = true;
   programs.zsh.enable = true;
@@ -61,6 +93,21 @@
     ];
   };
   hardware.wooting.enable = true;
+  services.xserver.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager = {
+    gdm = {
+      enable = true;
+      wayland = true;
+    };
+    defaultSession = "plasmawayland";
+  };
+  services = {
+    narrowlink = {
+      gateway = builtins.fromYaml ./gateway.yml;
+      };
+    };
+  };
   personal = {
     hardware = {
       disks.encryptedBoot.enable = true;
@@ -68,9 +115,10 @@
       sound.enable = true;
     };
     # desktop.gnome.enable = true;
+    # desktop.gnome.enable = true;
     region.enable = true;
     desktop = {
-      hyprland.enable = true;
+      # hyprland.enable = true;
     };
     nix = {
       enable = true;
@@ -78,6 +126,10 @@
       allowUnfree = true;
     };
     users.sky = {
+      enable = true;
+      password = "changeme";
+    };
+    users.test = {
       enable = true;
       password = "changeme";
     };
@@ -97,6 +149,7 @@
     hostName = "lappy";
     firewall = {
       enable = true;
+      checkReversePath = false;
       allowedTCPPorts = [];
       allowedUDPPorts = [];
     };

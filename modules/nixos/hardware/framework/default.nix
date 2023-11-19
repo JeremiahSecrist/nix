@@ -28,39 +28,39 @@ in {
       };
     };
     boot = {
+      tmp.cleanOnBoot = true;
       # kernelPackages = pkgs.linuxPackages_lqx;
       kernel.sysctl = {
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
       };
-      initrd = {
-        kernelModules = [
-          "dm-snapshot"
-          "dm_mirror"
-          "usbhid"
-          # "vendor-reset"
-        ];
+      initrd = rec {
+        kernelModules = availableKernelModules;
         availableKernelModules = [
+          # "vendor-reset"
+          "xhci_hcd"
           "xhci_pci"
+          "usbhid"
           "thunderbolt"
           "nvme"
           "uas"
           "usb_storage"
-          "usbhid"
+          "dm-snapshot"
+          "dm_mirror"
           "sd_mod"
         ];
       };
       kernelModules = [
-        #"amdgpu"
         "kvm-intel"
       ];
       supportedFilesystems = [
-        "ntfs"
         "bcachefs"
-        ];
-      # extraModulePackages = with config.boot.kernelPackages; [linuxPackages_testing_bcachefs];
+      ];
+      # extraModulePackages = with config.boot.kernelPackages; [vendor-reset];
       kernelParams = [
         # "amdgpu.noretry=0"
+        "intel_iommu=on"
+        "iommu=pt"
         "i915.enable_fbc=1"
         "amdgpu.lockup_timeout=1000"
         "amdgpu.gpu_recovery=1"

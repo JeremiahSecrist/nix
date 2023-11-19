@@ -7,11 +7,14 @@
   home.packages = with pkgs; [
     # desktop look & feel
     # waybar
+    (callPackage ../../packages/bambu-studio {})
     webcord
+    # discord
     xdg-utils
     appimage-run
     popsicle
-
+    distrobox
+    webkitgtk
     # zathura # pdf viewer
     # gnome.gnome-tweaks # desktop settings
     # extensions
@@ -28,6 +31,7 @@
     gnupg
     tldr
     nixfmt
+    # nmap
     # cmatrix
     # noisetorch
     # protonvpn-cli

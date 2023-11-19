@@ -1,5 +1,5 @@
 base := "sudo nixos-rebuild"
-flake := "--flake .#"
+flake := " --flake .#"
 
 default:
     echo 'available command: vm, build, test, boot, switch'
@@ -10,7 +10,7 @@ vm:
 run-vm: vm
     ./result/bin/run-*-vm
 
-switch:
+switch: boot
     {{base}} switch {{flake}}
 
 boot:

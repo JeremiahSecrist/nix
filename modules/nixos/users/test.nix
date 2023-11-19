@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf types mkOption;
-  cfg = config.personal.users.sky;
+  cfg = config.personal.users.test;
 in {
-  options.personal.users.sky = {
-    enable = mkEnableOption "enable user sky";
+  options.personal.users.test = {
+    enable = mkEnableOption "enable user test";
     password = mkOption {
       default = null;
       type = types.str;
@@ -16,13 +16,13 @@ in {
   };
   config = mkIf cfg.enable {
     programs.zsh.enable = true;
-    users.users.sky = {
-      uid = 1000;
+    users.users.test = {
+      uid = 1001;
       isNormalUser = true;
       initialPassword = cfg.password;
       shell = pkgs.zsh;
-      description = "sky";
-      extraGroups = ["networkmanager" "wheel" "seat" "libvirtd" "kvm"];
+      description = "test";
+      extraGroups = ["networkmanager" "wheel" "seat"];
     };
   };
 }

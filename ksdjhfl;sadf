@@ -1,0 +1,2 @@
+nix (lang) -> nix (pkgs) -> nixOS
+nix (lang) -> nixOS

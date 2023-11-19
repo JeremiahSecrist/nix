@@ -7,10 +7,9 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # anyrun = {
-    #   url = "github:Kirottu/anyrun";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    bambu-studio = {
+      url = "github:zhaofengli/nixpkgs/bambu-studio";
+    };
     disko = {
       url = "github:nix-community/disko/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,7 +91,6 @@
         builders-use-substitutes = true;
         extra-substituters = [
           "https://cache.ngi0.nixos.org"
-          # "https://anyrun.cachix.org"
           "https://cache.nixos.org"
         ];
       };

@@ -13,18 +13,24 @@ in {
   config = lib.mkIf cfg.enable {
     services = {
       gnome.gnome-keyring.enable = true;
+      # gnome.gnome-settings-daemon.enable = true;
+      # gnome.gnome-initial-setup.enable = true;
       xserver = {
         enable = true;
         layout = "us";
         xkbVariant = "";
         displayManager = {
-          gdm.enable = true;
-          gdm.wayland = true;
-          # defaultSession = lib.mkDefault "gnome";
+          gdm = {
+            enable = true;
+            wayland = true;
+          };
+          # desktopSession = "gnome";
+          defaultSession = lib.mkForce "gnome";
         };
         desktopManager = {
           gnome.enable = lib.mkDefault true;
         };
+        libinput.enable = true;
       };
       udev.packages = [pkgs.yubikey-personalization pkgs.gnome3.gnome-settings-daemon];
     };
