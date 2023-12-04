@@ -8,6 +8,8 @@
     # desktop look & feel
     # waybar
     (callPackage ../../packages/bambu-studio {})
+    (callPackage ../../packages/ollama {})
+    (callPackage ../../packages/parsec {})
     # webcord
     # ollama
     # openblas
@@ -16,7 +18,9 @@
     appimage-run
     # popsicle
     distrobox
-    bottles
+    # bottles
+    # parsec-bin
+    warp
     winetricks
     wineWowPackages.fonts
     wineWowPackages.stagingFull

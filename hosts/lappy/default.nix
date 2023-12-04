@@ -14,6 +14,7 @@
   # nixpkgs.config.permittedInsecurePackages = [
   #   "openssl-1.1.1u"
   # ];
+  hardware.opengl.extraPackages = [ pkgs.vaapiVdpau ];
   services.pcscd.enable = true;
   services.pcscd.plugins = [
     pkgs.ccid
@@ -47,7 +48,7 @@
   # personal.desktop.displayManager.tuigreet.enable = true;
   # };
   # };
-  networking.stevenblack.enable = true;
+  # networking.stevenblack.enable = true;
   # services.switcherooControl.enable = true;
   virtualisation.vmVariant = {
     services.qemuGuest.enable = true;
@@ -140,6 +141,7 @@
       password = "changeme";
     };
   };
+  services.flatpak.enable = true;
   programs.steam.enable = true;
   programs.gamemode = {
     enable = true;

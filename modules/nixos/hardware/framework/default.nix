@@ -14,7 +14,7 @@
   # test = lib.optionals config.personal.hardware.framework.enable inputs.nixos-hardware.nixosModules.framework-12th-gen-intel;
 in {
   imports = [
-    inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   options.personal.hardware.framework.enable = mkEnableOption "";
@@ -37,7 +37,7 @@ in {
       initrd = rec {
         kernelModules = availableKernelModules;
         availableKernelModules = [
-          # "vendor-reset"
+          "amdgpu"
           "xhci_hcd"
           "xhci_pci"
           "usbhid"
@@ -51,17 +51,15 @@ in {
         ];
       };
       kernelModules = [
-        "kvm-intel"
+        "kvm-amd"
       ];
       supportedFilesystems = [
         "bcachefs"
       ];
       # extraModulePackages = with config.boot.kernelPackages; [vendor-reset];
       kernelParams = [
-        "intel_iommu=on"
+        "amd_iommu=on"
         "iommu=pt"
-        "i915.enable_fbc=1"
-        "i915.modeset=1"
         # "amdgpu.lockup_timeout=1000"
         # "amdgpu.gpu_recovery=1"
         # "amdgpu.noretry=0"
@@ -92,7 +90,7 @@ in {
       bluetooth.enable = true;
     };
     nixpkgs.config.packageOverrides = pkgs: {
-      vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+      # vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
     };
     hardware.opengl = {
       enable = true;
@@ -114,7 +112,7 @@ in {
     powerManagement.cpuFreqGovernor = "powersave";
     #powerManagement.powertop.enable = true;
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.intel.updateMicrocode =
+    hardware.cpu.amd.updateMicrocode =
       lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
