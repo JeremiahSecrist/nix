@@ -8,14 +8,14 @@
     # desktop look & feel
     # waybar
     (callPackage ../../packages/bambu-studio {})
-    (callPackage ../../packages/ollama {})
-    (callPackage ../../packages/parsec {})
+    # (callPackage ../../packages/ollama {})
     # webcord
     # ollama
     # openblas
     discord
     xdg-utils
     appimage-run
+    blender
     # popsicle
     distrobox
     # bottles

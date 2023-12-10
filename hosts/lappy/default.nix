@@ -30,12 +30,12 @@
   };
   # specialisation = {
   # gnome.configuration = {
-  environment.sessionVariables = {
-    # MESA_VK_DEVICE_SELECT_FORCE_DEFAULT_DEVICE = "1";
-    # MESA_VK_WSI_PRESENT_MODE = "immediate";
-    KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
-    RADV_PERFTEST = "nosam"; #performance improvement for eGPUs
-  };
+  # environment.sessionVariables = {
+  #   # MESA_VK_DEVICE_SELECT_FORCE_DEFAULT_DEVICE = "1";
+  #   # MESA_VK_WSI_PRESENT_MODE = "immediate";
+  #   KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+  #   RADV_PERFTEST = "nosam"; #performance improvement for eGPUs
+  # };
   # personal.desktop.hyprland.enable = lib.mkForce false;
 #  services.udev.extraRules = ''
 #     SUBSYSTEM=="drm", KERNEL=="card[0-9]", TAG-="seat", TAG-="master-of-seat", ENV{ID_FOR_SEAT}="", ENV{ID_PATH}=""
@@ -88,23 +88,25 @@
 
   zramSwap.enable = lib.mkDefault true;
   services.teamviewer.enable = true;
-  virtualisation.libvirtd.enable = true;
+  # virtualisation.libvirtd.enable = true;
   environment.systemPackages = with pkgs; [
-    virt-manager
+    # virt-manager
+    # (callPackage ../../packages/parsec {})
+    parsec-bin
   ];
-  virtualisation.podman = {
-    enable = true;
-  };
+  # virtualisation.podman = {
+    # enable = true;
+  # };
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
   programs.noisetorch.enable = true;
   programs.zsh.enable = true;
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = [
-      "12ac4a1e71a74f47"
-    ];
-  };
-  hardware.wooting.enable = true;
+  # services.zerotierone = {
+    # enable = true;
+    # joinNetworks = [
+      # "12ac4a1e71a74f47"
+    # ];
+  # };
+  # hardware.wooting.enable = true;
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager = {

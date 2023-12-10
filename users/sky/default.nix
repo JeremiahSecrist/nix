@@ -224,8 +224,8 @@ in {
           "extensions.pocket.bffRecentSaves" = false;
           "extensions.pocket.enabled" = false;
           "identity.fxaccounts.enabled" = false;
-          "media.ffmpeg.vaapi.enabled" = true;
-          "media.mediasource.webm.enabled" = false;
+          # "media.ffmpeg.vaapi.enabled" = true;
+          # "media.mediasource.webm.enabled" = false;
           "network.trr.mode" = 2;
           "toolkit.telemetry.enabled" = false;
           "toolkit.telemetry.server" = "";

@@ -34,6 +34,7 @@ in {
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
       };
+      kernelPackages = pkgs.linuxPackages_testing;
       initrd = rec {
         kernelModules = availableKernelModules;
         availableKernelModules = [
@@ -105,7 +106,7 @@ in {
     };
     # dynamic dhcp
     networking.useDHCP = lib.mkDefault true;
-
+    services.auto-cpufreq.enable = true;
     # SSD optimization
     services.fstrim.enable = true;
     # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
