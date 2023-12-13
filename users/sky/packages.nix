@@ -7,7 +7,8 @@
   home.packages = with pkgs; [
     # desktop look & feel
     # waybar
-    (callPackage ../../packages/bambu-studio {})
+    # (callPackage ../../packages/bambu-studio {})
+    bambu-studio
     # (callPackage ../../packages/ollama {})
     # webcord
     # ollama
@@ -16,6 +17,7 @@
     xdg-utils
     appimage-run
     blender
+    element-desktop
     # popsicle
     distrobox
     # bottles
