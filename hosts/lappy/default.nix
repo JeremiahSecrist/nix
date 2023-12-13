@@ -138,10 +138,6 @@
       enable = true;
       password = "changeme";
     };
-    users.test = {
-      enable = true;
-      password = "changeme";
-    };
   };
   services.flatpak.enable = true;
   programs.steam.enable = true;
