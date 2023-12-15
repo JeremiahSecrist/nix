@@ -7,8 +7,8 @@
   home.packages = with pkgs; [
     # desktop look & feel
     # waybar
-    # (callPackage ../../packages/bambu-studio {})
-    bambu-studio
+    (callPackage ../../packages/bambu-studio {})
+    # bambu-studio
     # (callPackage ../../packages/ollama {})
     # webcord
     # ollama
@@ -19,6 +19,8 @@
     blender
     element-desktop
     # popsicle
+    gst_all_1.gstreamer
+    mplayer
     distrobox
     # bottles
     # parsec-bin
