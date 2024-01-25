@@ -10,7 +10,7 @@
   services.pcscd.enable = true;
   services.pcscd.plugins = with pkgs; [
     ccid
-    pcsclite
+    # pcsclite
   ];
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=10s
@@ -20,8 +20,8 @@
       # pkgs.libu2f-host
     ];
   services.yubikey-agent.enable = true;
-  # programs.gnupg.agent.enable = true;
-  # hardware.gpgSmartcards.enable = true;
+  programs.gnupg.agent.enable = true;
+  hardware.gpgSmartcards.enable = true;
   environment.sessionVariables = {
     # NIXOS_SPECIALIZATION = lib.mkDefault "default";
   };
