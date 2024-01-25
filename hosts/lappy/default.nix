@@ -28,7 +28,7 @@
       pkgs.yubikey-personalization
       # pkgs.libu2f-host
     ];
-  # services.yubikey-agent.enable = true;
+  services.yubikey-agent.enable = true;
   environment.sessionVariables = {
     # NIXOS_SPECIALIZATION = lib.mkDefault "default";
   };
