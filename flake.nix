@@ -4,7 +4,7 @@
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/master"; # release-23.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # bambu-studio = {

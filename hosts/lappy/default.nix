@@ -6,6 +6,7 @@
   lib,
   ...
 }: {
+
   # nixpkgs.overlays = [
   #   (self: super: {
   #     bambu-studio = inputs.bambu-studio.legacyPackages.x86_64-linux.bambu-studio;
@@ -16,15 +17,18 @@
   # ];
   hardware.opengl.extraPackages = [ pkgs.vaapiVdpau ];
   services.pcscd.enable = true;
-  services.pcscd.plugins = [
-    pkgs.ccid
-    pkgs.pcsclite
+  services.pcscd.plugins = with pkgs; [
+    ccid
+    # pcsclite
   ];
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
   services.udev.packages = [
       pkgs.yubikey-personalization
-      pkgs.libu2f-host
+      # pkgs.libu2f-host
     ];
-    services.yubikey-agent.enable = true;
+  # services.yubikey-agent.enable = true;
   environment.sessionVariables = {
     # NIXOS_SPECIALIZATION = lib.mkDefault "default";
   };
@@ -88,12 +92,17 @@
 
   zramSwap.enable = lib.mkDefault true;
   services.teamviewer.enable = true;
+  # hardware.gpgSmartcards.enable = true;
   # virtualisation.libvirtd.enable = true;
   environment.systemPackages = with pkgs; [
     # virt-manager
     # (callPackage ../../packages/parsec {})
+    fwupd
+    pcsclite
+    pcscliteWithPolkit.out
     parsec-bin
   ];
+
   # virtualisation.podman = {
     # enable = true;
   # };

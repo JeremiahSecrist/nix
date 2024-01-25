@@ -159,20 +159,20 @@ in {
   #     enable = true;
   #     preset = "noisereduc";
   #   };
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    enableExtraSocket = true;
-    enableZshIntegration = true;
-    enableScDaemon = true;
-    sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
-    # pinentryFlavor = "gnome3";
-    defaultCacheTtl = 345600;
-    defaultCacheTtlSsh = 345600;
-    maxCacheTtl = 345600;
-    maxCacheTtlSsh = 345600;
-    extraConfig = "\n";
-  };
+  # services.gpg-agent = {
+  #   enable = true;
+  #   enableSshSupport = true;
+  #   enableExtraSocket = true;
+  #   # enableZshIntegration = true;
+  #   enableScDaemon = true;
+  #   sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
+  #   # pinentryFlavor = "gnome3";
+  #   defaultCacheTtl = 345600;
+  #   defaultCacheTtlSsh = 345600;
+  #   maxCacheTtl = 345600;
+  #   maxCacheTtlSsh = 345600;
+  #   extraConfig = "disable-ccid";
+  # };
 
   programs = {
     firefox = {
@@ -260,18 +260,18 @@ in {
       # mutableExtensionsDir = true;
     };
 
-    gpg = {
-      mutableTrust = false;
-      mutableKeys = false;
-      publicKeys = [
-        {
-          me = {
-            trust = 5;
-            source = ./publickeys.gpg;
-          };
-        }
-      ];
-    };
+    # gpg = {
+    #   mutableTrust = false;
+    #   mutableKeys = false;
+    #   publicKeys = [
+    #     {
+    #       me = {
+    #         trust = 5;
+    #         source = ./publickeys.gpg;
+    #       };
+    #     }
+    #   ];
+    # };
     ssh = {
       enable = true;
       compression = true;
@@ -326,11 +326,11 @@ in {
         bindkey '^[[3;6~' kill-word
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
-        ${lib.optionalString config.services.gpg-agent.enable ''
-          export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-        ''}
         # eval "$(zellij setup --generate-auto-start zsh)"
       '';
+        #${lib.optionalString config.services.gpg-agent.enable ''
+        #  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        #''}
       envExtra = ''
         starship_precmd_user_func="set_win_title"
         precmd_functions+=(set_win_title)

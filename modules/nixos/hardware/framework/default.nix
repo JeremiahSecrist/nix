@@ -19,6 +19,7 @@ in {
   ];
   options.personal.hardware.framework.enable = mkEnableOption "";
   config = mkIf cfg.enable {
+    services.fwupd.enable = true;
     services.hardware.bolt.enable = true;
     disko = {
       checkScripts = true;
