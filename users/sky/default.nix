@@ -163,7 +163,7 @@ in {
     enable = true;
     enableSshSupport = true;
     enableExtraSocket = true;
-    # enableZshIntegration = true;
+    enableZshIntegration = true;
     enableScDaemon = true;
     sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
     # pinentryFlavor = "gnome3";
@@ -171,7 +171,7 @@ in {
     defaultCacheTtlSsh = 345600;
     maxCacheTtl = 345600;
     maxCacheTtlSsh = 345600;
-    extraConfig = "disable-ccid";
+    # extraConfig = "disable-ccid\n";
   };
 
   programs = {
@@ -327,10 +327,11 @@ in {
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
         # eval "$(zellij setup --generate-auto-start zsh)"
+        ${lib.optionalString config.services.gpg-agent.enable ''
+         export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        ''}
+
       '';
-        #${lib.optionalString config.services.gpg-agent.enable ''
-        #  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-        #''}
       envExtra = ''
         starship_precmd_user_func="set_win_title"
         precmd_functions+=(set_win_title)
