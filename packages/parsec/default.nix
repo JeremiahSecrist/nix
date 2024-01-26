@@ -1,6 +1,22 @@
-{ lib, stdenv, fetchurl, alsaLib, curl, dbus, ffmpeg_4, libGL, libpulseaudio,
-  libpng, libva, jq, openssl, runCommand, udev, xorg, wayland }:
-
+{
+  lib,
+  stdenv,
+  fetchurl,
+  alsaLib,
+  curl,
+  dbus,
+  ffmpeg_4,
+  libGL,
+  libpulseaudio,
+  libpng,
+  libva,
+  jq,
+  openssl,
+  runCommand,
+  udev,
+  xorg,
+  wayland,
+}:
 stdenv.mkDerivation rec {
   pname = "parsec";
   version = "150-90c";
@@ -19,7 +35,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-6urXMrh43viJeNK3bK/T0dJDQYi73YhpZZoSdHltP/M=";
   };
 
-  latest_parsecd_so = runCommand "latest_parsecd_so" { } ''
+  latest_parsecd_so = runCommand "latest_parsecd_so" {} ''
     cat ${latest_appdata} | ${jq}/bin/jq --raw-output .so_name | tee $out
   '';
 
@@ -42,14 +58,30 @@ stdenv.mkDerivation rec {
       sha256 = "sha256-F7qlt6yz8PjRXXPdJBbLk5ilWzM0pak1nSeNjealC6w=";
     };
 
-    outputs = [ "out" "lib" ];
+    outputs = ["out" "lib"];
   });
 
   runtimeDependencies = [
-    alsaLib (lib.getLib dbus) (lib.getLib curl) (lib.getLib libjpeg8.lib)
-    libGL libpulseaudio libpng libva (lib.getLib openssl) (lib.getLib stdenv.cc.cc)
-    (lib.getLib udev) xorg.libX11 xorg.libXcursor xorg.libXfixes xorg.libXi xorg.libXinerama
-    xorg.libXrandr xorg.libXScrnSaver wayland (lib.getLib ffmpeg_4)
+    alsaLib
+    (lib.getLib dbus)
+    (lib.getLib curl)
+    (lib.getLib libjpeg8.lib)
+    libGL
+    libpulseaudio
+    libpng
+    libva
+    (lib.getLib openssl)
+    (lib.getLib stdenv.cc.cc)
+    (lib.getLib udev)
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXfixes
+    xorg.libXi
+    xorg.libXinerama
+    xorg.libXrandr
+    xorg.libXScrnSaver
+    wayland
+    (lib.getLib ffmpeg_4)
   ];
 
   unpackPhase = ''
@@ -90,6 +122,6 @@ stdenv.mkDerivation rec {
     description = "Remotely connect to a gaming PC for a low latency remote computing experience";
     homepage = "https://parsecgaming.com/";
     license = licenses.unfree;
-    maintainers = with maintainers; [ delroth ];
+    maintainers = with maintainers; [delroth];
   };
 }

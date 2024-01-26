@@ -328,7 +328,7 @@ in {
         bindkey "^[[1;5D" backward-word
         # eval "$(zellij setup --generate-auto-start zsh)"
         ${lib.optionalString config.services.gpg-agent.enable ''
-         export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+          export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
         ''}
 
       '';

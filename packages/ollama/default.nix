@@ -1,10 +1,10 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, stdenv
-, darwin
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  stdenv,
+  darwin,
 }:
-
 buildGoModule rec {
   pname = "ollama";
   version = "0.1.8";
@@ -24,12 +24,12 @@ buildGoModule rec {
 
   vendorHash = "sha256-IgEf/WOc1eNGCif1fViIFxbgZAd6mHBqfxcaqH/WvGg=";
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = ["-s" "-w"];
 
   meta = with lib; {
     description = "Get up and running with large language models locally";
     homepage = "https://github.com/jmorganca/ollama";
     license = licenses.mit;
-    maintainers = with maintainers; [ dit7ya ];
+    maintainers = with maintainers; [dit7ya];
   };
 }

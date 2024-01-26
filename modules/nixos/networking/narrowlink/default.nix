@@ -16,7 +16,7 @@ in {
         type = types.nullOr types.attrs;
         default = null;
       };
-       raw = mkOption {
+      raw = mkOption {
         type = types.nullOr types.path;
       };
     };
@@ -45,7 +45,11 @@ in {
         after = ["network.target"];
         serviceConfig = {
           DynamicUser = true;
-          ExecStart = "${pkgs.narrowlink}/bin/narrowlink-gateway --config='${if cfg.gateway.settings != null then mkConfigFile cfg.gateway.settings else toString cfg.gateway.raw}'";
+          ExecStart = "${pkgs.narrowlink}/bin/narrowlink-gateway --config='${
+            if cfg.gateway.settings != null
+            then mkConfigFile cfg.gateway.settings
+            else toString cfg.gateway.raw
+          }'";
           Restart = "on-failure";
 
           AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];

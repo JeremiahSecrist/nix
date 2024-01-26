@@ -76,6 +76,7 @@
         buildInputs = with pkgs; [
           just
           alejandra
+          nil
         ];
 
         shellHook = ''
