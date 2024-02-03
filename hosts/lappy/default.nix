@@ -9,9 +9,13 @@
 
   services.pcscd = {
     enable = true;
-    plugins = with pkgs; [ccid];
+    plugins = with pkgs; [libykneomgr ccid];
   };
-
+  # environment.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=10s
   '';
@@ -19,14 +23,10 @@
   services.udev.packages = [
     pkgs.yubikey-personalization
   ];
-
-  services.yubikey-agent.enable = true;
-  programs.gnupg.agent.enable = true;
-  hardware.gpgSmartcards.enable = true;
-
-  environment.sessionVariables = {
-    # NIXOS_SPECIALIZATION = lib.mkDefault "default";
-  };
+  # programs.ssh.startAgent = false;
+  # services.yubikey-agent.enable = true;
+  # programs.gnupg.agent.enable = true;
+  # hardware.gpgSmartcards.enable = true;
 
   virtualisation.vmVariant = {
     services.qemuGuest.enable = true;
@@ -99,10 +99,10 @@
       password = "changeme";
     };
   };
-
+  # systemd.services.nix-daemon.environment.TMPDIR = "/var/tmp/nix-daemon";
   services.flatpak.enable = true;
+  services.preload.enable = true;
   programs.steam.enable = true;
-
   programs.gamemode = {
     enable = true;
     enableRenice = true;

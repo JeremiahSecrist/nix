@@ -49,7 +49,7 @@ stdenv.mkDerivation rec {
     cp $parsecd_so usr/share/parsec/skel/${builtins.readFile latest_parsecd_so}
   '';
 
-  libjpeg8 = stdenv.mkDerivation (finalAttrs: {
+  libjpeg8 = stdenv.mkDerivation (_finalAttrs: {
     pname = "libjpeg";
     version = "8";
 

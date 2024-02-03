@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkOption types optionalString;
+  inherit (lib) mkEnableOption mkOption types;
   cfg = config.personal.nix;
 in {
   options.personal.nix = {

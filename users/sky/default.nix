@@ -1,12 +1,8 @@
 {
   config,
   pkgs,
-  lib,
-  inputs,
   ...
-}: let
-  g = {myuid = "1000";};
-in {
+}: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   imports = [
@@ -167,10 +163,10 @@ in {
     enableScDaemon = true;
     sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
     # pinentryFlavor = "gnome3";
-    defaultCacheTtl = 345600;
-    defaultCacheTtlSsh = 345600;
-    maxCacheTtl = 345600;
-    maxCacheTtlSsh = 345600;
+    # defaultCacheTtl = 345600;
+    # defaultCacheTtlSsh = 345600;
+    # maxCacheTtl = 345600;
+    # maxCacheTtlSsh = 345600;
     # extraConfig = "disable-ccid\n";
   };
 
@@ -275,8 +271,16 @@ in {
     ssh = {
       enable = true;
       compression = true;
-      # forwardAgent = true;
+      forwardAgent = true;
       matchBlocks = {
+        "107.172.92.84" = {
+          host = "107.172.92.84";
+          forwardAgent = true;
+          # extraOptions = {
+          #   AddKeysToAgent = "yes";
+          #   # RemoteForward = "/run/user/1000/gnupg/ /run/user/1000/gnupg/";
+          # };
+        };
         "github.com" = {
           hostname = "github.com";
           user = "git";
@@ -327,9 +331,6 @@ in {
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
         # eval "$(zellij setup --generate-auto-start zsh)"
-        ${lib.optionalString config.services.gpg-agent.enable ''
-          export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-        ''}
 
       '';
       envExtra = ''

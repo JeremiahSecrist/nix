@@ -6,8 +6,6 @@
 }: let
   inherit (lib) mkEnableOption mkOption mkIf types;
   cfg = config.personal.noisetorch;
-  settingsFormat = pkgs.formats.toml {};
-  settingsFile = settingsFormat.generate "config.toml" cfg.settings;
 in {
   options.personal.noisetorch = {
     enable = mkEnableOption "enables noisetorch service for user";

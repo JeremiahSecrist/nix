@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkOption optionalString mkIf types;
+  inherit (lib) mkEnableOption mkOption mkIf types;
   dmcfg = config.services.xserver.displayManager;
   cfg = config.personal.desktop.displayManager.tuigreet;
   gduser = config.services.greetd.settings.default_session.user;

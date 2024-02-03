@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }: {
   home.packages = with pkgs; [
@@ -13,6 +11,7 @@
     # webcord
     # ollama
     # openblas
+    nil
     discord
     xdg-utils
     appimage-run

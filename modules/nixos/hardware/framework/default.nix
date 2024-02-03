@@ -9,7 +9,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf types;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.personal.hardware.framework;
   # test = lib.optionals config.personal.hardware.framework.enable inputs.nixos-hardware.nixosModules.framework-12th-gen-intel;
 in {
@@ -19,6 +19,7 @@ in {
   ];
   options.personal.hardware.framework.enable = mkEnableOption "";
   config = mkIf cfg.enable {
+    services.nscd.enableNsncd = true;
     services.fwupd.enable = true;
     services.hardware.bolt.enable = true;
     disko = {
@@ -35,20 +36,18 @@ in {
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
       };
-      kernelPackages = pkgs.linuxPackages_testing;
-      initrd = rec {
-        kernelModules = availableKernelModules;
-        availableKernelModules = [
-          "amdgpu"
-          "xhci_hcd"
-          "xhci_pci"
-          "usbhid"
-          "thunderbolt"
-          "nvme"
-          "uas"
-          "usb_storage"
+      kernelPackages = pkgs.linuxPackages_6_7;
+      initrd =  {
+        kernelModules = [
           "dm-snapshot"
           "dm_mirror"
+           ];
+        availableKernelModules = [
+          "nvme"
+          "xhci_pci"
+          "thunderbolt"
+          "usbhid"
+          "uas"
           "sd_mod"
         ];
       };
@@ -91,7 +90,7 @@ in {
       # laptop supports bt
       bluetooth.enable = true;
     };
-    nixpkgs.config.packageOverrides = pkgs: {
+    nixpkgs.config.packageOverrides = _pkgs: {
       # vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
     };
     hardware.opengl = {
@@ -114,7 +113,6 @@ in {
     powerManagement.cpuFreqGovernor = "powersave";
     #powerManagement.powertop.enable = true;
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.amd.updateMicrocode =
-      lib.mkDefault config.hardware.enableRedistributableFirmware;
+    hardware.cpu.amd.updateMicrocode = true;
   };
 }

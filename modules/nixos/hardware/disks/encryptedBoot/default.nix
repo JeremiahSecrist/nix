@@ -1,10 +1,9 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption types;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.personal.hardware.disks.encryptedBoot;
 in {
   options.personal.hardware.disks.encryptedBoot.enable = mkEnableOption "";

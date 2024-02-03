@@ -36,13 +36,11 @@
   opencascade-occt,
   openvdb,
   pcre,
-  qhull,
   systemd,
   tbb_2021_8,
   webkitgtk,
   wxGTK31,
   xorg,
-  fetchpatch,
   withSystemd ? stdenv.isLinux,
 }: let
   wxGTK31' = wxGTK31.overrideAttrs (old: {
@@ -53,7 +51,7 @@
         "--enable-debug=no"
       ];
   });
-  openvdb_tbb_2021_8 = openvdb.overrideAttrs (old: rec {
+  openvdb_tbb_2021_8 = openvdb.overrideAttrs (_old: rec {
     buildInputs = [openexr boost179 tbb_2021_8 jemalloc c-blosc ilmbase];
   });
 in

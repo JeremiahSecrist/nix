@@ -2,12 +2,9 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }: let
-  dmcfg = config.services.xserver.displayManager;
   cfg = config.personal.desktop.hyprland;
-  gduser = config.services.greetd.settings.default_session.user;
 in {
   imports = [
     ../displayManager/tuigreet

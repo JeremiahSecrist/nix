@@ -4,10 +4,7 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption types;
-  font = "JetBrainsMono Nerd Font";
-  accent = "bd93f9";
-  background = "11111B";
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.personal.desktop.waybar;
 in {
   options.personal.desktop.waybar.enable = mkEnableOption "";
