@@ -47,7 +47,7 @@
   };
 
   local = {
-    impermanence.enable = true;
+    # impermanence.enable = true;
     hardware = {
       framework.enable = true;
       sound.enable = true;
