@@ -7,10 +7,10 @@
 }: {
   disko = import ../../modules/nixos/disks/impermanence.nix {
     device = "/dev/nvme0n1";
-    swapSize = "8GB";
+    swapSize = "8G";
   };
   hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
-
+  boot.loader.systemd-boot.enable = true;
   # programs.ssh.startAgent = false;
   # services.yubikey-agent.enable = true;
   # programs.gnupg.agent.enable = true;
