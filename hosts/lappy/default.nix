@@ -5,13 +5,16 @@
   lib,
   ...
 }: {
+  disko = import ../../modules/nixos/disks/impermanence.nix {
+    device = "/dev/nvme0n1";
+    swapSize = "8GB";
+  };
   hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
 
   # programs.ssh.startAgent = false;
   # services.yubikey-agent.enable = true;
   # programs.gnupg.agent.enable = true;
   # hardware.gpgSmartcards.enable = true;
-
 
   system.nixos.tags = ["${toString self.rev or self.dirtyRev}"];
 
@@ -43,8 +46,8 @@
   };
 
   local = {
+    impermanence.enable = true;
     hardware = {
-      disks.encryptedBoot.enable = true;
       framework.enable = true;
       sound.enable = true;
     };

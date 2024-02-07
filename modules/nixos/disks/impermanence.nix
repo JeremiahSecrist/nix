@@ -3,7 +3,7 @@
   swapSize ? throw "Set this to your swapSize, e.g. 8gb",
   ...
 }: {
-  disko.devices = {
+  devices = {
     disk.main = {
       inherit device;
       type = "disk";

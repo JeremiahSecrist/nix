@@ -10,10 +10,10 @@
     ./packages.nix
   ];
   local = {
-    desktop = {
-      # hyprland.enable = true;
-      # waybar.enable = true;
-    };
+    # desktop = {
+    #   # hyprland.enable = true;
+    #   # waybar.enable = true;
+    # };
     noisetorch = {
       enable = true;
       settings.LastUsedInput = "alsa_input.usb-Generic_TONOR_TC40_Audio_Device-00.iec958-stereo";

@@ -9,7 +9,7 @@ in {
   options.local.yubikey = {
     enable = lib.mkEnableOption "enables yubikey settings";
   };
-  config = lib.mkif cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.pcscd = {
       enable = true;
       plugins = with pkgs; [libykneomgr ccid];

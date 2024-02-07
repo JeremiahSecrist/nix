@@ -7,11 +7,11 @@
       url = "github:nix-community/home-manager/master"; # release-23.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # bambu-studio = {
-    #   url = "github:zhaofengli/nixpkgs/bambu-studio";
-    # };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
     disko = {
-      url = "github:nix-community/disko/v1.0.0";
+      url = "github:nix-community/disko/v1.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -31,6 +31,7 @@
           modules = [
             # agenix.nixosModules.default
             # devenv.nixosModules.default
+            impermanence.nixosModules.impermanence
             nur.nixosModules.nur
             home-manager.nixosModules.home-manager
             disko.nixosModules.disko
