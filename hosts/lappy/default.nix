@@ -11,6 +11,7 @@
   };
   hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
   boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   # programs.ssh.startAgent = false;
   # services.yubikey-agent.enable = true;
   # programs.gnupg.agent.enable = true;
