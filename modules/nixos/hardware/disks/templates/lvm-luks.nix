@@ -134,11 +134,11 @@
     };
   };
   nodev = {
-      "/tmp" = {
-        fsType = "tmpfs";
-        mountOptions = [
-          "size=2G"
-        ];
-      };
+    "/tmp" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "size=2G"
+      ];
     };
+  };
 }
