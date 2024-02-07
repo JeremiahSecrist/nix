@@ -5,9 +5,9 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf types mkOption;
-  cfg = config.personal.users.sky;
+  cfg = config.local.users.sky;
 in {
-  options.personal.users.sky = {
+  options.local.users.sky = {
     enable = mkEnableOption "enable user sky";
     password = mkOption {
       default = null;

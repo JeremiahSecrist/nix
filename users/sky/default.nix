@@ -9,7 +9,7 @@
     # ./dconf.nix
     ./packages.nix
   ];
-  personal = {
+  local = {
     desktop = {
       # hyprland.enable = true;
       # waybar.enable = true;

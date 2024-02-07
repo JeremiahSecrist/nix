@@ -7,9 +7,9 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkOption types;
-  cfg = config.personal.nix;
+  cfg = config.local.nix;
 in {
-  options.personal.nix = {
+  options.local.nix = {
     enable = mkEnableOption "";
     isBuilder = mkOption {
       default = false;

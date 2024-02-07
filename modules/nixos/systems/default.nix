@@ -1,6 +1,5 @@
 {
   imports = [
-    ./disks
     ./framework
     ./sound
   ];

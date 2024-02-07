@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkOption mkDefault mkIf types;
-  cfg = config.personal.region;
+  cfg = config.local.region;
   # ops = options.base.defaults.region;
 in {
-  options.personal.region = {
+  options.local.region = {
     enable = mkEnableOption "enables defaults for region";
     locale = mkOption {
       default = "en_US.utf8";
@@ -19,6 +19,10 @@ in {
     };
   };
   config = mkIf cfg.enable {
+    systemd.extraConfig = ''
+      DefaultTimeoutStopSec=10s
+    '';
+
     time.timeZone = mkDefault cfg.timeZone;
 
     i18n = rec {

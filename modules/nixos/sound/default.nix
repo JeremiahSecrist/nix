@@ -4,9 +4,9 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.personal.hardware.sound;
+  cfg = config.local.hardware.sound;
 in {
-  options.personal.hardware.sound.enable = mkEnableOption "";
+  options.local.hardware.sound.enable = mkEnableOption "";
   config = mkIf cfg.enable {
     sound.enable = true;
     hardware.pulseaudio.enable = false;
