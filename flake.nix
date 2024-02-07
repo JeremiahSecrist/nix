@@ -72,6 +72,20 @@
       homeConfigurations = {
         "sky@lappy" = mkHome ./users/sky;
       };
+      checks = {
+        x86_64-linux = {
+          default = pkgs.nixosTest {
+            nodes.default = self.nixosConfigurations.lappy;
+            # hostPkgs = pkgs;
+            name = "basic test";
+            testScript = ''
+              machine.wait_for_unit("default.target")
+              machine.succeed("su -- alice -c 'which firefox'")
+              machine.fail("su -- root -c 'which firefox'")
+            '';
+          };
+        };
+      };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           just
