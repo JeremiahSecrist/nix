@@ -62,6 +62,7 @@
                   mountOptions = ["compression=lz4" "subvol=persist" "noatime"];
                   mountpoint = "/persist";
                 };
+                "/persist/system" = {};
 
                 "/nix" = {
                   mountOptions = ["compression=lz4" "subvol=nix" "noatime"];
