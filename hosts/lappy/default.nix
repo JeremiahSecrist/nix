@@ -4,11 +4,11 @@
   pkgs,
   lib,
   ...
-}: {
-  disko = import ../../modules/nixos/disks/impermanence.nix {
+}: (import ../../modules/nixos/disks/impermanence.nix {
     device = "/dev/nvme0n1";
     swapSize = "8G";
-  };
+  })//{
+  
   hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
