@@ -34,6 +34,7 @@ in {
     '';
 
     fileSystems."/persist".neededForBoot = true;
+    fileSystems."/persist/system".neededForBoot = true;
     environment.persistence."/persist/system" = {
       hideMounts = true;
       directories = [
