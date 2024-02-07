@@ -1,7 +1,6 @@
 {
   imports = [
     ./yggdrasil
-    ./narrowlink
     ./tailscale
   ];
 }
