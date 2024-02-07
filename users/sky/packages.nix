@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # desktop look & feel
     # waybar
