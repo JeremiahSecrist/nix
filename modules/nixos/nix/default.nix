@@ -60,7 +60,7 @@ in {
           "https://cache.ngi0.nixos.org"
         ];
 
-        secret-key-files = /var/lib/nix-keys/deploy.secret;
+        # secret-key-files = /var/lib/nix-keys/deploy.secret;
         allowed-users = [
           "@wheel"
           "@builders"
