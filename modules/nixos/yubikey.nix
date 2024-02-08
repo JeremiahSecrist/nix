@@ -20,7 +20,7 @@ in {
     };
 
     services.udev.packages = [
-      pkgs.yubikey-localization
+      pkgs.yubikey-personalization
     ];
   };
 }
