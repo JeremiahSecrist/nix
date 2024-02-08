@@ -4,11 +4,13 @@
   pkgs,
   lib,
   ...
-}: (import ../../modules/nixos/disks/impermanence.nix {
-    device = "/dev/nvme0n1";
-    swapSize = "8G";
-  })//{
-  
+}: {
+  imports = [
+    (import ../../modules/nixos/disks/impermanence.nix {
+      device = "/dev/nvme0n1";
+      swapSize = "8G";
+    })
+  ];
   hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
   
   # programs.ssh.startAgent = false;
@@ -16,7 +18,7 @@
   # programs.gnupg.agent.enable = true;
   # hardware.gpgSmartcards.enable = true;
 
-  system.nixos.tags = ["${toString self.rev or self.dirtyRev}"];
+  system.nixos.tags = ["${toString self.rev or self.dirtyRev or ""}"];
 
   zramSwap.enable = lib.mkDefault true;
   services.teamviewer.enable = true;
@@ -26,11 +28,9 @@
     pcscliteWithPolkit.out
     parsec-bin
   ];
-
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
   programs.noisetorch.enable = true;
   programs.zsh.enable = true;
-
   services.xserver = {
     enable = true;
     desktopManager = {
@@ -44,25 +44,25 @@
       defaultSession = "plasmawayland";
     };
   };
-
+  hardware.enableAllFirmware = true;
   local = {
     # impermanence.enable = true;
+    yubikey.enable = true;
     hardware = {
       framework.enable = true;
       sound.enable = true;
     };
-
     region = {enable = true;};
-
-    desktop = {};
-
     nix = {
       enable = true;
       isBuilder = false;
       allowUnfree = true;
     };
-
     users.sky = {
+      enable = true;
+      password = "changeme";
+    };
+    users.test = {
       enable = true;
       password = "changeme";
     };
@@ -76,17 +76,17 @@
     enable = true;
     enableRenice = true;
   };
-
   networking = {
-    nameservers = ["1.1.1.1" "1.0.0.1"];
+    # dhcpcd.enable = false;
+    # nameservers = ["1.1.1.1" "1.0.0.1"];
     networkmanager = {
       enable = true;
-      insertNameservers = ["1.1.1.1" "1.0.0.1"];
+      # insertNameservers = ["1.1.1.1" "1.0.0.1"];
     };
     hostName = "lappy";
     firewall = {
       enable = true;
-      checkReversePath = false;
+      # checkReversePath = false;
       allowedTCPPorts = [];
       allowedUDPPorts = [];
     };
@@ -99,5 +99,5 @@
     };
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 }
