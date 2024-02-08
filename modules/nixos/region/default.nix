@@ -27,12 +27,12 @@ in {
 
     i18n = rec {
       defaultLocale = mkDefault cfg.locale;
-      supportedLocales = [
-        "en_US.UTF-8/UTF-8"
-        "en_GB.UTF-8/UTF-8"
-        "nl_NL.UTF-8/UTF-8"
-        "nl_NL/ISO-8859-1"
-      ];
+      # supportedLocales = [
+      #   "en_US.UTF-8/UTF-8"
+      #   "en_GB.UTF-8/UTF-8"
+      #   "nl_NL.UTF-8/UTF-8"
+      #   "nl_NL/ISO-8859-1"
+      # ];
       # extraLocaleSettings = {
       #   LC_ADDRESS = defaultLocale;
       #   LC_IDENTIFICATION = defaultLocale;
