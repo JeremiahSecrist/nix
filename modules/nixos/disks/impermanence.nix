@@ -64,6 +64,11 @@
                 };
                 "/persist/system" = {};
 
+                "/Games" = {
+                  mountOptions = ["defaults" "nofail"];
+                  mountpoint = "/Games";
+                };
+
                 "/nix" = {
                   mountOptions = ["compression=lz4" "subvol=nix" "noatime"];
                   mountpoint = "/nix";
