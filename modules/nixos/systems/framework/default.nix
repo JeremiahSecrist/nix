@@ -14,7 +14,7 @@
   # test = lib.optionals config.local.hardware.framework.enable inputs.nixos-hardware.nixosModules.framework-12th-gen-intel;
 in {
   imports = [
-    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    # inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   options.local.hardware.framework.enable = mkEnableOption "";
@@ -41,7 +41,7 @@ in {
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
       };
-      kernelPackages = pkgs.linuxPackages_6_7;
+      kernelPackages = pkgs.linuxPackages_6_1;
       initrd = {
         kernelModules = [
           "dm-snapshot"

@@ -25,25 +25,19 @@ in {
 
     time.timeZone = mkDefault cfg.timeZone;
 
-    i18n = rec {
-      defaultLocale = mkDefault cfg.locale;
-      # supportedLocales = [
-      #   "en_US.UTF-8/UTF-8"
-      #   "en_GB.UTF-8/UTF-8"
-      #   "nl_NL.UTF-8/UTF-8"
-      #   "nl_NL/ISO-8859-1"
-      # ];
-      # extraLocaleSettings = {
-      #   LC_ADDRESS = defaultLocale;
-      #   LC_IDENTIFICATION = defaultLocale;
-      #   LC_MEASUREMENT = defaultLocale;
-      #   LC_MONETARY = defaultLocale;
-      #   LC_NAME = defaultLocale;
-      #   LC_NUMERIC = defaultLocale;
-      #   LC_PAPER = defaultLocale;
-      #   LC_TELEPHONE = defaultLocale;
-      #   LC_TIME = defaultLocale;
-      # };
+    i18n.defaultLocale = "en_US.UTF-8";
+
+    i18n.extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
     };
+
   };
 }

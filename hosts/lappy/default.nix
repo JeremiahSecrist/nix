@@ -11,7 +11,7 @@
       swapSize = "8G";
     })
   ];
-  hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
+  # hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
   
   # programs.ssh.startAgent = false;
   # services.yubikey-agent.enable = true;
@@ -31,19 +31,19 @@
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
   programs.noisetorch.enable = true;
   programs.zsh.enable = true;
+ # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the Budgie Desktop environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.budgie.enable = true;
+
+  # Configure keymap in X11
   services.xserver = {
-    enable = true;
-    desktopManager = {
-      plasma5 = {enable = true;};
-    };
-    displayManager = {
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
-      defaultSession = "plasmawayland";
-    };
+    layout = "us";
+    xkbVariant = "";
   };
+
   hardware.enableAllFirmware = true;
   local = {
     # impermanence.enable = true;
@@ -62,10 +62,10 @@
       enable = true;
       password = "changeme";
     };
-    users.test = {
-      enable = true;
-      password = "changeme";
-    };
+    # users.test = {
+    #   enable = true;
+    #   password = "changeme";
+    # };
   };
   services = {
     flatpak.enable = true;
