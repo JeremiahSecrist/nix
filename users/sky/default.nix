@@ -162,7 +162,7 @@
     enableZshIntegration = true;
     enableScDaemon = true;
     sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
-    # pinentryFlavor = "gnome3";
+    pinentryFlavor = "gnome3";
     # defaultCacheTtl = 345600;
     # defaultCacheTtlSsh = 345600;
     # maxCacheTtl = 345600;
