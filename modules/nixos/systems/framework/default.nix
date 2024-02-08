@@ -85,16 +85,21 @@ in {
       # laptop supports bt
       bluetooth.enable = true;
     };
+
     hardware.opengl = {
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
     };
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
     # dynamic dhcp
     networking.useDHCP = lib.mkDefault true;
     # SSD optimization
     services.fstrim.enable = true;
-    # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
+    # networking.interfaces.eht0.useDHCP = lib.mkForce true;
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.cpu.amd.updateMicrocode = true;
   };
