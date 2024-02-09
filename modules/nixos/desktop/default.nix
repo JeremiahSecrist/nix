@@ -2,6 +2,5 @@
   imports = [
     ./displayManager
     ./gnome
-    ./hyprland
   ];
 }

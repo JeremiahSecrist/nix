@@ -7,9 +7,9 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkOption types;
-  cfg = config.personal.nix;
+  cfg = config.local.nix;
 in {
-  options.personal.nix = {
+  options.local.nix = {
     enable = mkEnableOption "";
     isBuilder = mkOption {
       default = false;
@@ -60,7 +60,7 @@ in {
           "https://cache.ngi0.nixos.org"
         ];
 
-        secret-key-files = /var/lib/nix-keys/deploy.secret;
+        # secret-key-files = /var/lib/nix-keys/deploy.secret;
         allowed-users = [
           "@wheel"
           "@builders"

@@ -4,9 +4,9 @@
   ...
 }: let
   inherit (lib) mkOption mkEnableOption mkIf mkDefault types;
-  cfg = config.personal.networking.yggdrasil;
+  cfg = config.local.networking.yggdrasil;
 in {
-  options.personal.networking.yggdrasil = {
+  options.local.networking.yggdrasil = {
     enable = mkEnableOption "enables yggdrasil a sdwan solution";
     AllowedPublicKeys = mkOption {
       type = with types; listOf str;

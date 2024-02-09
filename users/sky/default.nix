@@ -9,11 +9,11 @@
     # ./dconf.nix
     ./packages.nix
   ];
-  personal = {
-    desktop = {
-      # hyprland.enable = true;
-      # waybar.enable = true;
-    };
+  local = {
+    # desktop = {
+    #   # hyprland.enable = true;
+    #   # waybar.enable = true;
+    # };
     noisetorch = {
       enable = true;
       settings.LastUsedInput = "alsa_input.usb-Generic_TONOR_TC40_Audio_Device-00.iec958-stereo";
@@ -26,7 +26,7 @@
     sessionVariables = {
       BROWSER = "firefox";
       EDITOR = "hx";
-      MOZ_ENABLE_WAYLAND = 1;
+      # MOZ_ENABLE_WAYLAND = 1;
       TERMINAL = "kitty";
       # XDG_CURRENT_DESKTOP = "hyprland";
       DIRENV_LOG_FORMAT = "";
@@ -72,24 +72,24 @@
   #     )
   #   '';
   # };
-  dconf = {
-    enable = true;
-    settings = {
-      "org/virt-manager/virt-manager/connections" = {
-        autoconnect = ["qemu:///system"];
-        uris = ["qemu:///system"];
-      };
-      "org/gnome/desktop/wm/preferences" = {
-        auto-raise = true;
-      };
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-      "org/gnome/mutter" = {
-        experimental-features = ["scale-monitor-framebuffer"];
-      };
-    };
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings = {
+  #     "org/virt-manager/virt-manager/connections" = {
+  #       autoconnect = ["qemu:///system"];
+  #       uris = ["qemu:///system"];
+  #     };
+  #     "org/gnome/desktop/wm/preferences" = {
+  #       auto-raise = true;
+  #     };
+  #     "org/gnome/desktop/interface" = {
+  #       color-scheme = "prefer-dark";
+  #     };
+  #     "org/gnome/mutter" = {
+  #       experimental-features = ["scale-monitor-framebuffer"];
+  #     };
+  #   };
+  # };
   # gtk = {
   #   enable = true;
   #   font.name = "Victor Mono SemiBold 12";
@@ -124,21 +124,21 @@
       };
     };
   };
-  programs.kitty = {
-    enable = true;
-    keybindings = {
-      # "ctrl+left release grabbed ungrabbed" = "mouse_handle_click link";
-    };
-    shellIntegration.enableZshIntegration = config.programs.zsh.enable;
-    settings = {
-      confirm_os_window_close = 0;
-      detect_urls = true;
-      enable_audio_bell = false;
-      open_url_with = "${pkgs.firefox-beta}/bin/firefox";
-    };
-    extraConfig = ''
-    '';
-  };
+  # programs.kitty = {
+  #   enable = true;
+  #   keybindings = {
+  #     # "ctrl+left release grabbed ungrabbed" = "mouse_handle_click link";
+  #   };
+  #   shellIntegration.enableZshIntegration = config.programs.zsh.enable;
+  #   settings = {
+  #     confirm_os_window_close = 0;
+  #     detect_urls = true;
+  #     enable_audio_bell = false;
+  #     open_url_with = "${pkgs.firefox-beta}/bin/firefox";
+  #   };
+  #   extraConfig = ''
+  #   '';
+  # };
 
   home.file.wallpapers = {
     recursive = true;
@@ -162,7 +162,7 @@
     enableZshIntegration = true;
     enableScDaemon = true;
     sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
-    # pinentryFlavor = "gnome3";
+    pinentryFlavor = "gnome3";
     # defaultCacheTtl = 345600;
     # defaultCacheTtlSsh = 345600;
     # maxCacheTtl = 345600;
@@ -257,14 +257,13 @@
     };
 
     gpg = {
+      enable = true;
       mutableTrust = false;
       mutableKeys = false;
       publicKeys = [
         {
-          me = {
             trust = 5;
-            source = ./publickeys.gpg;
-          };
+            source = ./files/publickeys.gpg;
         }
       ];
     };

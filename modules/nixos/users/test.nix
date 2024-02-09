@@ -5,9 +5,9 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf types mkOption;
-  cfg = config.personal.users.test;
+  cfg = config.local.users.test;
 in {
-  options.personal.users.test = {
+  options.local.users.test = {
     enable = mkEnableOption "enable user test";
     password = mkOption {
       default = null;

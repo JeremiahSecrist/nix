@@ -5,9 +5,9 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkOption mkIf types;
-  cfg = config.personal.noisetorch;
+  cfg = config.local.noisetorch;
 in {
-  options.personal.noisetorch = {
+  options.local.noisetorch = {
     enable = mkEnableOption "enables noisetorch service for user";
     settings = {
       Threshold = mkOption {
@@ -45,7 +45,7 @@ in {
     assertions = [
       {
         assertion = (0 <= cfg.settings.Threshold) && (cfg.settings.Threshold <= 95);
-        message = "personal.noisetorch.threshold valid values: 0-95";
+        message = "local.noisetorch.threshold valid values: 0-95";
       }
     ];
     # home.file.noisetorch-config = {

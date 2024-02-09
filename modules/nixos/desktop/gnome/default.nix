@@ -5,9 +5,9 @@
   ...
 }: let
   # opt = options.custom.desktop.gnome;
-  cfg = config.personal.desktop.gnome;
+  cfg = config.local.desktop.gnome;
 in {
-  options.personal.desktop.gnome = {
+  options.local.desktop.gnome = {
     enable = lib.mkEnableOption "This enables gnome desktop";
   };
   config = lib.mkIf cfg.enable {

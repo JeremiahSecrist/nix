@@ -6,10 +6,10 @@
 }: let
   inherit (lib) mkEnableOption mkOption mkIf types;
   dmcfg = config.services.xserver.displayManager;
-  cfg = config.personal.desktop.displayManager.tuigreet;
+  cfg = config.local.desktop.displayManager.tuigreet;
   gduser = config.services.greetd.settings.default_session.user;
 in {
-  options.personal.desktop.displayManager.tuigreet = {
+  options.local.desktop.displayManager.tuigreet = {
     enable = mkEnableOption "enables tuigreet";
     args = mkOption {
       default = "--time --asterisks --remember -s ${dmcfg.sessionData.desktops}/share/wayland-sessions:${dmcfg.sessionData.desktops}/share/xsessions";
