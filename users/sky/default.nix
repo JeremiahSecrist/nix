@@ -26,7 +26,7 @@
     sessionVariables = {
       BROWSER = "firefox";
       EDITOR = "hx";
-      MOZ_ENABLE_WAYLAND = 1;
+      # MOZ_ENABLE_WAYLAND = 1;
       TERMINAL = "kitty";
       # XDG_CURRENT_DESKTOP = "hyprland";
       DIRENV_LOG_FORMAT = "";
@@ -72,24 +72,24 @@
   #     )
   #   '';
   # };
-  dconf = {
-    enable = true;
-    settings = {
-      "org/virt-manager/virt-manager/connections" = {
-        autoconnect = ["qemu:///system"];
-        uris = ["qemu:///system"];
-      };
-      "org/gnome/desktop/wm/preferences" = {
-        auto-raise = true;
-      };
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-      "org/gnome/mutter" = {
-        experimental-features = ["scale-monitor-framebuffer"];
-      };
-    };
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings = {
+  #     "org/virt-manager/virt-manager/connections" = {
+  #       autoconnect = ["qemu:///system"];
+  #       uris = ["qemu:///system"];
+  #     };
+  #     "org/gnome/desktop/wm/preferences" = {
+  #       auto-raise = true;
+  #     };
+  #     "org/gnome/desktop/interface" = {
+  #       color-scheme = "prefer-dark";
+  #     };
+  #     "org/gnome/mutter" = {
+  #       experimental-features = ["scale-monitor-framebuffer"];
+  #     };
+  #   };
+  # };
   # gtk = {
   #   enable = true;
   #   font.name = "Victor Mono SemiBold 12";
@@ -124,21 +124,21 @@
       };
     };
   };
-  programs.kitty = {
-    enable = true;
-    keybindings = {
-      # "ctrl+left release grabbed ungrabbed" = "mouse_handle_click link";
-    };
-    shellIntegration.enableZshIntegration = config.programs.zsh.enable;
-    settings = {
-      confirm_os_window_close = 0;
-      detect_urls = true;
-      enable_audio_bell = false;
-      open_url_with = "${pkgs.firefox-beta}/bin/firefox";
-    };
-    extraConfig = ''
-    '';
-  };
+  # programs.kitty = {
+  #   enable = true;
+  #   keybindings = {
+  #     # "ctrl+left release grabbed ungrabbed" = "mouse_handle_click link";
+  #   };
+  #   shellIntegration.enableZshIntegration = config.programs.zsh.enable;
+  #   settings = {
+  #     confirm_os_window_close = 0;
+  #     detect_urls = true;
+  #     enable_audio_bell = false;
+  #     open_url_with = "${pkgs.firefox-beta}/bin/firefox";
+  #   };
+  #   extraConfig = ''
+  #   '';
+  # };
 
   home.file.wallpapers = {
     recursive = true;
@@ -257,6 +257,7 @@
     };
 
     gpg = {
+      enable = true;
       mutableTrust = false;
       mutableKeys = false;
       publicKeys = [
