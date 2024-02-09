@@ -59,18 +59,21 @@
                 };
 
                 "/persist" = {
-                  mountOptions = ["compression=lz4" "subvol=persist" "noatime"];
+                  mountOptions = ["compress=zstd" "subvol=persist" "noatime"];
                   mountpoint = "/persist";
                 };
+                 "/home" = {
+                  mountOptions = ["compress=zstd" "subvol=home" "noatime"];
+                  mountpoint = "/home";
+                };
                 "/persist/system" = {};
-
                 "/Games" = {
-                  mountOptions = ["defaults" "nofail"];
+                  mountOptions = ["defaults" "subvol=games" "nofail"];
                   mountpoint = "/Games";
                 };
 
                 "/nix" = {
-                  mountOptions = ["compression=lz4" "subvol=nix" "noatime"];
+                  mountOptions = ["compress=zstd" "subvol=nix" "noatime"];
                   mountpoint = "/nix";
                 };
               };
