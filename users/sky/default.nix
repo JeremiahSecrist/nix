@@ -262,10 +262,8 @@
       mutableKeys = false;
       publicKeys = [
         {
-          me = {
             trust = 5;
-            source = ./publickeys.gpg;
-          };
+            source = ./files/publickeys.gpg;
         }
       ];
     };
