@@ -46,7 +46,7 @@
 
   hardware.enableAllFirmware = true;
   local = {
-    # impermanence.enable = true;
+    impermanence.enable = true;
     yubikey.enable = true;
     hardware = {
       framework.enable = true;
