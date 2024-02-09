@@ -28,6 +28,7 @@ in {
           CPU_BOOST_ON_BAT = 0;
           CPU_SCALING_GOVERNOR_ON_AC = "performance";
           CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+          USB_AUTOSUSPEND = 0;
         };
       };
       system76-scheduler.settings.cfsProfiles.enable = true;
