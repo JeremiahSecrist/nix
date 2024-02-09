@@ -8,10 +8,10 @@
 in {
   options.local.impermanence.enable = lib.mkEnableOption "enables vm settings";
   config = lib.mkIf cfg.enable {
-    # environment.etc."machine-id" = {
-    #   text = "87f2201d1aa14509b92aba0d5e67be96";
-    #   mode = "0644";
-    # };
+    environment.etc."machine-id" = {
+      text = "87f2201d1aa14509b92aba0d5e67be96";
+      mode = "0644";
+    };
     
     boot.initrd.postDeviceCommands = lib.mkAfter ''
       mkdir /btrfs_tmp
@@ -36,18 +36,19 @@ in {
     '';
 
     fileSystems."/persist".neededForBoot = true;
+    # fileSystems."/Games".neededForBoot = true;
     environment.persistence."/persist/system" = {
       hideMounts = true;
       directories = [
         "/root"
         "/etc/nixos"
         "/var/log"
-        "/home"
+        # "/home"
         "/var/lib/bluetooth"
         "/var/lib/nixos"
         "/var/lib/systemd/coredump"
         "/var/lib/misc"
-        # "/etc/NetworkManager/system-connections"
+        "/etc/NetworkManager/system-connections"
         # "/var/lib/NetworkManager"
         # "/etc/NetworkManager"
         # "/var/lib/NetworkManager-fortisslvpn"
