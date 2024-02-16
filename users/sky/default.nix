@@ -3,7 +3,8 @@
   pkgs,
   ...
 }: let
-myPubKey = "${pkgs.writeText "mykey.pub" "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBA9i9HoP7X8Ufzz8rAaP7Nl3UOMZxQHMrsnA5aEQfpTyIQ1qW68jJ4jGK5V6Wv27MMc3czDU1qfFWIbGEWurUHQ=\n"}";
+  pubkey = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBA9i9HoP7X8Ufzz8rAaP7Nl3UOMZxQHMrsnA5aEQfpTyIQ1qW68jJ4jGK5V6Wv27MMc3czDU1qfFWIbGEWurUHQ=";
+  myPubKeyFile = "${pkgs.writeText "mykey.pub" "${pubkey}\n"}";
 in{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -22,7 +23,9 @@ in{
     # };
   };
   home = rec {
-    file.".ssh/allowed_signers".source = myPubKey;
+    file.".ssh/allowed_signers" = {
+      text = "${config.programs.git.userEmail} namespaces=\"git\" ${pubkey}";
+    };
     username = "sky";
     homeDirectory = "/home/${username}";
     stateVersion = "22.11";
@@ -316,7 +319,7 @@ in{
         commit.gpgsign = true;
         gpg.format = "ssh";
         gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-        user.signingkey = myPubKey;
+        user.signingkey = myPubKeyFile;
       };
       diff-so-fancy.enable = true;
       lfs.enable = true;
