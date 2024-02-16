@@ -22,7 +22,7 @@ in{
     # };
   };
   home = rec {
-    file.".ssh/allowed_signers".text = myPubKey;
+    file.".ssh/allowed_signers".source = myPubKey;
     username = "sky";
     homeDirectory = "/home/${username}";
     stateVersion = "22.11";
