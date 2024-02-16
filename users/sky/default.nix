@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+myPubKey = "${pkgs.writeText "mykey.pub" "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBA9i9HoP7X8Ufzz8rAaP7Nl3UOMZxQHMrsnA5aEQfpTyIQ1qW68jJ4jGK5V6Wv27MMc3czDU1qfFWIbGEWurUHQ="}";
+in{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   imports = [
@@ -20,6 +22,7 @@
     # };
   };
   home = rec {
+    file.".ssh/allowed_signers".text = myPubKey;
     username = "sky";
     homeDirectory = "/home/${username}";
     stateVersion = "22.11";
@@ -312,7 +315,8 @@
       extraConfig = {
         commit.gpgsign = true;
         gpg.format = "ssh";
-        user.signingkey = "${pkgs.writeText "mykey.pub" "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBA9i9HoP7X8Ufzz8rAaP7Nl3UOMZxQHMrsnA5aEQfpTyIQ1qW68jJ4jGK5V6Wv27MMc3czDU1qfFWIbGEWurUHQ="}";
+        gpg.ssh.allowedSignersFile = myPubKey;
+        user.signingkey = myPubKey;
       };
       diff-so-fancy.enable = true;
       lfs.enable = true;
