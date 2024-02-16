@@ -315,7 +315,7 @@ in{
       extraConfig = {
         commit.gpgsign = true;
         gpg.format = "ssh";
-        gpg.ssh.allowedSignersFile = myPubKey;
+        gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
         user.signingkey = myPubKey;
       };
       diff-so-fancy.enable = true;
