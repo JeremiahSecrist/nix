@@ -11,9 +11,9 @@
         type = "gpt";
         partitions = {
           #boot = {
-           # name = "boot";
-            #size = "1M";
-            #type = "EF02";
+          # name = "boot";
+          #size = "1M";
+          #type = "EF02";
           #};
           esp = {
             name = "ESP";
@@ -62,7 +62,7 @@
                   mountOptions = ["compress=zstd" "subvol=persist" "noatime"];
                   mountpoint = "/persist";
                 };
-                 "/home" = {
+                "/home" = {
                   mountOptions = ["compress=zstd" "subvol=home" "noatime"];
                   mountpoint = "/home";
                 };

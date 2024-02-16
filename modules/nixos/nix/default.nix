@@ -49,15 +49,15 @@ in {
         keep-outputs = cfg.isBuilder;
         keep-derivations = cfg.isBuilder;
         trusted-public-keys = [
-          "laptop-deploy:OMe69aOGxkvIhEYIECd1U3CE/PAouObowS7W4nDS460="
+          # "laptop-deploy:OMe69aOGxkvIhEYIECd1U3CE/PAouObowS7W4nDS460="
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
+          # "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
         ];
         builders-use-substitutes = true;
         substituters = [
           # "https://anyrun.cachix.org"
           "https://cache.nixos.org"
-          "https://cache.ngi0.nixos.org"
+          # "https://cache.ngi0.nixos.org"
         ];
 
         # secret-key-files = /var/lib/nix-keys/deploy.secret;

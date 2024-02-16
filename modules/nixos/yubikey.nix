@@ -10,6 +10,9 @@ in {
     enable = lib.mkEnableOption "enables yubikey settings";
   };
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      pcscliteWithPolkit.out
+    ];
     services.pcscd = {
       enable = true;
       plugins = with pkgs; [libykneomgr ccid];

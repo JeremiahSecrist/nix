@@ -4,34 +4,34 @@
     # waybar
     # (callPackage ../../packages/bambu-studio {})
     bambu-studio
-    # (callPackage ../../packages/ollama {})
+    # (callPackage ../../packages/discord-krisp {})
     # webcord
     # ollama
     # openblas
     nil
-    discord
+    discord-krisp
     xdg-utils
-    appimage-run
+    # appimage-run
     blender
     element-desktop
     # popsicle
-    gst_all_1.gstreamer
+    # gst_all_1.gstreamer
     mplayer
-    distrobox
+    # distrobox
     # bottles
     # parsec-bin
     warp
-    winetricks
-    wineWowPackages.fonts
-    wineWowPackages.stagingFull
+    # winetricks
+    # wineWowPackages.fonts
+    # wineWowPackages.stagingFull
     # zathura # pdf viewer
     # gnome.gnome-tweaks # desktop settings
     # extensions
     # gnomeExtensions.appindicator
     # CLI
     prismlauncher
-    nix-index
-    comma
+    # nix-index
+    # comma
     #(pkgs.uutils-coreutils.override {prefix = "";})
     btop
     # dconf2nix
@@ -55,11 +55,12 @@
     # distrobox
     # cryptomator
     # firefox
+    yubikey-personalization-gui
     yubioath-flutter
     # armcord
     # virt-manager
     protonvpn-gui
-    protonvpn-cli
+    # protonvpn-cli
     #work
     # teams
   ];

@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager/master"; # release-23.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     impermanence = {
       url = "github:nix-community/impermanence";
     };
@@ -15,6 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs:
     with inputs; let
@@ -29,8 +34,10 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
           modules = [
+            chaotic.nixosModules.default
             # agenix.nixosModules.default
             # devenv.nixosModules.default
+            nix-index-database.nixosModules.nix-index
             impermanence.nixosModules.impermanence
             nur.nixosModules.nur
             home-manager.nixosModules.home-manager
@@ -99,14 +106,14 @@
       };
       nixConfig = {
         extra-trusted-public-keys = [
-          "laptop-deploy:OMe69aOGxkvIhEYIECd1U3CE/PAouObowS7W4nDS460="
+          # "laptop-deploy:OMe69aOGxkvIhEYIECd1U3CE/PAouObowS7W4nDS460="
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           # "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-          "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
+          # "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
         ];
         builders-use-substitutes = true;
         extra-substituters = [
-          "https://cache.ngi0.nixos.org"
+          # "https://cache.ngi0.nixos.org"
           "https://cache.nixos.org"
         ];
       };

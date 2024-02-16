@@ -10,5 +10,6 @@
     ./yubikey.nix
     ./sound
     ./impermanenece.nix
+    ./tpm.nix
   ];
 }

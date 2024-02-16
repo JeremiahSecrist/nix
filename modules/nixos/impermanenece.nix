@@ -12,7 +12,7 @@ in {
       text = "87f2201d1aa14509b92aba0d5e67be96";
       mode = "0644";
     };
-    
+
     boot.initrd.postDeviceCommands = lib.mkAfter ''
       mkdir /btrfs_tmp
       mount /dev/root_vg/root /btrfs_tmp
@@ -36,7 +36,6 @@ in {
     '';
 
     fileSystems."/persist".neededForBoot = true;
-    # fileSystems."/Games".neededForBoot = true;
     environment.persistence."/persist/system" = {
       hideMounts = true;
       directories = [
@@ -49,29 +48,26 @@ in {
         "/var/lib/systemd/coredump"
         "/var/lib/misc"
         "/etc/NetworkManager/system-connections"
-        # "/var/lib/NetworkManager"
-        # "/etc/NetworkManager"
-        # "/var/lib/NetworkManager-fortisslvpn"
-        # "/etc/ipsec.d"
-        # "/run/pppd/lock"
-        # {
-        #   directory = "/var/lib/NetworkManager";
-        #   user = "networkmanager";
-        #   group = "networkmanager";
-        #   mode = "u=rwx,g=rx,o=";
-        # }
+        "/var/lib/iwd"
         {
           directory = "/var/lib/colord";
           user = "colord";
           group = "colord";
           mode = "u=rwx,g=rx,o=";
         }
+        # {
+        #   directory = "/sys/class/backlight/amdgpu_bl0";
+        #   user = "root";
+        #   group = "root";
+        #   mode = "u=rwx,g=rwx,o=rwx";
+        # }
       ];
       files = [
         {
           file = "/var/keys/secret_file";
           parentDirectory = {mode = "u=rwx,g=,o=";};
         }
+        # "/sys/class/backlight/amdgpu_bl0/brightness"
         "/etc/ssh/ssh_host_ed25519_key.pub"
         "/etc/ssh/ssh_host_ed25519_key"
         "/etc/ssh/ssh_host_rsa_key.pub"

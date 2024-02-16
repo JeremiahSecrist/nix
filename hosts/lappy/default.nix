@@ -11,43 +11,45 @@
       swapSize = "8G";
     })
   ];
+  services.gnome.gnome-keyring.enable = false;
   # hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
-  
   # programs.ssh.startAgent = false;
   # services.yubikey-agent.enable = true;
   # programs.gnupg.agent.enable = true;
   # hardware.gpgSmartcards.enable = true;
-
+  # security = { pkcs11Providers = [ "${pkgs.opensc}/lib/opensc-pkcs11.so" ]; };
   system.nixos.tags = ["${toString self.rev or self.dirtyRev or ""}"];
 
   zramSwap.enable = lib.mkDefault true;
   services.teamviewer.enable = true;
 
   environment.systemPackages = with pkgs; [
-    fwupd
-    pcscliteWithPolkit.out
     parsec-bin
   ];
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
-  programs.noisetorch.enable = true;
+  # programs.noisetorch.enable = true;
   programs.zsh.enable = true;
- # Enable the X11 windowing system.
+  # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the Budgie Desktop environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.budgie.enable = true;
-
+  programs.command-not-found.enable = false;
+  programs.nix-index-database.comma.enable = true;
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   hardware.enableAllFirmware = true;
   local = {
+    tmp.enable = true;
     impermanence.enable = true;
-    yubikey.enable = true;
+    # yubikey.enable = true;
     hardware = {
       framework.enable = true;
       sound.enable = true;

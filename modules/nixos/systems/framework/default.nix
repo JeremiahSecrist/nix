@@ -19,6 +19,8 @@ in {
   ];
   options.local.hardware.framework.enable = mkEnableOption "";
   config = mkIf cfg.enable {
+    networking.networkmanager.wifi.backend = "iwd";
+    networking.wireless.iwd.enable = true;
     services = {
       power-profiles-daemon.enable = false;
       tlp = {

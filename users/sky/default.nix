@@ -14,10 +14,10 @@
     #   # hyprland.enable = true;
     #   # waybar.enable = true;
     # };
-    noisetorch = {
-      enable = true;
-      settings.LastUsedInput = "alsa_input.usb-Generic_TONOR_TC40_Audio_Device-00.iec958-stereo";
-    };
+    # noisetorch = {
+    #   enable = true;
+    #   settings.LastUsedInput = "alsa_input.usb-Generic_TONOR_TC40_Audio_Device-00.iec958-stereo";
+    # };
   };
   home = rec {
     username = "sky";
@@ -156,20 +156,23 @@
   #     preset = "noisereduc";
   #   };
   services.gpg-agent = {
-    enable = true;
+    # enable = true;
     enableSshSupport = true;
     enableExtraSocket = true;
     enableZshIntegration = true;
     enableScDaemon = true;
     sshKeys = ["8D53CA91572B3252096210F0A5D58142765E3114"];
-    pinentryFlavor = "gnome3";
+    # pinentryFlavor = "gnome3";
     # defaultCacheTtl = 345600;
     # defaultCacheTtlSsh = 345600;
     # maxCacheTtl = 345600;
     # maxCacheTtlSsh = 345600;
     # extraConfig = "disable-ccid\n";
   };
-
+  services.gnome-keyring = {
+    components = ["secrets"];
+    enable = true;
+  };
   programs = {
     firefox = {
       enable = true;
@@ -250,20 +253,26 @@
     helix = {
       enable = true;
     };
-
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [
+        "--cmd cd"
+      ];
+    };
     vscode = {
       enable = true;
       # mutableExtensionsDir = true;
     };
 
     gpg = {
-      enable = true;
-      mutableTrust = false;
+      # enable = true;
+      mutableTrust = true;
       mutableKeys = false;
       publicKeys = [
         {
-            trust = 5;
-            source = ./files/publickeys.gpg;
+          trust = "ultimate";
+          source = ./files/publickeys.gpg;
         }
       ];
     };
@@ -271,6 +280,7 @@
       enable = true;
       compression = true;
       forwardAgent = true;
+      extraConfig = "PKCS11Provider ${pkgs.tpm2-pkcs11}/lib/libtpm2_pkcs11.so\n";
       matchBlocks = {
         "107.172.92.84" = {
           host = "107.172.92.84";
@@ -299,10 +309,11 @@
       enable = true;
       userName = "Jermeiah S";
       userEmail = "owner@arouzing.xyz";
-      # signing = {
-      #   key = "59472c1F0709FBA9";
-      #   signByDefault = true;
-      # };
+      extraConfig = {
+        commit.gpgsign = true;
+        gpg.format = "ssh";
+        user.signingkey = "${pkgs.writeText "mykey.pub" "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBA9i9HoP7X8Ufzz8rAaP7Nl3UOMZxQHMrsnA5aEQfpTyIQ1qW68jJ4jGK5V6Wv27MMc3czDU1qfFWIbGEWurUHQ="}";
+      };
       diff-so-fancy.enable = true;
       lfs.enable = true;
     };
@@ -330,7 +341,7 @@
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
         # eval "$(zellij setup --generate-auto-start zsh)"
-
+        # export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
       '';
       envExtra = ''
         starship_precmd_user_func="set_win_title"
@@ -343,6 +354,7 @@
       shellAliases = {
         reagent = "gpg-connect-agent reloadagent /bye";
         fucking = "sudo";
+        tssh = "ssh-add -s ${pkgs.tpm2-pkcs11}/lib/libtpm2_pkcs11.so";
       };
       enableCompletion = true;
       completionInit = ''
