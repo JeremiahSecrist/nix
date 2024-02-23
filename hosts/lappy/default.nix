@@ -1,6 +1,7 @@
 {
   self,
   inputs,
+  config,
   pkgs,
   lib,
   ...
@@ -11,6 +12,32 @@
       swapSize = "8G";
     })
   ];
+
+  systemd.services.bctl = {
+    enable = (!config.local.impermanence.enable);
+    wantedBy = ["multi-user.target"];
+    after = ["multi-user.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''${pkgs.brightnessctl}/bin/brightnessctl set 10%'';
+    };
+  };
+  # hardware.opengl = {
+  #   enable = true;
+  #   # extraPackages = with pkgs; [
+  #   #   # vaapiIntel # LIBVA_DRIVER_NAME=i965
+  #   #   libva
+  #   #   vaapiVdpau
+  #   #   libvdpau-va-gl
+  #   # ];
+  # };
+  # boot.initrd.extraUtilsCommands = lib.mkIf (!config.boot.initrd.systemd.enable) ''
+  #    copy_bin_and_libs
+  #    cp -pv ${pkgs.glibc.out}/lib/libnss_files.so.* $out/lib
+  #  '';
+  # boot.initrd.postDeviceCommands = lib.mkAfter ''
+  #   /bin/brightnessctl set 10%
+  # '';
   services.gnome.gnome-keyring.enable = false;
   # hardware.opengl.extraPackages = [pkgs.vaapiVdpau];
   # programs.ssh.startAgent = false;
@@ -27,8 +54,7 @@
     parsec-bin
   ];
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
-  # programs.noisetorch.enable = true;
-  programs.zsh.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -37,6 +63,7 @@
   services.xserver.desktopManager.budgie.enable = true;
   programs.command-not-found.enable = false;
   programs.nix-index-database.comma.enable = true;
+  services.tailscale.enable = true;
   # Configure keymap in X11
   services.xserver = {
     xkb = {
@@ -73,10 +100,13 @@
     flatpak.enable = true;
     preload.enable = true;
   };
-  programs.steam.enable = true;
-  programs.gamemode = {
-    enable = true;
-    enableRenice = true;
+  programs = {
+    zsh.enable = true;
+    steam.enable = true;
+    gamemode = {
+      enable = true;
+      enableRenice = true;
+    };
   };
   networking = {
     # dhcpcd.enable = false;

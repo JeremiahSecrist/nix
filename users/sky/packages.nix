@@ -5,11 +5,14 @@
     # (callPackage ../../packages/bambu-studio {})
     bambu-studio
     # (callPackage ../../packages/discord-krisp {})
+    (callPackage ../../packages/tabby {})
     # webcord
-    # ollama
+    ollama
     # openblas
+    llama-cpp
     nil
-    discord-krisp
+    # discord
+    vesktop
     xdg-utils
     # appimage-run
     blender

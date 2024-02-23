@@ -27,13 +27,31 @@
       specialArgs = {inherit inputs self;};
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          openclSupport = true;
+          cudaSupport = nixpkgs.lib.mkForce false;
+
+          rocmSupport = false;
+        };
       };
       homeManagerModules = import ./modules/homeManager;
       mkNixos = system: homeUsers: config:
         nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
           modules = [
+            {
+              nixpkgs.config = {
+                allowUnfree = true;
+                # rocmSupport = true;
+                cudaSupport = nixpkgs.lib.mkForce false;
+                openclSupport = true;
+                rocmSupport = false;
+              };
+              hardware.opengl.extraPackages = with pkgs; [
+                rocmPackages.clr.icd
+              ];
+            }
             chaotic.nixosModules.default
             # agenix.nixosModules.default
             # devenv.nixosModules.default

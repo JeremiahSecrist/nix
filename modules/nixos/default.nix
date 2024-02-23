@@ -11,5 +11,6 @@
     ./sound
     ./impermanenece.nix
     ./tpm.nix
+    # ./guake
   ];
 }
