@@ -3,6 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    agenix.url = "github:ryantm/agenix";
     home-manager = {
       url = "github:nix-community/home-manager/master"; # release-23.11
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +54,7 @@
               ];
             }
             chaotic.nixosModules.default
-            # agenix.nixosModules.default
+            agenix.nixosModules.default
             # devenv.nixosModules.default
             nix-index-database.nixosModules.nix-index
             impermanence.nixosModules.impermanence

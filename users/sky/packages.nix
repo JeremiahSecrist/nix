@@ -7,7 +7,9 @@
     # (callPackage ../../packages/discord-krisp {})
     (callPackage ../../packages/tabby {})
     # webcord
-    ollama
+    # ollama
+    micro
+    # nvim
     # openblas
     llama-cpp
     nil

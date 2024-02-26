@@ -14,7 +14,7 @@
   ];
 
   systemd.services.bctl = {
-    enable = (!config.local.impermanence.enable);
+    enable = (config.local.impermanence.enable);
     wantedBy = ["multi-user.target"];
     after = ["multi-user.target"];
     serviceConfig = {
@@ -22,15 +22,15 @@
       ExecStart = ''${pkgs.brightnessctl}/bin/brightnessctl set 10%'';
     };
   };
-  # hardware.opengl = {
-  #   enable = true;
-  #   # extraPackages = with pkgs; [
-  #   #   # vaapiIntel # LIBVA_DRIVER_NAME=i965
-  #   #   libva
-  #   #   vaapiVdpau
-  #   #   libvdpau-va-gl
-  #   # ];
-  # };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
   # boot.initrd.extraUtilsCommands = lib.mkIf (!config.boot.initrd.systemd.enable) ''
   #    copy_bin_and_libs
   #    cp -pv ${pkgs.glibc.out}/lib/libnss_files.so.* $out/lib
@@ -52,6 +52,8 @@
 
   environment.systemPackages = with pkgs; [
     parsec-bin
+    inputs.agenix.packages.x86_64-linux.default
+    age-plugin-yubikey
   ];
   boot.kernel.sysctl = {"kernel.sysrq" = 1;};
 
@@ -76,7 +78,7 @@
   local = {
     tmp.enable = true;
     impermanence.enable = true;
-    # yubikey.enable = true;
+    yubikey.enable = true;
     hardware = {
       framework.enable = true;
       sound.enable = true;
@@ -101,6 +103,11 @@
     preload.enable = true;
   };
   programs = {
+    ssh.extraConfig = ''
+    # Don't ask for fingerprint confirmation on first connection.
+    # If we know the fingerprint ahead of time, we should put it into `known_hosts` directly.
+    StrictHostKeyChecking=accept-new
+    '';
     zsh.enable = true;
     steam.enable = true;
     gamemode = {
@@ -113,7 +120,7 @@
     # nameservers = ["1.1.1.1" "1.0.0.1"];
     networkmanager = {
       enable = true;
-      # insertNameservers = ["1.1.1.1" "1.0.0.1"];
+      insertNameservers = ["1.1.1.1" "1.0.0.1"];
     };
     hostName = "lappy";
     firewall = {

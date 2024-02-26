@@ -153,7 +153,7 @@ in{
   };
   xdg.enable = true;
   xdg.mime.enable = true;
-  xdg.mimeApps.enable = true;
+  # xdg.mimeApps.enable = true;
   # xdg.mimeApps = {
   #   defaultApplications."application/pdf" = ["zathura.desktop"];
   # };
