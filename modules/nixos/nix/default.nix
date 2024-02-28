@@ -53,10 +53,11 @@ in {
           # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         ];
         builders-use-substitutes = true;
-        # substituters = [
-        #   # "https://cache.nixos.org?priority=1"
-        #   "ssh-ng://nix-ssh@arouzing.win?priority=2&want-mass-query=true"
-        # ];
+        substituters = [
+          # "https://cache.nixos.org?priority=1"
+          "https://cache.arouzing.win/"
+          "ssh-ng://nix-ssh@arouzing.win?priority=100&want-mass-query=true"
+        ];
 
         # secret-key-files = /var/lib/nix-keys/deploy.secret;
         allowed-users = [

@@ -68,6 +68,7 @@ in {
           parentDirectory = {mode = "u=rwx,g=,o=";};
         }
         # "/sys/class/backlight/amdgpu_bl0/brightness"
+        # "/etc/shadow"
         "/etc/ssh/ssh_host_ed25519_key.pub"
         "/etc/ssh/ssh_host_ed25519_key"
         "/etc/ssh/ssh_host_rsa_key.pub"

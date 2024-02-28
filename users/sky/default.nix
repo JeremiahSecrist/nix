@@ -362,6 +362,7 @@ in{
         reagent = "gpg-connect-agent reloadagent /bye";
         fucking = "sudo";
         tssh = "ssh-add -s ${pkgs.tpm2-pkcs11}/lib/libtpm2_pkcs11.so";
+        inst = "nix profile install";
       };
       enableCompletion = true;
       completionInit = ''
