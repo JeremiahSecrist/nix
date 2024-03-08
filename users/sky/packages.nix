@@ -1,9 +1,10 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    # nix-stable.nano
     # desktop look & feel
     # waybar
     # (callPackage ../../packages/bambu-studio {})
-    bambu-studio
+    # bambu-studio
     # (callPackage ../../packages/discord-krisp {})
     (callPackage ../../packages/tabby {})
     # webcord
@@ -13,6 +14,7 @@
     # openblas
     llama-cpp
     nil
+    # stable
     # discord
     vesktop
     xdg-utils
@@ -48,7 +50,7 @@
     # nmap
     # cmatrix
     # noisetorch
-    # protonvpn-cli
+    protonvpn-cli
     # cpu-x
     # sl
     # lolcat

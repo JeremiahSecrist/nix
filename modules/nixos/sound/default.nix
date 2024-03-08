@@ -13,6 +13,9 @@ in {
     security.rtkit.enable = true;
     services = {
       pipewire = {
+        lowLatency = {
+        enable = true;
+        };
         enable = true;
         alsa.enable = true;
         alsa.support32Bit = true;

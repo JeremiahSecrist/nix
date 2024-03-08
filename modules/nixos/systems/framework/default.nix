@@ -22,29 +22,28 @@ in {
     networking.networkmanager.wifi.backend = "iwd";
     networking.wireless.iwd.enable = true;
     services = {
-      power-profiles-daemon.enable = false;
-      tlp = {
-        enable = true;
-        settings = {
-          CPU_BOOST_ON_AC = 1;
-          CPU_BOOST_ON_BAT = 0;
-          CPU_SCALING_GOVERNOR_ON_AC = "performance";
-          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-          USB_AUTOSUSPEND = 0;
-        };
-      };
+      # power-profiles-daemon.enable = false;
+      # tlp = {
+      #   enable = true;
+      #   settings = {
+      #     CPU_BOOST_ON_AC = 1;
+      #     CPU_BOOST_ON_BAT = 0;
+      #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      #     USB_AUTOSUSPEND = 0;
+      #   };
+      # };
       system76-scheduler.settings.cfsProfiles.enable = true;
       fwupd.enable = true;
       hardware.bolt.enable = true;
     };
     boot = {
       tmp.cleanOnBoot = true;
-      # kernelPackages = pkgs.linuxPackages_lqx;
       kernel.sysctl = {
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
       };
-      kernelPackages = pkgs.linuxPackages_6_1;
+      kernelPackages = pkgs.linuxPackages_xanmod;
       initrd = {
         kernelModules = [
           "dm-snapshot"

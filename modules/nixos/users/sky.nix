@@ -19,7 +19,7 @@ in {
     users.users.sky = {
       uid = 1000;
       isNormalUser = true;
-      initialPassword = cfg.password;
+      hashedPassword = cfg.password;
       shell = pkgs.zsh;
       description = "sky";
       extraGroups = ["networkmanager" "wheel" "seat" "libvirtd" "kvm"];

@@ -1,6 +1,8 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     agenix.url = "github:ryantm/agenix";
@@ -53,6 +55,7 @@
                 rocmPackages.clr.icd
               ];
             }
+            nix-gaming.nixosModules.pipewireLowLatency
             chaotic.nixosModules.default
             agenix.nixosModules.default
             # devenv.nixosModules.default
@@ -67,6 +70,7 @@
               nixpkgs.overlays = [
                 vscode-extensions.overlays.default
                 nur.overlay
+                (final: prev: {nix-stable = (import nixpkgs-stable { inherit system; config.allowUnfree = true; });})
               ];
               home-manager = {
                 extraSpecialArgs = {inherit inputs self;};

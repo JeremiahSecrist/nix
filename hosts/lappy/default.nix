@@ -48,7 +48,7 @@
   system.nixos.tags = ["${toString self.rev or self.dirtyRev or ""}"];
 
   zramSwap.enable = lib.mkDefault true;
-  services.teamviewer.enable = true;
+  # services.teamviewer.enable = true;
 
   environment.systemPackages = with pkgs; [
     parsec-bin
@@ -91,7 +91,7 @@
     };
     users.sky = {
       enable = true;
-      password = "changeme";
+      password = "$y$j9T$5FxOeqdICm5REo/NMm9pM1$Tt.kY2OP05CLo4y1nOjxx/e4ObzsQILZuJRu4xQlrM/";
     };
     # users.test = {
     #   enable = true;
@@ -99,6 +99,14 @@
     # };
   };
   services = {
+    # miniupnpd = {
+    #   enable = true;
+    #   externalInterface = [
+    #     "eth0"
+    #     "wlan0"
+    #   ];
+    #   natpmp = true;
+    # };
     flatpak.enable = true;
     preload.enable = true;
   };
@@ -124,7 +132,7 @@
     };
     hostName = "lappy";
     firewall = {
-      enable = true;
+      enable = false;
       # checkReversePath = false;
       allowedTCPPorts = [];
       allowedUDPPorts = [];

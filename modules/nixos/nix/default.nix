@@ -55,8 +55,8 @@ in {
         builders-use-substitutes = true;
         substituters = [
           # "https://cache.nixos.org?priority=1"
-          "https://cache.arouzing.win/"
-          "ssh-ng://nix-ssh@arouzing.win?priority=100&want-mass-query=true"
+          # "https://cache.arouzing.win/"
+          # "ssh-ng://nix-ssh@arouzing.win?priority=100&want-mass-query=true"
         ];
 
         # secret-key-files = /var/lib/nix-keys/deploy.secret;

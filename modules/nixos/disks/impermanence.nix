@@ -3,7 +3,7 @@
   swapSize ? throw "Set this to your swapSize, e.g. 8gb",
   ...
 }: {
-  services.btrfs.autoScrub.enable = true;
+  # services.btrfs.autoScrub.enable = true;
   disko.devices = {
     disk.main = {
       inherit device;

@@ -19,7 +19,7 @@ in {
     users.users.test = {
       uid = 1001;
       isNormalUser = true;
-      initialPassword = cfg.password;
+      hashedPassword = cfg.password;
       shell = pkgs.zsh;
       description = "test";
       extraGroups = ["networkmanager" "wheel" "seat"];
